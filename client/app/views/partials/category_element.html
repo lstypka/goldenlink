@@ -1,0 +1,24 @@
+<div ng-if="!category.hasChildren">
+    <a href="#/{{category.publicId}}"><i class="fa fa-fw fa-dashboard"></i> {{category.label}}</a>
+</div>
+<div ng-if="category.hasChildren">
+
+    <div style="display: block; width: 225px;">
+
+        <span data-toggle="collapse" data-target="#{{category.publicId}}" ng-click="loadChildren(category, $event)">
+            <i class="fa fa-fw "
+               ng-class="{'fa-caret-right' : !category._opened, 'fa-caret-down' : category._opened}"></i></span>
+        <a ng-click="loadCategory(category, $event);">
+            <i class="fa fa-fw fa-dashboard"></i> {{category.label}} {{category._loading}}</a>
+    </div>
+
+    <ul id="{{category.publicId}}" class="collapse">
+        <li ng-repeat="category in category.children" ng-include="'views/partials/category_element.html'"
+            ng-class="{'active' : category._isSelected}">
+        </li>
+    </ul>
+
+
+</div>
+
+
