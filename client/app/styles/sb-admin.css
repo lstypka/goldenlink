@@ -11,7 +11,7 @@ body {
     background-color: #222;
 }
 
-@media(min-width:768px) {
+@media (min-width:768px) {
     body {
         margin-top: 50px;
     }
@@ -25,6 +25,9 @@ body {
     width: 100%;
     padding: 0;
     background-color: #fff;
+    border: 1px;
+    border-radius: 7px;
+    box-shadow: inset 1px 1px 2px 1px rgba(0, 0, 0, 0.2);
 }
 
 .huge {
@@ -32,7 +35,7 @@ body {
     line-height: normal;
 }
 
-@media(min-width:768px) {
+@media (min-width:768px) {
     #wrapper {
         padding-left: 225px;
     }
@@ -73,12 +76,12 @@ body {
     float: left;
     position: absolute;
     margin-top: 0;
-    border: 1px solid rgba(0,0,0,.15);
+    border: 1px solid rgba(0, 0, 0, .15);
     border-top-left-radius: 0;
     border-top-right-radius: 0;
     background-color: #fff;
-    -webkit-box-shadow: 0 6px 12px rgba(0,0,0,.175);
-    box-shadow: 0 6px 12px rgba(0,0,0,.175);
+    -webkit-box-shadow: 0 6px 12px rgba(0, 0, 0, .175);
+    box-shadow: 0 6px 12px rgba(0, 0, 0, .175);
 }
 
 .top-nav>.open>.dropdown-menu>li>a {
@@ -94,7 +97,7 @@ ul.message-dropdown {
 
 li.message-preview {
     width: 275px;
-    border-bottom: 1px solid rgba(0,0,0,.15);
+    border-bottom: 1px solid rgba(0, 0, 0, .15);
 }
 
 li.message-preview>a {
@@ -112,7 +115,7 @@ ul.alert-dropdown {
 
 /* Side Navigation */
 
-@media(min-width:768px) {
+@media (min-width:768px) {
     .side-nav {
         position: fixed;
         top: 51px;
@@ -126,18 +129,45 @@ ul.alert-dropdown {
         bottom: 0;
         overflow-x: hidden;
         padding-bottom: 40px;
+
+    }
+
+    .highlight_row>div:hover{
+        font-weight: bold;
+        color: #fff !important;
+    }
+
+    .side-nav-wrapper {
+        position: fixed;
+        top: 205px;
+        left: 210px;
+        width: 200px;
+        margin-left: -200px;
+        margin-top: 80px;
+        border: 1px;
+        border-radius:  7px 0px 0px 0px;
+        box-shadow: inset 1px 1px 2px 1px rgba(0, 0, 0, 0.2);
+        border: 1px solid #999;
+        overflow: auto;
+        bottom: 0;
+        overflow-x: auto;
+        padding-bottom: 40px;
+        height: auto !important;
+        margin-bottom: 20px;
+        color: #9d9d9d;
+        /* color: #404040;*/
+        /*background-color: #E0E0E0;*/
+        font-size: 13px;
+
     }
 
     .side-nav li a:hover,
     .side-nav li a:focus {
         outline: none;
-        background-color: #000 !important;
     }
 
     .side-nav a {
-       /* display: block;*/
         text-decoration: none;
-      /*  width: 225px;*/
         color: #999;
         cursor: pointer;
     }
@@ -147,12 +177,26 @@ ul.alert-dropdown {
         text-decoration: none;
     }
 
-   .side-nav li {
-       text-decoration: none;
-       list-style-type: none;
+    .side-nav li {
+        text-decoration: none;
+        list-style-type: none;
+        margin-top:5px;
+    }
+
+    .menu_element {
+        border: 2px;
+        border-radius: 7px 0px 0px 0px;
+        box-shadow: inset 1px 1px 2px 1px rgba(0, 0, 0, 0.3);
+        border: 1px solid #999;
+        width: 200px;
+        margin: 0 10px;
+    }
+
+    .menu_element :hover{
+        font-weight: bold;
+        background-color: transparent !important;
     }
 }
-
 
 /* Flot Chart Containers */
 

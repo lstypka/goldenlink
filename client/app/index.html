@@ -1,5 +1,5 @@
 <!doctype html>
-<html>
+<html xmlns="http://www.w3.org/1999/html">
 <head>
     <meta charset="utf-8">
     <title></title>
@@ -14,6 +14,7 @@
     <!-- endbuild -->
     <!-- build:css(.tmp) styles/main.css -->
     <link rel="stylesheet" href="styles/main.css">
+    <link rel="stylesheet" href="styles/scrollbar.css">
     <link rel="stylesheet" href="styles/sb-admin.css">
     <!-- endbuild -->
 </head>
@@ -151,13 +152,32 @@
                 </ul>
             </li>
         </ul>
-        <!-- Sidebar Menu Items - These collapse to the responsive navigation menu on small screens -->
-        <div class="collapse navbar-collapse navbar-ex1-collapse" data-ng-controller="leftMenuCtrl">
+
+        <div class="collapse navbar-collapse navbar-ex1-collapse">
             <ul class="nav navbar-nav side-nav">
-                <li ng-repeat="category in mainCategories" ng-class="{'active' : category._isSelected}" ng-include="'views/partials/category_element.html'">
+                <li class="menu_element">
+                    <a href="#/home"><i class="fa fa-fw fa-dashboard"></i>Pulpit</a>
+                </li>
+                <li class="menu_element">
+                    <a href="#/addlink"><i class="fa fa-fw fa-dashboard"></i> Dodaj link</a>
+                </li>
+                <li class="menu_element">
+                    <a href="#/search"><i class="fa fa-fw fa-dashboard"></i> Wyszukaj</a>
+                </li>
+                <li class="menu_element">
+                    <a href="#/friends"><i class="fa fa-fw fa-dashboard"></i> Znajomi</a>
+                </li>
+                <li  style="margin-top: 30px;">
+                    <ul class="nav navbar-nav side-nav-wrapper f_wkScroll_light" data-ng-controller="leftMenuCtrl">
+                        <li ng-repeat="category in mainCategories" ng-class="{'active' : category._isSelected}"
+                            ng-include="'views/partials/category_element.html'">
+                        </li>
+                    </ul>
                 </li>
             </ul>
         </div>
+        <!-- Sidebar Menu Items - These collapse to the responsive navigation menu on small screens -->
+
         <!-- /.navbar-collapse -->
     </nav>
     <div ng-view=""></div>

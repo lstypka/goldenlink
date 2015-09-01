@@ -8,7 +8,7 @@
  * Controller of the clientApp
  */
 angular.module('clientApp')
-    .controller('leftMenuCtrl', function ($scope, categoryService) {
+    .controller('leftMenuCtrl', ['$scope', '$timeout', 'categoryService', function ($scope, $timeout, categoryService) {
 
         var previousSelectedCategory = null;
 
@@ -18,28 +18,37 @@ angular.module('clientApp')
             });
         };
 
-        $scope.loadChildren = function (category, event) {
-            if(event) {
-                event.preventDefault();
-            }
-            if(category._opened)  {
+        $scope.loadChildren = function (category) {
+
+            if (category._opened) {
                 category._opened = false;
             } else {
                 category._opened = true;
             }
 
+            category.isLoadingChildren = true;
+
             if (!category._childrenLoaded) {
-                category._loading = true;
-                categoryService.getChildren(category.publicId).then(function (children) {
-                    category.children = children.data;
-                    category._childrenLoaded = true;
-                    category._loading = false;
-                });
+
+                $timeout(
+                    function () {
+                        return categoryService.getChildren(category.publicId).then(function (children) {
+                            category.children = children.data;
+                            category._childrenLoaded = true;
+                            category.isLoadingChildren = false;
+                        });
+                    }, 1500);
+            } else {
+                category.isLoadingChildren = false;
             }
         };
 
-        $scope.loadCategory = function(category) {
-            if(previousSelectedCategory) {
+        $scope.loadCategory = function (category, event) {
+            if (event) {
+                event.preventDefault();
+                event.stopPropagation();
+            }
+            if (previousSelectedCategory) {
                 previousSelectedCategory._isSelected = false;
             }
             category._isSelected = true;
@@ -47,5 +56,6 @@ angular.module('clientApp')
             window.console.log(category);
         };
 
+
         init();
-    });
+    }]);

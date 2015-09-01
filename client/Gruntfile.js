@@ -314,10 +314,7 @@ module.exports = function (grunt) {
         htmlmin: {
             dist: {
                 options: {
-                    collapseWhitespace: true,
-                    conservativeCollapse: true,
-                    collapseBooleanAttributes: true,
-                    removeCommentsFromCDATA: true
+
                 },
                 files: [
                     {
@@ -483,8 +480,10 @@ module.exports = function (grunt) {
     ]);
 
     grunt.registerTask('default', [
-        'newer:jshint',
+       /* 'newer:jshint',
         'test',
+        */
         'build'
+
     ]);
 };

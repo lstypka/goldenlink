@@ -30,7 +30,7 @@ public class CategoryController {
     }
 
     @RequestMapping(value = "/categories/{categoryId}/children", method = RequestMethod.GET)
-    public List<Category> getCategoriesChildren(@PathVariable("categoryId") String categoryId) {
+    public List<Category> getCategoriesChildren(@PathVariable("categoryId") String categoryId) throws InterruptedException {
         List<Category> categories = Lists.newArrayList();
 
         int numberOfChildren = (int)(Math.random() * 10) + 1;
@@ -39,6 +39,7 @@ public class CategoryController {
             String label = UUID.randomUUID().toString().substring(0, 10);
             categories.add(new Category(label, label, true, null));
         }
+        Thread.sleep(1500);
         return categories;
     }
 
