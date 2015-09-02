@@ -10,11 +10,25 @@
 angular.module('clientApp')
     .service('categoryService', ['$http', function ($http) {
 
-        this.getCategories = function () {
+        this.getCategories2 = function () {
             var promise = $http.get('http://localhost:8080/categories').then(function (response) {
                 return response;
             });
             return promise;
+        };
+
+        this.getCategories = function () {
+            var children = {};
+            children.data = [];
+            children.data.push({publicId : guid(), label : 'Linki', hasChildren: true});
+            children.data.push({publicId : guid(), label : 'Zdjęcia', hasChildren: true});
+            children.data.push({publicId : guid(), label : 'Filmy', hasChildren: true});
+            children.data.push({publicId : guid(), label : 'Youtube', hasChildren: true});
+            children.data.push({publicId : guid(), label : 'Notatki', hasChildren: true});
+
+            return { then: function (successFn) {
+                successFn(children);
+            }};
         };
 
         this.getChildren2 = function (publicId) {

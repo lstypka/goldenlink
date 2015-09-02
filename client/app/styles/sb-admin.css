@@ -114,6 +114,9 @@ ul.alert-dropdown {
 }
 
 /* Side Navigation */
+.side-nav-wrapper {
+    display: none;
+}
 
 @media (min-width:768px) {
     .side-nav {
@@ -129,6 +132,7 @@ ul.alert-dropdown {
         bottom: 0;
         overflow-x: hidden;
         padding-bottom: 40px;
+
 
     }
 
@@ -150,7 +154,6 @@ ul.alert-dropdown {
         border: 1px solid #999;
         overflow: auto;
         bottom: 0;
-        overflow-x: auto;
         padding-bottom: 40px;
         height: auto !important;
         margin-bottom: 20px;
@@ -158,7 +161,7 @@ ul.alert-dropdown {
         /* color: #404040;*/
         /*background-color: #E0E0E0;*/
         font-size: 13px;
-
+        display: block;
     }
 
     .side-nav li a:hover,
