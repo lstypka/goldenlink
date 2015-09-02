@@ -79,3 +79,36 @@ body {
     content: "\2605";
     position: absolute;
 }
+
+.thumbnails {
+    padding-left: 0px;
+    padding-right: 0px;
+}
+
+.thumbnail {
+    cursor: pointer;
+    border: 0px;
+
+}
+
+.tail {
+    float: left;
+    height: 180px;
+   /* width: 250px;*/
+    max-width: 24%;
+    margin-right: 10px;
+    list-style-type: none;
+    text-decoration: none;
+    background: transparent !important;
+}
+
+.wrap_lines {
+    word-wrap: break-word;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    display: -webkit-box;
+    -webkit-box-orient: vertical;
+    -webkit-line-clamp: 2; /* number of lines to show */
+    line-height: 1.5;        /* fallback */
+    max-height: 3;       /* fallback */
+}
