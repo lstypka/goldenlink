@@ -8,21 +8,21 @@
  * Controller of the clientApp
  */
 angular.module('clientApp')
-  .controller('MainCtrl', ['$scope', function ($scope) {
+    .controller('MainCtrl', ['$scope', function ($scope) {
 
-        var panels = ['panel-blue','panel-red','panel-green','panel-orange','panel-yellow', 'panel-lavender', 'panel-olivedrab', 'panel-khaki'];
+        var panels = ['panel-blue', 'panel-red', 'panel-green', 'panel-orange', 'panel-yellow', 'panel-lavender', 'panel-olivedrab', 'panel-khaki'];
 
         $scope.dragControlListeners = {
-           /* accept: function (sourceItemHandleScope, destSortableScope) {return true;},
-            itemMoved: function (event) {},
-                orderChanged: function(event) {},
-                    containment: '#board'*/
-                };
+            /* accept: function (sourceItemHandleScope, destSortableScope) {return true;},
+             itemMoved: function (event) {},
+             orderChanged: function(event) {},
+             containment: '#board'*/
+        };
 
-        var init = function() {
-               $scope.items = [];
-            for(var i = 0; i < 25; i++) {
-                $scope.items.push({id: i, index:i, drag: true, nrOfLinks: Math.floor((Math.random() * 100) + 1), label : 'Zdjęcuia Nr. ' + (i +1) + ' ' + guid(), panel : panels[Math.floor((Math.random() * panels.length))]});
+        var init = function () {
+            $scope.items = [];
+            for (var i = 0; i < 25; i++) {
+                $scope.items.push({id: i, index: i, drag: true, nrOfLinks: Math.floor((Math.random() * 100) + 1), label: 'Zdjęcuia Nr. ' + (i + 1) + ' ' + guid(), panel: panels[Math.floor((Math.random() * panels.length))]});
             }
 
         };
@@ -34,17 +34,22 @@ angular.module('clientApp')
                     .substring(1);
             }
 
-            return s4() + s4()+ s4()+ s4()+ s4() + s4() + s4()+ s4()+ s4()+ s4() + ' '  + s4() + s4()+ s4()+ s4()+ s4() ;
+            return s4() + s4() + s4() + s4() + s4() + s4() + s4() + s4() + s4() + s4() + ' ' + s4() + s4() + s4() + s4() + s4();
         }
 
-        $scope.dropCallback = function(event, ui, item) {
-                                         var fromIndex = $scope.items[item.index].index;
+        $scope.dropCallback = function (event, ui, item) {
+            var fromIndex = $scope.items[item.index].index;
             var toIndex = item.index;
 
-            window.console.log("From ",  fromIndex);
-            window.console.log("To ",   toIndex);
+            window.console.log("From ", fromIndex);
+            window.console.log("To ", toIndex);
 
-            arraymove($scope.items, fromIndex, toIndex+1);
+            if (fromIndex > toIndex) {
+                arraymove($scope.items, fromIndex, toIndex + 1);
+            } else {
+                arraymove($scope.items, fromIndex, toIndex - 1);
+            }
+
             rewriteIndexes();
         };
 
@@ -56,10 +61,10 @@ angular.module('clientApp')
         }
 
         function rewriteIndexes() {
-          for(var i =0; i < $scope.items.length; i++) {
-              $scope.items[i].index = i;
-          }
+            for (var i = 0; i < $scope.items.length; i++) {
+                $scope.items[i].index = i;
+            }
         }
 
         init();
-  }]);
+    }]);
