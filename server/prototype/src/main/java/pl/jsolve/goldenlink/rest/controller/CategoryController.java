@@ -1,8 +1,9 @@
 package pl.jsolve.goldenlink.rest.controller;
 
 import java.util.List;
-import java.util.Random;
 import java.util.UUID;
+
+import javax.annotation.PostConstruct;
 
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -11,36 +12,100 @@ import org.springframework.web.bind.annotation.RestController;
 
 import pl.jsolve.goldenlink.rest.dto.Category;
 
+import com.google.common.base.Predicate;
+import com.google.common.collect.Collections2;
 import com.google.common.collect.Lists;
 
 @RestController
 public class CategoryController {
 
+    private List<Category> categories;
+
     @RequestMapping(value = "/categories", method = RequestMethod.GET)
     public List<Category> getCategories() {
-        List<Category> categories = Lists.newArrayList();
+        return Lists.newArrayList(Collections2.filter(categories, new Predicate<Category>() {
 
-        categories.add(new Category("1", "Linki", true, null));
-        categories.add(new Category("2", "Zdjęcia", true, null));
-        categories.add(new Category("3", "Filmy", true, null));
-        categories.add(new Category("4", "Youtube", true, null));
-        categories.add(new Category("5", "Notatki", true, null));
+            @Override
+            public boolean apply(Category input) {
+                return input.getParentPublicId() == null;
+            }
 
-        return categories;
+        }));
     }
 
-    @RequestMapping(value = "/categories/{categoryId}/children", method = RequestMethod.GET)
-    public List<Category> getCategoriesChildren(@PathVariable("categoryId") String categoryId) throws InterruptedException {
-        List<Category> categories = Lists.newArrayList();
+    @RequestMapping(value = "/categories/{parentPublicId}/children", method = RequestMethod.GET)
+    public List<Category> getCategoriesChildren(@PathVariable("parentPublicId") final String parentPublicId)
+            throws InterruptedException {
+        return Lists.newArrayList(Collections2.filter(categories, new Predicate<Category>() {
 
-        int numberOfChildren = (int)(Math.random() * 10) + 1;
-        
-        for (int i = 0; i < numberOfChildren; i++) {
-            String label = UUID.randomUUID().toString().substring(0, 10);
-            categories.add(new Category(label, label, true, null));
+            @Override
+            public boolean apply(Category input) {
+                return input.getParentPublicId() != null && input.getParentPublicId().equals(parentPublicId);
+            }
+
+        }));
+    }
+
+    @RequestMapping(value = "/categories/{parentPublicId}/breadcrumbs", method = RequestMethod.GET)
+    public List<Category> getBreadcrumbs(@PathVariable("parentPublicId") String parentPublicId)
+            throws InterruptedException {
+
+        List<Category> breadcrumbs = Lists.newArrayList();
+        while (parentPublicId != null) {
+            for (Category category : categories) {
+                if (category.getPublicId().equals(parentPublicId)) {
+                    breadcrumbs.add(0, category);
+                    parentPublicId = category.getParentPublicId();
+                    break;
+                }
+            }
+            System.out.println("Nie znalazlem zadnego :(");
         }
-        Thread.sleep(1500);
-        return categories;
+
+        return breadcrumbs;
+    }
+
+    @PostConstruct
+    void setUp() {
+        categories = Lists.newArrayList();
+
+        // main categories
+        categories.add(new Category(generateId(), "Linki", true, null, "links"));
+        categories.add(new Category(generateId(), "Zdjęcia", true, null, "photos"));
+        categories.add(new Category(generateId(), "Filmy", true, null, "videos"));
+        categories.add(new Category(generateId(), "Youtube", true, null, "youtube"));
+        categories.add(new Category(generateId(), "Notatki", true, null, "notes"));
+
+        // inner categories
+        for (int i = 0; i < 5; i++) {
+            int generateChildren = generateChildren(categories.get(i).getPublicId(), 0, categories.get(i)
+                    .getCategoryGroup());
+            if (generateChildren == 0) {
+                categories.get(i).setHasChildren(false);
+            }
+        }
+    }
+
+    private int generateChildren(String parentId, int level, String categoryGroup) {
+        if (level > 6) {
+            return 0;
+        }
+        int numberOfChildren = randomNumberOfChildren();
+        for (int j = 0; j < numberOfChildren; j++) {
+
+            String publicId = generateId();
+            int children = generateChildren(publicId, level + 1, categoryGroup);
+            categories.add(new Category(publicId, publicId, children > 0, parentId, categoryGroup));
+        }
+        return numberOfChildren;
+    }
+
+    private int randomNumberOfChildren() {
+        return (int) (Math.random() * 10);
+    }
+
+    private String generateId() {
+        return UUID.randomUUID().toString().substring(0, 32);
     }
 
 }

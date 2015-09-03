@@ -32,27 +32,27 @@ angular
                 controller: 'MainCtrl',
                 controllerAs: 'main'
             })
-            .when('/links', {
+            .when('/links/:category_id', {
                 templateUrl: 'views/links.html',
                 controller: 'MainCtrl',
                 controllerAs: 'main'
             })
-            .when('/photos', {
+            .when('/photos/:category_id', {
                 templateUrl: 'views/photos.html',
                 controller: 'MainCtrl',
                 controllerAs: 'main'
             })
-            .when('/videos', {
+            .when('/videos/:category_id', {
                 templateUrl: 'views/videos.html',
                 controller: 'MainCtrl',
                 controllerAs: 'main'
             })
-            .when('/youtube', {
+            .when('/youtube/:category_id', {
                 templateUrl: 'views/youtube.html',
                 controller: 'MainCtrl',
                 controllerAs: 'main'
             })
-            .when('/notes', {
+            .when('/notes/:category_id', {
                 templateUrl: 'views/notes.html',
                 controller: 'MainCtrl',
                 controllerAs: 'main'

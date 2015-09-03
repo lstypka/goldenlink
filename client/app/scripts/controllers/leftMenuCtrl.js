@@ -8,7 +8,7 @@
  * Controller of the clientApp
  */
 angular.module('clientApp')
-    .controller('leftMenuCtrl', ['$scope', '$timeout', 'categoryService', function ($scope, $timeout, categoryService) {
+    .controller('leftMenuCtrl', ['$scope', '$timeout', '$location', 'categoryService', function ($scope, $timeout, $location, categoryService) {
 
         var previousSelectedCategory = null;
 
@@ -43,11 +43,7 @@ angular.module('clientApp')
             }
         };
 
-        $scope.loadCategory = function (category, event) {
-            if (event) {
-                event.preventDefault();
-                event.stopPropagation();
-            }
+        $scope.loadCategory = function (category) {
             if (previousSelectedCategory) {
                 previousSelectedCategory._isSelected = false;
             }

@@ -1,29 +1,30 @@
-<div ng-if="!category.hasChildren">
-    <a href="#/{{category.publicId}}"><i class="fa fa-fw fa-dashboard"></i> {{category.label}}</a>
-</div>
-<div ng-if="category.hasChildren" >
+<div class="row">
+    <div class="col-lg-12">
 
-    <div style="display: block; width: 180px;" class="highlight_row">
-
-        <span data-toggle="collapse" data-target="#{{category.publicId}}" ng-click="loadChildren(category, $event)"
+        <span class="highlight_row" ng-if="category.hasChildren" data-toggle="collapse" data-target="#{{category.publicId}}"
+              ng-click="loadChildren(category, $event)"
               style="outline:none;">
-            <i
-                    ng-class="{'fa fa-fw fa-caret-right' : !category._opened, 'fa fa-fw fa-caret-down' : category._opened, 'fa fa-spinner fa-pulse' : category.isLoadingChildren}"
-                    style="padding: 0px; margin: 0px;"/>
+            <i ng-class="{'fa fa-fw fa-caret-right' : !category._opened, 'fa fa-fw fa-caret-down' : category._opened, 'fa fa-spinner fa-pulse' : category.isLoadingChildren}"/>
         </span>
+        <span class="highlight_row">
+            <a ng-if="category.hasChildren"  ng-class="{'active_category' : category._isSelected}"
+               ng-click="loadCategory(category)" href="#/{{category.categoryGroup}}/{{category.publicId}}"
+               style="outline:none;">
+                {{category.label}}
+            </a>
 
-        <div ng-click="loadCategory(category, $event);" style="width: 159px; float: right; outline:none;">
-            {{category.label}}
-        </div>
+            <a ng-if="!category.hasChildren" ng-class="{'active_category' : category._isSelected}"
+               ng-click="loadCategory(category)" href="#/{{category.categoryGroup}}/{{category.publicId}}"
+               style="outline:none;">
+                {{category.label}}
+            </a>
+        </span>
     </div>
-
-    <ul id="{{category.publicId}}" class="collapse" class="clear_highlight_row">
-        <li ng-repeat="category in category.children" ng-include="'views/partials/category_element.html'"
-            ng-class="{'active' : category._isSelected}">
-        </li>
-    </ul>
-
-
 </div>
 
+<ul ng-if="category.hasChildren" id="{{category.publicId}}" class="collapse">
+    <li ng-repeat="category in category.children" ng-include="'views/partials/category_element.html'"
+        ng-class="{'active' : category._isSelected}">
+    </li>
+</ul>
 

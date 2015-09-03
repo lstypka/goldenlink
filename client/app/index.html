@@ -8,10 +8,10 @@
     <!-- Place favicon.ico and apple-touch-icon.png in the root directory -->
     <!-- build:css(.) styles/vendor.css -->
     <!-- bower:css -->
-    <link rel="stylesheet" href="bower_components/bootstrap/dist/css/bootstrap.css" />
-    <link rel="stylesheet" href="bower_components/font-awesome/css/font-awesome.css" />
-    <link rel="stylesheet" href="bower_components/ng-sortable/dist/ng-sortable.css" />
-    <link rel="stylesheet" href="bower_components/ng-sortable/dist/ng-sortable.style.css" />
+    <link rel="stylesheet" href="bower_components/bootstrap/dist/css/bootstrap.css"/>
+    <link rel="stylesheet" href="bower_components/font-awesome/css/font-awesome.css"/>
+    <link rel="stylesheet" href="bower_components/ng-sortable/dist/ng-sortable.css"/>
+    <link rel="stylesheet" href="bower_components/ng-sortable/dist/ng-sortable.style.css"/>
     <!-- endbower -->
     <!-- endbuild -->
     <!-- build:css(.tmp) styles/main.css -->
@@ -169,9 +169,10 @@
                 <li class="menu_element">
                     <a href="#/friends"><i class="fa fa-fw fa-dashboard"></i> Znajomi</a>
                 </li>
-                <li  style="margin-top: 30px;">
-                    <ul class="nav navbar-nav side-nav-wrapper f_wkScroll_light" data-ng-controller="leftMenuCtrl">
-                        <li ng-repeat="category in mainCategories" ng-class="{'active' : category._isSelected}"
+                <li style="margin-top: 30px;">
+                    <ul class="side-nav-wrapper container-fluid f_wkScroll_light "
+                        data-ng-controller="leftMenuCtrl">
+                        <li ng-repeat="category in mainCategories"
                             ng-include="'views/partials/category_element.html'">
                         </li>
                     </ul>
@@ -212,10 +213,12 @@
 <script src="scripts/app.js"></script>
 
 <script src="scripts/services/categoryService.js"></script>
+<script src="scripts/services/breadcrumbsService.js"></script>
 
 <script src="scripts/controllers/main.js"></script>
 <script src="scripts/controllers/about.js"></script>
 <script src="scripts/controllers/leftMenuCtrl.js"></script>
+<script src="scripts/controllers/breadcrumbsCtrl.js"></script>
 
 <!-- endbuild -->
 </body>

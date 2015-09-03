@@ -132,11 +132,14 @@ ul.alert-dropdown {
         bottom: 0;
         overflow-x: hidden;
         padding-bottom: 40px;
-
-
     }
 
-    .highlight_row>div:hover{
+    .highlight_row *:hover{
+      /*  font-weight: bold;*/
+        color: #fff !important;
+    }
+
+    .active_category {
         font-weight: bold;
         color: #fff !important;
     }

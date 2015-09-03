@@ -10,14 +10,14 @@
 angular.module('clientApp')
     .service('categoryService', ['$http', function ($http) {
 
-        this.getCategories2 = function () {
+        this.getCategories = function () {
             var promise = $http.get('http://localhost:8080/categories').then(function (response) {
                 return response;
             });
             return promise;
         };
 
-        this.getCategories = function () {
+        this.getCategoriesMock = function () {
             var children = {};
             children.data = [];
             children.data.push({publicId : guid(), label : 'Linki', hasChildren: true});
@@ -31,14 +31,14 @@ angular.module('clientApp')
             }};
         };
 
-        this.getChildren2 = function (publicId) {
+        this.getChildren = function (publicId) {
             var promise = $http.get('http://localhost:8080/categories/' + publicId + '/children').then(function (response) {
                 return response;
             });
             return promise;
         };
 
-        this.getChildren = function () {
+        this.getChildrenMock = function () {
             var children = {};
             children.data = [];
             for (var i = 0; i < Math.floor((Math.random() * 10) + 1); i++) {

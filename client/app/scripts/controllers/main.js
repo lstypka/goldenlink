@@ -53,7 +53,6 @@ angular.module('clientApp')
             rewriteIndexes();
         };
 
-
         function arraymove(arr, fromIndex, toIndex) {
             var element = arr[fromIndex];
             arr.splice(fromIndex, 1);

@@ -1,19 +1,19 @@
 package pl.jsolve.goldenlink.rest.dto;
 
-import java.util.List;
-
 public class Category {
 
     private final String publicId;
     private final String label;
     private boolean hasChildren;
-    private final List<Category> children;
+    private final String categoryGroup;
+    private final String parentPublicId;
 
-    public Category(String publicId, String label, boolean hasChildren,List<Category> children) {
+    public Category(String publicId, String label, boolean hasChildren, String parentPublicId, String categoryGroup) {
         this.publicId = publicId;
         this.label = label;
-        this.children = children;
+        this.parentPublicId = parentPublicId;
         this.hasChildren = hasChildren;
+        this.categoryGroup = categoryGroup;
     }
 
     public String getPublicId() {
@@ -24,12 +24,20 @@ public class Category {
         return label;
     }
 
-    public List<Category> getChildren() {
-        return children;
+    public String getParentPublicId() {
+        return parentPublicId;
     }
 
     public boolean isHasChildren() {
         return hasChildren;
+    }
+
+    public void setHasChildren(boolean hasChildren) {
+        this.hasChildren = hasChildren;
+    }
+
+    public String getCategoryGroup() {
+        return categoryGroup;
     }
 
 }
