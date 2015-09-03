@@ -10,7 +10,7 @@
                 </h1>
                 <ol class="breadcrumb">
                     <li class="active">
-                        <i class="fa fa-dashboard"></i> Pulpit
+                         <div   ng-include="'views/partials/breadcrumbs.html'"></div>
                     </li>
                 </ol>
             </div>
@@ -23,11 +23,11 @@
 
         <div class="row-fluid">
             <ul class="thumbnails">
-                <li class="tail" data-ng-repeat="item in items" data-drop="true" ng-model='items'
+                <li class="tail repeated-item" data-ng-repeat="item in items" data-drop="true" ng-model='items'
                     jqyoui-droppable="{index: {{$index}}, onDrop:'dropCallback(item, $index)', 'data-drop': false}">
                     <div class="col-lg-3 col-md-6 thumbnail" data-drag="{{item.drag}}"
                          data-jqyoui-options="{revert: 'invalid'}" ng-model="items"
-                         jqyoui-draggable="{index: {{$index}},animate:false}" style="width: 100%; background-color: transparent;">
+                         jqyoui-draggable="{index: {{$index}}}" style="width: 100%; background-color: transparent;">
                         <div class="panel" ng-class="item.panel">
                             <div class="panel-heading">
                                 <div class="row">

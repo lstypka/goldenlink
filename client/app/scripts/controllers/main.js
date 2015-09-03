@@ -8,7 +8,7 @@
  * Controller of the clientApp
  */
 angular.module('clientApp')
-    .controller('MainCtrl', ['$scope', function ($scope) {
+    .controller('MainCtrl', ['$scope', '$timeout', function ($scope, $timeout) {
 
         var panels = ['panel-blue', 'panel-red', 'panel-green', 'panel-orange', 'panel-yellow', 'panel-lavender', 'panel-olivedrab', 'panel-khaki'];
 
@@ -46,11 +46,14 @@ angular.module('clientApp')
 
             if (fromIndex > toIndex) {
                 arraymove($scope.items, fromIndex, toIndex + 1);
+                rewriteIndexes();
+                animate($scope.items, toIndex);
             } else {
                 arraymove($scope.items, fromIndex, toIndex - 1);
+                rewriteIndexes();
+                animate($scope.items, fromIndex);
             }
 
-            rewriteIndexes();
         };
 
 
@@ -65,6 +68,22 @@ angular.module('clientApp')
                 $scope.items[i].index = i;
             }
         }
+
+        function animate(arr, fromIndex) {
+              var bak = arr.slice(fromIndex);
+            window.console.log("BAK " , bak);
+
+
+            window.console.log("ITEMS " ,  $scope.items);
+
+            for(var i = 0; i < bak.length; i++) {
+                $timeout(function() {
+                    $scope.items.slice(fromIndex + i, 1);
+                    $scope.items.push(bak[i]) }, i * 50);
+            };
+
+        };
+
 
         init();
     }]);
