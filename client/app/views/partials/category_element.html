@@ -1,21 +1,18 @@
 <div class="row">
     <div class="col-lg-12">
 
-        <span class="highlight_row" ng-if="category.hasChildren" data-toggle="collapse" data-target="#{{category.publicId}}"
-              ng-click="loadChildren(category, $event)"
-              style="outline:none;">
+        <span class="highlight_row without_outline" ng-if="category.hasChildren" data-toggle="collapse" data-target="#{{category.publicId}}"
+              ng-click="loadChildren(category, $event)">
             <i ng-class="{'fa fa-fw fa-caret-right' : !category._opened, 'fa fa-fw fa-caret-down' : category._opened, 'fa fa-spinner fa-pulse' : category.isLoadingChildren}"/>
         </span>
         <span class="highlight_row">
-            <a ng-if="category.hasChildren"  ng-class="{'active_category' : category._isSelected}"
-               ng-click="loadCategory(category)" href="#/{{category.categoryGroup}}/{{category.publicId}}"
-               style="outline:none;">
+            <a ng-if="category.hasChildren"  ng-class="{'active_category' : category._isSelected}" class="without_outline"
+               ng-click="loadCategory(category)" href="#/{{category.categoryGroup}}/{{category.publicId}}">
                 <i ng-if="category.icon" class="fa fa-fw " ng-class="category.icon"></i> {{category.label}}
             </a>
 
-            <a ng-if="!category.hasChildren" ng-class="{'active_category' : category._isSelected}"
-               ng-click="loadCategory(category)" href="#/{{category.categoryGroup}}/{{category.publicId}}"
-               style="outline:none;">
+            <a ng-if="!category.hasChildren" ng-class="{'active_category' : category._isSelected}" class="without_outline"
+               ng-click="loadCategory(category)" href="#/{{category.categoryGroup}}/{{category.publicId}}">
                 <i ng-if="category.icon" class="fa fa-fw " ng-class="category.icon"></i> {{category.label}}
             </a>
         </span>

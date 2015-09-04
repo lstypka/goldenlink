@@ -8,10 +8,10 @@
     <!-- Place favicon.ico and apple-touch-icon.png in the root directory -->
     <!-- build:css(.) styles/vendor.css -->
     <!-- bower:css -->
-    <link rel="stylesheet" href="bower_components/bootstrap/dist/css/bootstrap.css" />
-    <link rel="stylesheet" href="bower_components/font-awesome/css/font-awesome.css" />
-    <link rel="stylesheet" href="bower_components/ng-sortable/dist/ng-sortable.css" />
-    <link rel="stylesheet" href="bower_components/ng-sortable/dist/ng-sortable.style.css" />
+    <link rel="stylesheet" href="bower_components/bootstrap/dist/css/bootstrap.css"/>
+    <link rel="stylesheet" href="bower_components/font-awesome/css/font-awesome.css"/>
+    <link rel="stylesheet" href="bower_components/ng-sortable/dist/ng-sortable.css"/>
+    <link rel="stylesheet" href="bower_components/ng-sortable/dist/ng-sortable.style.css"/>
     <!-- endbower -->
     <!-- endbuild -->
     <!-- build:css(.tmp) styles/main.css -->
@@ -20,6 +20,7 @@
     <link rel="stylesheet" href="styles/sb-admin.css">
     <link rel="stylesheet" href="styles/panels.css">
     <link rel="stylesheet" href="styles/categories_tree.css">
+    <link rel="stylesheet" href="styles/left_menu.css">
     <!-- endbuild -->
 </head>
 <body ng-app="clientApp" data-ng-controller="rootCtrl">
@@ -157,33 +158,8 @@
             </li>
         </ul>
 
-        <div class="collapse navbar-collapse navbar-ex1-collapse">
-            <ul class="nav navbar-nav side-nav">
-                <li class="menu_element">
-                    <a href="#/home"><i class="fa fa-fw fa-dashboard"></i>Pulpit</a>
-                </li>
-                <li class="menu_element">
-                    <a href="#/addlink"><i class="fa fa-fw fa-dashboard"></i> Dodaj link</a>
-                </li>
-                <li class="menu_element">
-                    <a href="#/search"><i class="fa fa-fw fa-dashboard"></i> Wyszukaj</a>
-                </li>
-                <li class="menu_element">
-                    <a href="#/friends"><i class="fa fa-fw fa-dashboard"></i> Znajomi</a>
-                </li>
-                <li style="margin-top: 30px;">
-                    <ul class="categories_tree_container container-fluid f_wkScroll_light "
-                        data-ng-controller="categoriesTreeCtrl">
-                        <li ng-repeat="category in mainCategories"
-                            ng-include="'views/partials/category_element.html'">
-                        </li>
-                    </ul>
-                </li>
-            </ul>
-        </div>
-        <!-- Sidebar Menu Items - These collapse to the responsive navigation menu on small screens -->
+        <div ng-include="'views/partials/left_menu.html'"></div>
 
-        <!-- /.navbar-collapse -->
     </nav>
     <div ng-view=""></div>
 

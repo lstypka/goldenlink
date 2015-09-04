@@ -1,0 +1,30 @@
+<div class="collapse navbar-collapse navbar-ex1-collapse">
+    <ul class="nav navbar-nav side-nav">
+        <li class="menu_element">
+            <a href="#/home"><i class="fa fa-fw fa-dashboard"></i> Pulpit</a>
+        </li>
+        <li class="menu_element">
+            <a href="#/addlink"><i class="fa fa-fw fa-plus"></i> Dodaj link</a>
+        </li>
+        <li class="menu_element">
+            <a href="#/search"><i class="fa fa-fw fa-search"></i> Wyszukaj</a>
+        </li>
+        <li class="menu_element">
+            <a href="#/friends"><i class="fa fa-fw fa-users"></i> Znajomi</a>
+        </li>
+        <li class="menu_element">
+            <a href="#/categories"><i class="fa fa-fw fa-list"></i> Kategorie</a>
+        </li>
+        <li class="menu_element">
+            <a href="#/settings"><i class="fa fa-fw fa-wrench"></i> Ustawienia</a>
+        </li>
+        <li>
+            <ul class="categories_tree_container container-fluid"
+                data-ng-controller="categoriesTreeCtrl">
+                <li ng-repeat="category in mainCategories"
+                    ng-include="'views/partials/category_element.html'">
+                </li>
+            </ul>
+        </li>
+    </ul>
+</div>

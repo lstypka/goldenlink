@@ -1,13 +1,10 @@
-<div id="page-wrapper" data-ng-controller="DashboardCtrl">
+<div id="page-wrapper" style="margin-top: 10px;" data-ng-controller="DashboardCtrl">
 
     <div class="container-fluid">
 
         <!-- Page Heading -->
         <div class="row">
             <div class="col-lg-12">
-                <h1 class="page-header" style="vertical-align: middle;">
-                    Pulpit
-                </h1>
                 <ol class="breadcrumb">
                     <div class="row">
                         <div class="col-lg-8" style="margin-top: 6px;">
@@ -22,12 +19,12 @@
             </div>
         </div>
 
-        Użytkownik dodaje sobie kategorie które chce widziec tutaj na pulpicie. Za pomocą drag & drop użytkownik może
+      <!--  Użytkownik dodaje sobie kategorie które chce widziec tutaj na pulpicie. Za pomocą drag & drop użytkownik może
         ustalac
         sobie kolejnosc elementów. Cyfra informuje ile elementów jest w danej kategorii. Użytkownik może sobie sam
         wybrac jaki
         kolor ma miec kafelek oraz jaka ma być ikona przy nim. Ma to pomoc w łatwym przeglądaniu
-
+-->
         <div ng-class="{'successfully-saved' : isSaved || isReverted, 'show_save_box' : isDirty}"
              style="position: fixed; bottom: 5px; z-index: 10000; height: 40px; width: 80%;">
             <div ng-show="isSaved || isReverted || isDirty" class="row breadcrumb"
