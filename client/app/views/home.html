@@ -1,33 +1,62 @@
-<div id="page-wrapper">
+<div id="page-wrapper" data-ng-controller="DashboardCtrl">
 
     <div class="container-fluid">
 
         <!-- Page Heading -->
         <div class="row">
             <div class="col-lg-12">
-                <h1 class="page-header">
+                <h1 class="page-header" style="vertical-align: middle;">
                     Pulpit
                 </h1>
                 <ol class="breadcrumb">
-                    <li class="active">
-                        <i class="fa fa-dashboard"></i> Pulpit
-                    </li>
+                    <div class="row">
+                        <div class="col-lg-8" style="margin-top: 6px;">
+                            <li class="active">
+                                <i class="fa fa-dashboard"></i> Pulpit
+                            </li>
+                        </div>
+                        <div class="col-lg-4">
+                                <input type="text" class="form-control" placeholder="Wyszukaj" ng-model="tilesFilter">
+                        </div>
                 </ol>
             </div>
         </div>
+
         Użytkownik dodaje sobie kategorie które chce widziec tutaj na pulpicie. Za pomocą drag & drop użytkownik może
         ustalac
         sobie kolejnosc elementów. Cyfra informuje ile elementów jest w danej kategorii. Użytkownik może sobie sam
         wybrac jaki
         kolor ma miec kafelek oraz jaka ma być ikona przy nim. Ma to pomoc w łatwym przeglądaniu
 
+        <div ng-class="{'successfully-saved' : isSaved || isReverted, 'show_save_box' : isDirty}"
+             style="position: fixed; bottom: 5px; z-index: 10000; height: 40px; width: 80%;">
+            <div ng-show="isSaved || isReverted || isDirty" class="row breadcrumb"
+                 style="background-color: rgba(192, 192, 192, 0.8) !important;">
+                <div class="text-center">
+
+                    <div class="btn-group" ng-show="isDirty">
+                        <button type="button" class="btn btn-success" style="width: 150px; margin-right: 10px;"
+                                ng-click="save()"> Zapisz
+                        </button>
+                        <button type="button" class="btn btn-default" style="width: 150px; margin-left: 10px;"
+                                ng-click="revert()">Przywróć
+                        </button>
+                    </div>
+                    <div ng-show="!isDirty">
+                        {{message}}
+                    </div>
+                </div>
+            </div>
+        </div>
+
         <div class="row-fluid">
             <ul class="thumbnails">
-                <li class="tail" data-ng-repeat="item in items" data-drop="true" ng-model='items'
+                <li class="tail" data-ng-repeat="item in items | filter:{label : tilesFilter}" data-drop="true" ng-model='items'
                     jqyoui-droppable="{index: {{$index}}, onDrop:'dropCallback(item, $index)', 'data-drop': false}">
                     <div class="col-lg-3 col-md-6 thumbnail" data-drag="{{item.drag}}"
                          data-jqyoui-options="{revert: 'invalid'}" ng-model="items"
-                         jqyoui-draggable="{index: {{$index}},animate:false}" style="width: 100%; background-color: transparent;">
+                         jqyoui-draggable="{index: {{$index}},animate:false}"
+                         style="width: 100%; background-color: transparent;">
                         <div class="panel" ng-class="item.panel">
                             <div class="panel-heading">
                                 <div class="row">

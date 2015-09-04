@@ -112,3 +112,29 @@ body {
     line-height: 1.5;        /* fallback */
     max-height: 3;       /* fallback */
 }
+
+.successfully-saved {
+    color: #3d8b3d;
+    font-weight: bold;
+    text-align: center;
+
+    -webkit-transition: opacity 2.25s;
+    -moz-transition: opacity 2.25s;
+    -o-transition: opacity 2.25s;
+    -ms-transition: opacity 2.25s;
+    transition: opacity 2.25s;
+    -ms-filter: "progid:DXImageTransform.Microsoft.Alpha(Opacity=0)";
+    filter: alpha(opacity=0);
+    opacity: 0;
+}
+
+.show_save_box {
+    -webkit-transition: opacity .5s;
+    -moz-transition: opacity .5s;
+    -o-transition: opacity .2s;
+    -ms-transition: opacity .5s;
+    transition: opacity .5s;
+    -ms-filter: "progid:DXImageTransform.Microsoft.Alpha(Opacity=100)";
+    filter: alpha(opacity=100);
+    opacity: 1;
+}

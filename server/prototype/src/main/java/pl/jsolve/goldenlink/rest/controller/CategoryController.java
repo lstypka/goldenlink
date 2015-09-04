@@ -21,6 +21,9 @@ public class CategoryController {
 
     private List<Category> categories;
 
+    List<String> icons = Lists.newArrayList(null, "fa-asterisk", "fa-bomb", null, null, null, null, "fa-bell", "fa-book", "fa-bus", "fa-bed",
+            "fa-ban", "fa-check", "fa-dashboard", "fa-diamond", "fa-edit");
+
     @RequestMapping(value = "/categories", method = RequestMethod.GET)
     public List<Category> getCategories() {
         return Lists.newArrayList(Collections2.filter(categories, new Predicate<Category>() {
@@ -69,12 +72,14 @@ public class CategoryController {
     void setUp() {
         categories = Lists.newArrayList();
 
+        // icons
+
         // main categories
-        categories.add(new Category(generateId(), "Linki", true, null, "links"));
-        categories.add(new Category(generateId(), "Zdjęcia", true, null, "photos"));
-        categories.add(new Category(generateId(), "Filmy", true, null, "videos"));
-        categories.add(new Category(generateId(), "Youtube", true, null, "youtube"));
-        categories.add(new Category(generateId(), "Notatki", true, null, "notes"));
+        categories.add(new Category(generateId(), "Linki", true, null, "links", randomIcon()));
+        categories.add(new Category(generateId(), "Zdjęcia", true, null, "photos", randomIcon()));
+        categories.add(new Category(generateId(), "Filmy", true, null, "videos", randomIcon()));
+        categories.add(new Category(generateId(), "Youtube", true, null, "youtube", randomIcon()));
+        categories.add(new Category(generateId(), "Notatki", true, null, "notes", randomIcon()));
 
         // inner categories
         for (int i = 0; i < 5; i++) {
@@ -86,6 +91,10 @@ public class CategoryController {
         }
     }
 
+    private String randomIcon() {
+        return icons.get(random(icons.size() - 1));
+    }
+
     private int generateChildren(String parentId, int level, String categoryGroup) {
         if (level > 6) {
             return 0;
@@ -95,13 +104,17 @@ public class CategoryController {
 
             String publicId = generateId();
             int children = generateChildren(publicId, level + 1, categoryGroup);
-            categories.add(new Category(publicId, publicId, children > 0, parentId, categoryGroup));
+            categories.add(new Category(publicId, publicId, children > 0, parentId, categoryGroup, randomIcon()));
         }
         return numberOfChildren;
     }
 
     private int randomNumberOfChildren() {
-        return (int) (Math.random() * 10);
+        return random(10);
+    }
+
+    private int random(int max) {
+        return (int) (Math.random() * max);
     }
 
     private String generateId() {

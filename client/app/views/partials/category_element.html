@@ -10,13 +10,13 @@
             <a ng-if="category.hasChildren"  ng-class="{'active_category' : category._isSelected}"
                ng-click="loadCategory(category)" href="#/{{category.categoryGroup}}/{{category.publicId}}"
                style="outline:none;">
-                {{category.label}}
+                <i ng-if="category.icon" class="fa fa-fw " ng-class="category.icon"></i> {{category.label}}
             </a>
 
             <a ng-if="!category.hasChildren" ng-class="{'active_category' : category._isSelected}"
                ng-click="loadCategory(category)" href="#/{{category.categoryGroup}}/{{category.publicId}}"
                style="outline:none;">
-                {{category.label}}
+                <i ng-if="category.icon" class="fa fa-fw " ng-class="category.icon"></i> {{category.label}}
             </a>
         </span>
     </div>

@@ -8,9 +8,12 @@
  * Controller of the clientApp
  */
 angular.module('clientApp')
-    .controller('MainCtrl', ['$scope', function ($scope) {
+    .controller('DashboardCtrl', ['$scope', '$timeout', function ($scope, $timeout) {
 
         var panels = ['panel-blue', 'panel-red', 'panel-green', 'panel-orange', 'panel-yellow', 'panel-lavender', 'panel-olivedrab', 'panel-khaki'];
+
+        $scope.isDirty = false;
+        $scope.backup = [];
 
         $scope.dragControlListeners = {
             /* accept: function (sourceItemHandleScope, destSortableScope) {return true;},
@@ -25,6 +28,7 @@ angular.module('clientApp')
                 $scope.items.push({id: i, index: i, drag: true, nrOfLinks: Math.floor((Math.random() * 100) + 1), label: 'Zdjęcuia Nr. ' + (i + 1) + ' ' + guid(), panel: panels[Math.floor((Math.random() * panels.length))]});
             }
 
+            $scope.backup = $scope.items.slice();
         };
 
         function guid() {
@@ -51,6 +55,7 @@ angular.module('clientApp')
             }
 
             rewriteIndexes();
+            $scope.isDirty = true;
         };
 
         function arraymove(arr, fromIndex, toIndex) {
@@ -64,6 +69,35 @@ angular.module('clientApp')
                 $scope.items[i].index = i;
             }
         }
+
+        $scope.save = function () {
+            $scope.isDirty = false;
+            $scope.message= "Zapisano";
+            $scope.isSaved = true;
+            $scope.backup = $scope.items.slice();
+            $timeout(function(){ $scope.isSaved = false;}, 1000);
+            window.console.log("SAVED");
+            resetFlags();
+        };
+
+        $scope.revert = function () {
+            $scope.isDirty = false;
+            $scope.message = "Przywrócono";
+            $scope.isReverted = true;
+            $scope.items = $scope.backup.slice();
+            rewriteIndexes();
+            window.console.log("REVERTED");
+            resetFlags();
+        };
+
+        var resetFlags = function() {
+            $timeout(function(){
+                $scope.isSaved = false;
+                $scope.isReverted = false;
+                $scope.isDirty = false;
+                $scope.message = "";
+            }, 1000);
+        };
 
         init();
     }]);

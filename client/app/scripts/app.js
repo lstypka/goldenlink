@@ -19,48 +19,34 @@ angular
         'ngSanitize',
         'ngTouch',
         'ngDragDrop'
-    ])
+    ]).constant("restServiceConfig", {
+        "url": "http://localhost:8080"
+    })
     .config(function ($routeProvider) {
         $routeProvider
             .when('', {
-                templateUrl: 'views/home.html',
-                controller: 'MainCtrl',
-                controllerAs: 'main'
+                templateUrl: 'views/home.html'
             })
             .when('/', {
-                templateUrl: 'views/home.html',
-                controller: 'MainCtrl',
-                controllerAs: 'main'
+                templateUrl: 'views/home.html'
             })
             .when('/links/:category_id', {
-                templateUrl: 'views/links.html',
-                controller: 'MainCtrl',
-                controllerAs: 'main'
+                templateUrl: 'views/links.html'
             })
             .when('/photos/:category_id', {
-                templateUrl: 'views/photos.html',
-                controller: 'MainCtrl',
-                controllerAs: 'main'
+                templateUrl: 'views/photos.html'
             })
             .when('/videos/:category_id', {
-                templateUrl: 'views/videos.html',
-                controller: 'MainCtrl',
-                controllerAs: 'main'
+                templateUrl: 'views/videos.html'
             })
             .when('/youtube/:category_id', {
-                templateUrl: 'views/youtube.html',
-                controller: 'MainCtrl',
-                controllerAs: 'main'
+                templateUrl: 'views/youtube.html'
             })
             .when('/notes/:category_id', {
-                templateUrl: 'views/notes.html',
-                controller: 'MainCtrl',
-                controllerAs: 'main'
+                templateUrl: 'views/notes.html'
             })
             .when('/search', {
-                templateUrl: 'views/search.html',
-                controller: 'MainCtrl',
-                controllerAs: 'main'
+                templateUrl: 'views/search.html'
             })
             .otherwise({
                 redirectTo: '/'

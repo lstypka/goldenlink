@@ -1,0 +1,147 @@
+.huge {
+    font-size: 40px;
+}
+
+.panel-green {
+    border-color: #3d8b3d;
+}
+
+.panel-green > .panel-heading {
+    border-color: #3d8b3d;
+    color: #fff;
+    background-color: #5cb85c;
+}
+
+.panel-green > a {
+    color: #5cb85c;
+}
+
+.panel-green > a:hover {
+    color: #3d8b3d;
+}
+
+.panel-red {
+    border-color: #b52b27;
+}
+
+.panel-red > .panel-heading {
+    border-color: #b52b27;
+    color: #fff;
+    background-color: #d9534f;
+}
+
+.panel-red > a {
+    color: #d9534f;
+}
+
+.panel-red > a:hover {
+    color: #b52b27;
+}
+
+.panel-orange {
+    border-color: #df8a13;
+}
+
+.panel-orange > .panel-heading {
+    border-color: #df8a13;
+    color: #fff;
+    background-color: #f0ad4e;
+}
+
+.panel-orange > a {
+    color: #f0ad4e;
+}
+
+.panel-orange > a:hover {
+    color: #df8a13;
+}
+
+.panel-blue {
+    border-color: #000033;
+}
+
+.panel-blue > .panel-heading {
+    border-color: #000033;
+    color: #fff;
+    background-color: #9370DB;
+}
+
+.panel-blue > a {
+    color: #9370DB;
+}
+
+.panel-blue > a:hover {
+    color: #000033;
+}
+
+.panel-yellow {
+    border-color: #DA7C20;
+}
+
+.panel-yellow > .panel-heading {
+    border-color: #DA7C20;
+    color: #fff;
+    background-color: #FFD700;
+}
+
+.panel-yellow > a {
+    color: #FFD700;
+}
+
+.panel-yellow > a:hover {
+    color: #DA7C20;
+}
+
+.panel-lavender {
+    border-color: #9370DB;
+}
+
+.panel-lavender > .panel-heading {
+    border-color: #9370DB;
+    color: #fff;
+    background-color: #cfd1fa;
+}
+
+.panel-lavender > a {
+    color: #cfd1fa;
+}
+
+.panel-lavender > a:hover {
+    color: #9370DB;
+}
+
+.panel-olivedrab {
+    border-color: #556B2F;
+}
+
+.panel-olivedrab > .panel-heading {
+    border-color: #556B2F;
+    color: #fff;
+    background-color: #6B8E23;
+}
+
+.panel-olivedrab > a {
+    color: #6B8E23;
+}
+
+.panel-olivedrab > a:hover {
+    color: #556B2F;
+}
+
+.panel-khaki {
+    border-color: #B8860B;
+}
+
+.panel-khaki > .panel-heading {
+    border-color: #B8860B;
+    color: #fff;
+    background-color: #DEB887;
+}
+
+.panel-khaki > a {
+    color: #DEB887;
+}
+
+.panel-khaki > a:hover {
+    color: #B8860B;
+}

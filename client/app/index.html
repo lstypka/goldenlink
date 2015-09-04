@@ -8,19 +8,21 @@
     <!-- Place favicon.ico and apple-touch-icon.png in the root directory -->
     <!-- build:css(.) styles/vendor.css -->
     <!-- bower:css -->
-    <link rel="stylesheet" href="bower_components/bootstrap/dist/css/bootstrap.css"/>
-    <link rel="stylesheet" href="bower_components/font-awesome/css/font-awesome.css"/>
-    <link rel="stylesheet" href="bower_components/ng-sortable/dist/ng-sortable.css"/>
-    <link rel="stylesheet" href="bower_components/ng-sortable/dist/ng-sortable.style.css"/>
+    <link rel="stylesheet" href="bower_components/bootstrap/dist/css/bootstrap.css" />
+    <link rel="stylesheet" href="bower_components/font-awesome/css/font-awesome.css" />
+    <link rel="stylesheet" href="bower_components/ng-sortable/dist/ng-sortable.css" />
+    <link rel="stylesheet" href="bower_components/ng-sortable/dist/ng-sortable.style.css" />
     <!-- endbower -->
     <!-- endbuild -->
     <!-- build:css(.tmp) styles/main.css -->
     <link rel="stylesheet" href="styles/main.css">
     <link rel="stylesheet" href="styles/scrollbar.css">
     <link rel="stylesheet" href="styles/sb-admin.css">
+    <link rel="stylesheet" href="styles/panels.css">
+    <link rel="stylesheet" href="styles/categories_tree.css">
     <!-- endbuild -->
 </head>
-<body ng-app="clientApp">
+<body ng-app="clientApp" data-ng-controller="rootCtrl">
 <!--[if lte IE 8]>
 <p class="browsehappy">You are using an <strong>outdated</strong> browser. Please <a href="http://browsehappy.com/">upgrade
     your browser</a> to improve your experience.</p>
@@ -170,8 +172,8 @@
                     <a href="#/friends"><i class="fa fa-fw fa-dashboard"></i> Znajomi</a>
                 </li>
                 <li style="margin-top: 30px;">
-                    <ul class="side-nav-wrapper container-fluid f_wkScroll_light "
-                        data-ng-controller="leftMenuCtrl">
+                    <ul class="categories_tree_container container-fluid f_wkScroll_light "
+                        data-ng-controller="categoriesTreeCtrl">
                         <li ng-repeat="category in mainCategories"
                             ng-include="'views/partials/category_element.html'">
                         </li>
@@ -215,9 +217,9 @@
 <script src="scripts/services/categoryService.js"></script>
 <script src="scripts/services/breadcrumbsService.js"></script>
 
-<script src="scripts/controllers/main.js"></script>
-<script src="scripts/controllers/about.js"></script>
-<script src="scripts/controllers/leftMenuCtrl.js"></script>
+<script src="scripts/controllers/rootCtrl.js"></script>
+<script src="scripts/controllers/dashboardCtrl.js"></script>
+<script src="scripts/controllers/categoriesTreeCtrl.js"></script>
 <script src="scripts/controllers/breadcrumbsCtrl.js"></script>
 
 <!-- endbuild -->
