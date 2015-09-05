@@ -1,0 +1,19 @@
+.icons_container {
+    width: 600px;
+    margin: auto;
+}
+
+.icon_tile {
+    border: 1px solid #999;
+    padding: 5px;
+    margin: 11px 11px;
+    border-radius:  7px;
+    box-shadow: inset 1px 1px 2px 1px rgba(0, 0, 0, 0.2);
+    display: inline-flex;
+}
+
+.icon_tile:hover {
+    background-color: #999;
+    color: white;
+    cursor: pointer;
+}

@@ -59,10 +59,11 @@ public class CategoryController {
                 if (category.getPublicId().equals(parentPublicId)) {
                     breadcrumbs.add(0, category);
                     parentPublicId = category.getParentPublicId();
-                    break;
+                    continue;
                 }
             }
             System.out.println("Nie znalazlem zadnego :(");
+            break;
         }
 
         return breadcrumbs;

@@ -18,7 +18,9 @@ angular
         'ngRoute',
         'ngSanitize',
         'ngTouch',
-        'ngDragDrop'
+        'ngDragDrop',
+        'ui.bootstrap',
+        'angularModalService'
     ]).constant("restServiceConfig", {
         "url": "http://localhost:8080"
     })
@@ -47,6 +49,9 @@ angular
             })
             .when('/search', {
                 templateUrl: 'views/search.html'
+            })
+            .when('/categories', {
+                templateUrl: 'views/categories.html'
             })
             .otherwise({
                 redirectTo: '/'
