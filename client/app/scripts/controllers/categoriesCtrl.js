@@ -71,7 +71,7 @@ angular.module('clientApp')
                     $scope.subcategoryDraft = null;
                     $scope.selectedCategory = createdSubcategory;
 
-                    $rootScope.$emit(restServiceConfig.events.SUBCATEGORY_ADDED, createdSubcategory.data);
+                    $rootScope.$emit(restServiceConfig.events.SUBCATEGORY_ADDED, createdSubcategory);
                 });
 
         };
