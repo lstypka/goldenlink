@@ -6,6 +6,7 @@ import java.util.UUID;
 import javax.annotation.PostConstruct;
 
 import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
@@ -21,8 +22,8 @@ public class CategoryController {
 
     private List<Category> categories;
 
-    List<String> icons = Lists.newArrayList(null, "fa-asterisk", "fa-bomb", null, null, null, null, "fa-bell", "fa-book", "fa-bus", "fa-bed",
-            "fa-ban", "fa-check", "fa-dashboard", "fa-diamond", "fa-edit");
+    List<String> icons = Lists.newArrayList(null, "fa-asterisk", "fa-bomb", null, null, null, null, "fa-bell",
+            "fa-book", "fa-bus", "fa-bed", "fa-ban", "fa-check", "fa-dashboard", "fa-diamond", "fa-edit");
 
     @RequestMapping(value = "/categories", method = RequestMethod.GET)
     public List<Category> getCategories() {
@@ -47,6 +48,40 @@ public class CategoryController {
             }
 
         }));
+    }
+
+    @RequestMapping(value = "/categories/{publicId}", method = RequestMethod.PUT)
+    public Category updateCategory(@PathVariable("publicId") final String publicId,
+            @RequestBody Category categoryToUpdate) throws InterruptedException {
+
+        Category foundCategory = findCategory(publicId);
+        foundCategory.setLabel(categoryToUpdate.getLabel());
+        foundCategory.setIcon(categoryToUpdate.getIcon());
+        return categoryToUpdate;
+    }
+
+    @RequestMapping(value = "/categories/{parentPublicId}", method = RequestMethod.POST)
+    public Category createSubcategory(@PathVariable("parentPublicId") final String parentPublicId,
+            @RequestBody Category categoryToAdd) throws InterruptedException {
+        Category parentCategory = findCategory(parentPublicId);
+        Category subcategory = new Category(generateId(), categoryToAdd.getLabel(), false, parentPublicId,
+                parentCategory.getCategoryGroup(), categoryToAdd.getIcon());
+        categories.add(subcategory);
+        if(!parentCategory.isHasChildren()) {
+            parentCategory.setHasChildren(true);
+        }
+
+        return subcategory;
+    }
+
+    private Category findCategory(final String publicId) {
+        for (Category category : categories) {
+            if (category.getPublicId().equals(publicId)) {
+                return category;
+
+            }
+        }
+        return null;
     }
 
     @RequestMapping(value = "/categories/{parentPublicId}/breadcrumbs", method = RequestMethod.GET)
@@ -111,7 +146,7 @@ public class CategoryController {
     }
 
     private int randomNumberOfChildren() {
-        return random(10);
+        return random(4);
     }
 
     private int random(int max) {

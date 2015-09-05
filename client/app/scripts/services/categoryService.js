@@ -24,4 +24,18 @@ angular.module('clientApp')
             return promise;
         };
 
+        this.updateCategory = function(category) {
+            var promise = $http.put(restServiceConfig.url + '/categories/' + category.publicId, category).then(function (response) {
+                return response;
+            });
+            return promise;
+        };
+
+        this.createSubcategory = function(parentPublicId, category) {
+            var promise = $http.post(restServiceConfig.url + '/categories/' + parentPublicId, category).then(function (response) {
+                return response;
+            });
+            return promise;
+        };
+
     }]);

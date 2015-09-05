@@ -22,7 +22,12 @@ angular
         'ui.bootstrap',
         'angularModalService'
     ]).constant("restServiceConfig", {
-        "url": "http://localhost:8080"
+        "url": "http://localhost:8080",
+        "events" : {
+            CATEGORY_UPDATED : "category_updated",
+            SUBCATEGORY_ADDED : "subcategory_added",
+            CATEGORY_DELETED : "category_deleted"
+        }
     })
     .config(function ($routeProvider) {
         $routeProvider

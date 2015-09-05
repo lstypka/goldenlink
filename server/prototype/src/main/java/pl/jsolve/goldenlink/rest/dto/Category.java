@@ -1,16 +1,21 @@
 package pl.jsolve.goldenlink.rest.dto;
 
+import com.fasterxml.jackson.annotation.JsonCreator;
+import com.fasterxml.jackson.annotation.JsonProperty;
+
 public class Category {
 
     private final String publicId;
-    private final String label;
+    private String label;
     private boolean hasChildren;
     private final String categoryGroup;
     private final String parentPublicId;
-    private final String icon;
+    private String icon;
 
-    public Category(String publicId, String label, boolean hasChildren, String parentPublicId, String categoryGroup,
-            String icon) {
+    @JsonCreator
+    public Category(@JsonProperty("publicId") String publicId, @JsonProperty("label") String label,
+            @JsonProperty("hasChildren") boolean hasChildren, @JsonProperty("parentPublicId") String parentPublicId,
+            @JsonProperty("categoryGroup") String categoryGroup, @JsonProperty("icon") String icon) {
         this.publicId = publicId;
         this.label = label;
         this.parentPublicId = parentPublicId;
@@ -45,6 +50,14 @@ public class Category {
 
     public String getIcon() {
         return icon;
+    }
+
+    public void setLabel(String label) {
+        this.label = label;
+    }
+
+    public void setIcon(String icon) {
+        this.icon = icon;
     }
 
 }

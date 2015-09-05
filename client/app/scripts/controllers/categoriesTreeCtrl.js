@@ -8,7 +8,7 @@
  * Controller of the clientApp
  */
 angular.module('clientApp')
-    .controller('categoriesTreeCtrl', ['$scope', '$timeout', '$location', '$routeParams', 'categoryService', function ($scope, $timeout, $location, $routeParams, categoryService) {
+    .controller('categoriesTreeCtrl', ['$rootScope', '$scope', '$timeout', '$location', '$routeParams', 'categoryService', 'restServiceConfig', function ($rootScope, $scope, $timeout, $location, $routeParams, categoryService, restServiceConfig) {
 
         var previousSelectedCategory = null;
 
@@ -22,32 +22,58 @@ angular.module('clientApp')
                     if (previousSelectedCategory) {
                         previousSelectedCategory._isSelected = false;
                     }
-                    for (var i = 0; i < $scope.mainCategories.length; i++) {
-                        var found = selectCategoryOnTree($scope.mainCategories[i], current.params.category_id);
-                        if(found) {
-                            return;
-                        }
+
+                    execute(current.params.category_id, function (foundCategory) {
+                        foundCategory._isSelected = true;
+                        previousSelectedCategory = foundCategory;
+                    });
+
+                });
+            });
+
+            $rootScope.$on(restServiceConfig.events.CATEGORY_UPDATED, function (event, categoryToUpdate) {
+                execute(categoryToUpdate.publicId, function (foundCategory) {
+                    foundCategory.label = categoryToUpdate.label;
+                    foundCategory.icon = categoryToUpdate.icon;
+                });
+            });
+
+            $rootScope.$on(restServiceConfig.events.SUBCATEGORY_ADDED, function (event, addedSubcategory) {
+                execute(addedSubcategory.parentPublicId, function (foundParentCategory) {
+                    if (!foundParentCategory.hasChildren) {
+                        foundParentCategory.hasChildren = true;
+                        foundParentCategory.children = [addedSubcategory];
+                    } else if (foundParentCategory.children) {
+                        foundParentCategory.children.push(addedSubcategory);
                     }
                 });
             });
+
         };
 
-        var selectCategoryOnTree = function (category, selectedCategoryId) {
-            if (category.publicId === selectedCategoryId) {
-                category._isSelected = true;
-                previousSelectedCategory = category;
+        var execute = function (categoryPublicId, successFn) {
+            for (var i = 0; i < $scope.mainCategories.length; i++) {
+                var found = executeRecursively($scope.mainCategories[i], categoryPublicId, successFn);
+                if (found) {
+                    return;
+                }
+            }
+        };
+
+        var executeRecursively = function (category, categoryPublicId, successFn) {
+            if (category.publicId === categoryPublicId) {
+                successFn(category);
                 return true;
             } else {
-                if(category.hasChildren && category.children) {
+                if (category.hasChildren && category.children) {
                     for (var i = 0; i < category.children.length; i++) {
-                        var found = selectCategoryOnTree(category.children[i], selectedCategoryId);
-                        if(found) {
+                        var updated = executeRecursively(category.children[i], categoryPublicId, successFn);
+                        if (updated) {
                             return true;
                         }
                     }
                 }
             }
-            return false;
         };
 
         $scope.loadChildren = function (category) {
@@ -69,7 +95,7 @@ angular.module('clientApp')
                             category._childrenLoaded = true;
                             category.isLoadingChildren = false;
                         });
-                    }, 1500);
+                    }, 50);
             } else {
                 category.isLoadingChildren = false;
             }

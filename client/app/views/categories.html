@@ -6,18 +6,78 @@
         <div class="row">
             <div class="col-lg-12">
                 <h1 class="page-header">
-                    Ikony
+                    Kategorie
                 </h1>
-               <div  ng-include="'views/partials/breadcrumbs.html'"></div>
             </div>
         </div>
 
-        <button type="button" class="btn btn-info btn-lg" data-ng-click="open();">Wybierz ikone</button>
-    <!-- /.container-fluid -->
-      <!--          <div ng-include="'views/partials/icons_modal.html'"></div>-->
-</div>
-<!-- /#page-wrapper -->
+
+        <div class="panel panel-warning" ng-if="selectedCategory && !subcategoryDraft">
+            <div class="panel-heading">
+                <h3 class="panel-title">{{selectedCategory.label}} : edycja kategorii</h3>
+            </div>
+            <div class="panel-body">
+                <div class="input-group">
+                    <span ng-disabled="!selectedCategory.parentPublicId" class="input-group-addon"
+                          ng-click="openIconsModal(selectedCategory)">
+                        <i ng-if="selectedCategory.icon" class="fa fa-fw {{selectedCategory.icon}}"></i>
+                        <span ng-if="!selectedCategory.icon">Wybierz ikone ...</span>
+                    </span>
+                    <input ng-disabled="!selectedCategory.parentPublicId" type="text" ng-model="selectedCategory.label"
+                           class="form-control"
+                           placeholder="Nazwa kategorii" aria-describedby="basic-addon1">
+                </div>
+
+                <hr>
+                <button ng-show="selectedCategory.parentPublicId" type="button" class="btn btn-primary"
+                        ng-click="editCategory();" style="width: 150px;">Edytuj
+                </button>
+                <button type="button" class="btn btn-primary" ng-click="addSubcategory(selectedCategory);"
+                        style="width: 150px;">Dodaj podkategorie
+                </button>
+                <button ng-show="selectedCategory.parentPublicId" type="button" class="btn btn-primary"
+                        ng-click="deleteCategory();" style="width: 150px;">Usuń kategorie *
+                </button>
+                <div ng-show="selectedCategory.parentPublicId">
+                    <hr>
+                    <p style="float: right;">* Uwaga! Wszystkie podkategorie oraz cała zawartość zostaną także
+                        usunięte</p>
+                </div>
+            </div>
+        </div>
+
+        <div class="panel panel-warning" ng-if="subcategoryDraft">
+            <div class="panel-heading">
+                <h3 class="panel-title">{{selectedCategory.label}} : nowa podkategoria</h3>
+            </div>
+            <div class="panel-body">
+                <div class="input-group">
+                    <span class="input-group-addon" ng-click="openIconsModal(subcategoryDraft)">
+                        <i ng-if="subcategoryDraft.icon" class="fa fa-fw {{subcategoryDraft.icon}}"></i>
+                        <span ng-if="!subcategoryDraft.icon">Wybierz ikone ...</span>
+                    </span>
+                    <input type="text" ng-model="subcategoryDraft.label" class="form-control"
+                           placeholder="Nazwa kategorii" aria-describedby="basic-addon1">
+                </div>
+
+                <hr>
+                <button type="button" class="btn btn-primary" ng-click="saveSubcategory();" style="width: 150px;">Zapisz
+                    podkategorie
+                </button>
+
+            </div>
+        </div>
+
+        <div>
+
+            <ul class="categories_container container-fluid">
+                <li ng-repeat="category in mainCategories"
+                    ng-include="'views/partials/manage_category_element.html'">
+                </li>
+            </ul>
+        </div>
+
+    </div>
 
 </div>
-<!-- /#wrapper -->
 

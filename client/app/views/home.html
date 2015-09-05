@@ -13,18 +13,19 @@
                             </li>
                         </div>
                         <div class="col-lg-4">
-                                <input type="text" class="form-control" placeholder="Wyszukaj" ng-model="tilesFilter">
+                            <input type="text" class="form-control" placeholder="Wyszukaj" ng-model="tilesFilter">
                         </div>
+                    </div>
                 </ol>
             </div>
         </div>
 
-      <!--  Użytkownik dodaje sobie kategorie które chce widziec tutaj na pulpicie. Za pomocą drag & drop użytkownik może
-        ustalac
-        sobie kolejnosc elementów. Cyfra informuje ile elementów jest w danej kategorii. Użytkownik może sobie sam
-        wybrac jaki
-        kolor ma miec kafelek oraz jaka ma być ikona przy nim. Ma to pomoc w łatwym przeglądaniu
--->
+        <!--  Użytkownik dodaje sobie kategorie które chce widziec tutaj na pulpicie. Za pomocą drag & drop użytkownik może
+          ustalac
+          sobie kolejnosc elementów. Cyfra informuje ile elementów jest w danej kategorii. Użytkownik może sobie sam
+          wybrac jaki
+          kolor ma miec kafelek oraz jaka ma być ikona przy nim. Ma to pomoc w łatwym przeglądaniu
+  -->
         <div ng-class="{'successfully-saved' : isSaved || isReverted, 'show_save_box' : isDirty}"
              style="position: fixed; bottom: 5px; z-index: 10000; height: 40px; width: 80%;">
             <div ng-show="isSaved || isReverted || isDirty" class="row breadcrumb"
@@ -48,7 +49,8 @@
 
         <div class="row-fluid">
             <ul class="thumbnails">
-                <li class="tail" data-ng-repeat="item in items | filter:{label : tilesFilter}" data-drop="true" ng-model='items'
+                <li class="tail" data-ng-repeat="item in items | filter:{label : tilesFilter}" data-drop="true"
+                    ng-model='items'
                     jqyoui-droppable="{index: {{$index}}, onDrop:'dropCallback(item, $index)', 'data-drop': false}">
                     <div class="col-lg-3 col-md-6 thumbnail" data-drag="{{item.drag}}"
                          data-jqyoui-options="{revert: 'invalid'}" ng-model="items"
