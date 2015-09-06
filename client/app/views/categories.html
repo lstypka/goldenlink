@@ -23,7 +23,7 @@
             <div class="panel-heading orange-gradient-background">
                 <h3 class="panel-title">
 
-<strong>Edycja kategorii: </strong>
+                    <strong>Edycja kategorii: </strong>
                             <span ng-repeat="breadcrumb in breadcrumbs" class="categories_breadcrump">
                                 <span>{{breadcrumb.label}}</span>
                                 <span ng-if="!$last"> / </span>
@@ -31,7 +31,7 @@
                 </h3>
             </div>
             <div class="panel-body">
-                <div class="input-group">
+                <div class="input-group" ng-class="{'has-error' : isBlank(selectedCategory.label), 'has-success' : !isBlank(selectedCategory.label)}">
                     <span ng-disabled="!selectedCategory.parentPublicId" class="input-group-addon"
                           ng-click="openIconsModal(selectedCategory)">
                         <i ng-if="selectedCategory.icon" class="fa fa-fw {{selectedCategory.icon}}"></i>
@@ -43,7 +43,9 @@
                 </div>
 
                 <hr>
-                <button ng-show="selectedCategory.parentPublicId" type="button" class="btn btn-primary"
+                <button ng-show="selectedCategory.parentPublicId"
+                        ng-disabled="isBlank(selectedCategory.label);"
+                        type="button" class="btn btn-primary"
                         ng-click="editCategory();" style="width: 150px;">Edytuj
                 </button>
                 <button type="button" class="btn btn-primary" ng-click="addSubcategory(selectedCategory);"
@@ -62,10 +64,16 @@
 
         <div class="panel panel-warning" ng-if="subcategoryDraft">
             <div class="panel-heading">
-                <h3 class="panel-title">{{selectedCategory.label}} : nowa podkategoria</h3>
+                <h3 class="panel-title">
+                    <strong>Nowa podkategoria: </strong>
+                            <span ng-repeat="breadcrumb in breadcrumbs" class="categories_breadcrump">
+                                <span>{{breadcrumb.label}}</span>
+                                <span ng-if="!$last"> / </span>
+                            </span>
+                </h3>
             </div>
             <div class="panel-body">
-                <div class="input-group">
+                <div class="input-group" ng-class="{'has-error' : isBlank(subcategoryDraft.label), 'has-success' : !isBlank(subcategoryDraft.label)}">
                     <span class="input-group-addon" ng-click="openIconsModal(subcategoryDraft)">
                         <i ng-if="subcategoryDraft.icon" class="fa fa-fw {{subcategoryDraft.icon}}"></i>
                         <span ng-if="!subcategoryDraft.icon">Wybierz ikone ...</span>
@@ -75,7 +83,7 @@
                 </div>
 
                 <hr>
-                <button type="button" class="btn btn-primary" ng-click="saveSubcategory();" style="width: 150px;">Zapisz
+                <button type="button" ng-disabled="isBlank(subcategoryDraft.label);" class="btn btn-primary" ng-click="saveSubcategory();" style="width: 150px;">Zapisz
                     podkategorie
                 </button>
 

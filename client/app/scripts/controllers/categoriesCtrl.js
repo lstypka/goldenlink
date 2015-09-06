@@ -55,16 +55,15 @@ angular.module('clientApp')
 
             $scope.selectedCategory = selectedCategory;
             $scope.subcategoryDraft = null;
-            breadcrumbsService.getBreadcrumbs(selectedCategory.publicId).then(function (breadcrumbs) {
-                $scope.breadcrumbs = breadcrumbs.data;
-            });
+            updateBreadcrumbs(selectedCategory.publicId);
         };
 
         $scope.editCategory = function () {
             return categoryService.updateCategory($scope.selectedCategory).then(function (updatedCategory) {
                 updatedCategory = updatedCategory.data;
                 $rootScope.$emit(restServiceConfig.events.CATEGORY_UPDATED, updatedCategory);
-                alertMessageService.showMessage($scope, "Kategoria '" + updatedCategory.label +"' zaktualizowana poprawnie");
+                alertMessageService.showMessage($scope, "Kategoria '" + updatedCategory.label + "' zaktualizowana poprawnie");
+                updateBreadcrumbs(updatedCategory.publicId);
             });
         };
 
@@ -87,8 +86,8 @@ angular.module('clientApp')
                     $scope.selectedCategory._isSelected = true;
 
                     $rootScope.$emit(restServiceConfig.events.SUBCATEGORY_ADDED, createdSubcategory);
-                    alertMessageService.showMessage($scope, "Kategoria '" + createdSubcategory.label +"' dodana poprawnie");
-
+                    alertMessageService.showMessage($scope, "Kategoria '" + createdSubcategory.label + "' dodana poprawnie");
+                    updateBreadcrumbs(createdSubcategory.publicId);
                 });
 
         };
@@ -105,21 +104,26 @@ angular.module('clientApp')
         };
 
         $scope.deleteCategory = function () {
-            return categoryService.deleteSubcategory($scope.selectedCategory.publicId).then(function () {
-                $rootScope.$emit(restServiceConfig.events.CATEGORY_DELETED, $scope.selectedCategory);
-                categoryService.execute($scope.mainCategories, $scope.selectedCategory.parentPublicId, function (foundCategory) {
-                    if (foundCategory.children.length === 1) {
-                        foundCategory.hasChildren = false;
-                        foundCategory.children = null;
-                    } else {
-                        for (var i = 0; i < foundCategory.children.length; i++) {
-                            if (foundCategory.children[i].publicId === $scope.selectedCategory.publicId) {
-                                foundCategory.children.splice(i, 1);
+            $scope.showConfirmModal("Usunięcie kategorii " + $scope.selectedCategory.label, "Czy jesteś pewien że chcesz usunąć " +
+                "kategorie '" + $scope.selectedCategory.label + "'?. Wraz z kategorią usunięte zostaną wszystkie podkategorie oraz cała ich zawartość",
+                function () {
+                    categoryService.deleteSubcategory($scope.selectedCategory.publicId).then(function () {
+                        $rootScope.$emit(restServiceConfig.events.CATEGORY_DELETED, $scope.selectedCategory);
+                        categoryService.execute($scope.mainCategories, $scope.selectedCategory.parentPublicId, function (foundCategory) {
+                            if (foundCategory.children.length === 1) {
+                                foundCategory.hasChildren = false;
+                                foundCategory.children = null;
+                            } else {
+                                for (var i = 0; i < foundCategory.children.length; i++) {
+                                    if (foundCategory.children[i].publicId === $scope.selectedCategory.publicId) {
+                                        foundCategory.children.splice(i, 1);
+                                    }
+                                }
                             }
-                        }
-                    }
+                        });
+                    });
                 });
-            });
+
         };
 
         $scope.openIconsModal = function (category) {
@@ -140,6 +144,42 @@ angular.module('clientApp')
                     });
                 });
         };
+
+        $scope.showConfirmModal = function (title, message, positiveFn, negativeFn) {
+
+            ModalService.showModal({
+                templateUrl: "views/partials/confirm_modal.html",
+                controller: "confirmModalCtrl",
+                inputs: {
+                    title: title,
+                    message: message
+                }
+            }).then(function (modal) {
+                    modal.element.modal();
+                    modal.close.then(function (result) {
+                        if (result) {
+                            if (positiveFn) {
+                                positiveFn();
+                            }
+                        } else {
+                            if (negativeFn) {
+                                negativeFn();
+                            }
+                        }
+                    });
+                });
+        };
+
+        $scope.isBlank = function (value) {
+            return !!(value || '').match(/^\s*$/);
+        };
+
+        var updateBreadcrumbs = function (publicId) {
+            breadcrumbsService.getBreadcrumbs(publicId).then(function (breadcrumbs) {
+                $scope.breadcrumbs = breadcrumbs.data;
+            });
+        };
+
 
         init();
 
