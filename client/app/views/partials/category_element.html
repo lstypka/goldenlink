@@ -9,19 +9,19 @@
             <a ng-if="category.hasChildren"  ng-class="{'active_category' : category._isSelected}" class="without_outline"
                ng-click="loadCategory(category)" href="#/{{category.categoryGroup}}/{{category.publicId}}">
                 <i ng-if="category.icon" class="fa fa-fw " ng-class="category.icon"></i>
-                <span ng-if="!category.icon" class="icon_placeholder"></span> {{category.label}}
+               {{category.label}}
             </a>
 
             <a ng-if="!category.hasChildren" ng-class="{'active_category' : category._isSelected}" class="without_outline"
                ng-click="loadCategory(category)" href="#/{{category.categoryGroup}}/{{category.publicId}}">
                 <i ng-if="category.icon" class="fa fa-fw " ng-class="category.icon"></i>
-                <span ng-if="!category.icon" class="icon_placeholder"></span>{{category.label}}
+               {{category.label}}
             </a>
         </span>
     </div>
 </div>
 
-<ul ng-if="category.hasChildren" id="{{category.publicId}}" class="collapse">
+<ul ng-if="category.hasChildren" id="{{category.publicId}}" class="collase">
     <li ng-repeat="category in category.children" ng-include="'views/partials/category_element.html'"
         ng-class="{'active' : category._isSelected}">
     </li>

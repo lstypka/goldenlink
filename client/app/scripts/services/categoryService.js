@@ -38,4 +38,36 @@ angular.module('clientApp')
             return promise;
         };
 
+        this.deleteSubcategory = function(publicId) {
+            var promise = $http.delete(restServiceConfig.url + '/categories/' + publicId).then(function (response) {
+                return response;
+            });
+            return promise;
+        };
+
+        this.execute = function (mainCategories, categoryPublicId, successFn) {
+            for (var i = 0; i < mainCategories.length; i++) {
+                var found = executeRecursively(mainCategories[i], categoryPublicId, successFn);
+                if (found) {
+                    return;
+                }
+            }
+        };
+
+        var executeRecursively = function (category, categoryPublicId, successFn) {
+            if (category.publicId === categoryPublicId) {
+                successFn(category);
+                return true;
+            } else {
+                if (category.hasChildren && category.children) {
+                    for (var i = 0; i < category.children.length; i++) {
+                        var updated = executeRecursively(category.children[i], categoryPublicId, successFn);
+                        if (updated) {
+                            return true;
+                        }
+                    }
+                }
+            }
+        };
+
     }]);

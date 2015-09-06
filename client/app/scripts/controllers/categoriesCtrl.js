@@ -8,7 +8,7 @@
  * Controller of the clientApp
  */
 angular.module('clientApp')
-    .controller('categoriesCtrl', ['$rootScope', '$scope', '$http', '$timeout', 'categoryService', 'ModalService', 'restServiceConfig', function ($rootScope, $scope, $http, $timeout, categoryService, ModalService, restServiceConfig) {
+    .controller('categoriesCtrl', ['$rootScope', '$scope', '$http', '$timeout', 'categoryService', 'alertMessageService', 'ModalService', 'restServiceConfig', function ($rootScope, $scope, $http, $timeout, categoryService, alertMessageService, ModalService, restServiceConfig) {
 
         $scope.selectedCategory = null;
 
@@ -48,13 +48,20 @@ angular.module('clientApp')
         };
 
         $scope.selectCategory = function (selectedCategory) {
+            if ($scope.selectedCategory) {
+                $scope.selectedCategory._isSelected = false;
+            }
+            selectedCategory._isSelected = true;
+
             $scope.selectedCategory = selectedCategory;
             $scope.subcategoryDraft = null;
         };
 
         $scope.editCategory = function () {
             return categoryService.updateCategory($scope.selectedCategory).then(function (updatedCategory) {
-                $rootScope.$emit(restServiceConfig.events.CATEGORY_UPDATED, updatedCategory.data);
+                updatedCategory = updatedCategory.data;
+                $rootScope.$emit(restServiceConfig.events.CATEGORY_UPDATED, updatedCategory);
+                alertMessageService.showMessage($scope, "Kategoria '" + updatedCategory.label +"' zaktualizowana poprawnie");
             });
         };
 
@@ -69,9 +76,16 @@ angular.module('clientApp')
                         $scope.selectedCategory.children.push(createdSubcategory);
                     }
                     $scope.subcategoryDraft = null;
+
+                    if ($scope.selectedCategory) {
+                        $scope.selectedCategory._isSelected = false;
+                    }
                     $scope.selectedCategory = createdSubcategory;
+                    $scope.selectedCategory._isSelected = true;
 
                     $rootScope.$emit(restServiceConfig.events.SUBCATEGORY_ADDED, createdSubcategory);
+                    alertMessageService.showMessage($scope, "Kategoria '" + createdSubcategory.label +"' dodana poprawnie");
+
                 });
 
         };
@@ -88,7 +102,21 @@ angular.module('clientApp')
         };
 
         $scope.deleteCategory = function () {
-
+            return categoryService.deleteSubcategory($scope.selectedCategory.publicId).then(function () {
+                $rootScope.$emit(restServiceConfig.events.CATEGORY_DELETED, $scope.selectedCategory);
+                categoryService.execute($scope.mainCategories, $scope.selectedCategory.parentPublicId, function (foundCategory) {
+                    if (foundCategory.children.length === 1) {
+                        foundCategory.hasChildren = false;
+                        foundCategory.children = null;
+                    } else {
+                        for (var i = 0; i < foundCategory.children.length; i++) {
+                            if (foundCategory.children[i].publicId === $scope.selectedCategory.publicId) {
+                                foundCategory.children.splice(i, 1);
+                            }
+                        }
+                    }
+                });
+            });
         };
 
         $scope.openIconsModal = function (category) {

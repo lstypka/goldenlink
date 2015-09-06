@@ -23,7 +23,7 @@ angular.module('clientApp')
                         previousSelectedCategory._isSelected = false;
                     }
 
-                    execute(current.params.category_id, function (foundCategory) {
+                    categoryService.execute($scope.mainCategories, current.params.category_id, function (foundCategory) {
                         foundCategory._isSelected = true;
                         previousSelectedCategory = foundCategory;
                     });
@@ -32,14 +32,14 @@ angular.module('clientApp')
             });
 
             $rootScope.$on(restServiceConfig.events.CATEGORY_UPDATED, function (event, categoryToUpdate) {
-                execute(categoryToUpdate.publicId, function (foundCategory) {
+                categoryService.execute($scope.mainCategories, categoryToUpdate.publicId, function (foundCategory) {
                     foundCategory.label = categoryToUpdate.label;
                     foundCategory.icon = categoryToUpdate.icon;
                 });
             });
 
             $rootScope.$on(restServiceConfig.events.SUBCATEGORY_ADDED, function (event, addedSubcategory) {
-                execute(addedSubcategory.parentPublicId, function (foundParentCategory) {
+                categoryService.execute($scope.mainCategories, addedSubcategory.parentPublicId, function (foundParentCategory) {
                     if (!foundParentCategory.hasChildren) {
                         foundParentCategory.hasChildren = true;
                         foundParentCategory.children = [addedSubcategory];
@@ -49,31 +49,20 @@ angular.module('clientApp')
                 });
             });
 
-        };
-
-        var execute = function (categoryPublicId, successFn) {
-            for (var i = 0; i < $scope.mainCategories.length; i++) {
-                var found = executeRecursively($scope.mainCategories[i], categoryPublicId, successFn);
-                if (found) {
-                    return;
-                }
-            }
-        };
-
-        var executeRecursively = function (category, categoryPublicId, successFn) {
-            if (category.publicId === categoryPublicId) {
-                successFn(category);
-                return true;
-            } else {
-                if (category.hasChildren && category.children) {
-                    for (var i = 0; i < category.children.length; i++) {
-                        var updated = executeRecursively(category.children[i], categoryPublicId, successFn);
-                        if (updated) {
-                            return true;
+            $rootScope.$on(restServiceConfig.events.CATEGORY_DELETED, function (event, categoryToDelete) {
+                categoryService.execute($scope.mainCategories, categoryToDelete.parentPublicId, function (foundCategory) {
+                    if (foundCategory.children.length === 1) {
+                        foundCategory.hasChildren = false;
+                        foundCategory.children = null;
+                    } else {
+                        for (var i = 0; i < foundCategory.children.length; i++) {
+                            if (foundCategory.children[i].publicId === categoryToDelete.publicId) {
+                                foundCategory.children.splice(i, 1);
+                            }
                         }
                     }
-                }
-            }
+                });
+            });
         };
 
         $scope.loadChildren = function (category) {

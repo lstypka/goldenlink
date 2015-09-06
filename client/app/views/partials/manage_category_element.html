@@ -7,19 +7,19 @@
             <i ng-class="{'fa fa-fw fa-caret-right' : !category._opened, 'fa fa-fw fa-caret-down' : category._opened, 'fa fa-spinner fa-pulse' : category.isLoadingChildren}"/>
         </span>
         <span>
-            <a ng-if="category.hasChildren" ng-class="{'active_category' : category._isSelected}"
+            <a ng-if="category.hasChildren" ng-class="{'active_managed_category' : category._isSelected}"
                class="without_outline"
                ng-click="selectCategory(category)">
                 <i ng-if="category.icon" class="fa fa-fw " ng-class="category.icon"></i>
-                <span ng-if="!category.icon" class="icon_placeholder"></span> {{category.label}}
+                {{category.label}}
             </a>
 
-            <a ng-if="!category.hasChildren" ng-class="{'active_category' : category._isSelected}"
+            <a ng-if="!category.hasChildren" ng-class="{'active_managed_category' : category._isSelected}"
                class="without_outline"
                ng-click="selectCategory(category)">
+
+
                 <i ng-if="category.icon" class="fa fa-fw " ng-class="category.icon"></i>
-                <span ng-if="!category.icon" class="icon_placeholder"></span>
-                <span ng-if="!category.icon" class="icon_placeholder"></span>
                 {{category.label}}
             </a>
         </span>

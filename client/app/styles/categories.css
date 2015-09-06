@@ -27,7 +27,7 @@
     }
 
     .categories_container ul {
-        padding-left: 10px;
+        padding-left: 20px;
         text-decoration: none;
     }
 
@@ -56,9 +56,8 @@
         color: #fff !important;
     }
 
-    .active_category {
-        font-weight: bold;
-        color: #fff !important;
+    .active_managed_category {
+        font-weight: bold !important;
     }
 
     .icon_placeholder {

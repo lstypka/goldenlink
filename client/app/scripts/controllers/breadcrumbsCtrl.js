@@ -8,17 +8,18 @@
  * Controller of the clientApp
  */
 angular.module('clientApp')
-    .controller('breadcrumbsCtrl', ['$scope', 'breadcrumbsService', function ($scope, breadcrumbsService) {
+    .controller('breadcrumbsCtrl', ['$scope', '$routeParams', 'breadcrumbsService', function ($scope,$routeParams,  breadcrumbsService) {
 
         var init = function () {
             loadBreadcrumbs();
         };
 
         var loadBreadcrumbs = function() {
-            breadcrumbsService.getBreadcrumbs().then(function (breadcrumbs) {
-                $scope.breadcrumbs = breadcrumbs.data;
-            });
-
+            if($routeParams.category_id) {
+                breadcrumbsService.getBreadcrumbs().then(function (breadcrumbs) {
+                    $scope.breadcrumbs = breadcrumbs.data;
+                });
+            }
         };
 
         init();

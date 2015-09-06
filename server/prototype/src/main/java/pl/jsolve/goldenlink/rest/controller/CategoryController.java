@@ -52,7 +52,7 @@ public class CategoryController {
 
     @RequestMapping(value = "/categories/{publicId}", method = RequestMethod.PUT)
     public Category updateCategory(@PathVariable("publicId") final String publicId,
-            @RequestBody Category categoryToUpdate) throws InterruptedException {
+            @RequestBody Category categoryToUpdate) {
 
         Category foundCategory = findCategory(publicId);
         foundCategory.setLabel(categoryToUpdate.getLabel());
@@ -62,16 +62,36 @@ public class CategoryController {
 
     @RequestMapping(value = "/categories/{parentPublicId}", method = RequestMethod.POST)
     public Category createSubcategory(@PathVariable("parentPublicId") final String parentPublicId,
-            @RequestBody Category categoryToAdd) throws InterruptedException {
+            @RequestBody Category categoryToAdd) {
         Category parentCategory = findCategory(parentPublicId);
         Category subcategory = new Category(generateId(), categoryToAdd.getLabel(), false, parentPublicId,
                 parentCategory.getCategoryGroup(), categoryToAdd.getIcon());
         categories.add(subcategory);
-        if(!parentCategory.isHasChildren()) {
+        if (!parentCategory.isHasChildren()) {
             parentCategory.setHasChildren(true);
         }
 
         return subcategory;
+    }
+
+    @RequestMapping(value = "/categories/{publicId}", method = RequestMethod.DELETE)
+    public void deleteCategory(@PathVariable("publicId") final String publicId) {
+
+        for (int i = 0; i < categories.size(); i++) {
+            if (categories.get(i).getPublicId().equals(publicId)) {
+                Category parentCategory = findCategory(categories.get(i).getParentPublicId());
+                int numberOfChildren = 0;
+                for(Category category : categories) {
+                    if(category.getParentPublicId() != null && category.getParentPublicId().equals(parentCategory.getPublicId())) {
+                        numberOfChildren++;
+                    }
+                }
+                if(numberOfChildren == 1) {
+                    parentCategory.setHasChildren(false);
+                }
+                categories.remove(i);
+            }
+        }
     }
 
     private Category findCategory(final String publicId) {
@@ -90,15 +110,19 @@ public class CategoryController {
 
         List<Category> breadcrumbs = Lists.newArrayList();
         while (parentPublicId != null) {
+            boolean found = false;
             for (Category category : categories) {
                 if (category.getPublicId().equals(parentPublicId)) {
                     breadcrumbs.add(0, category);
                     parentPublicId = category.getParentPublicId();
-                    continue;
+                    found = true;
+                    break;
                 }
             }
-            System.out.println("Nie znalazlem zadnego :(");
-            break;
+            if(!found) {
+                System.out.println("Nie znalazlem zadnego :(");
+                break;
+            }
         }
 
         return breadcrumbs;
@@ -118,7 +142,7 @@ public class CategoryController {
         categories.add(new Category(generateId(), "Notatki", true, null, "notes", randomIcon()));
 
         // inner categories
-        for (int i = 0; i < 5; i++) {
+        for (int i = 0; i < 10; i++) {
             int generateChildren = generateChildren(categories.get(i).getPublicId(), 0, categories.get(i)
                     .getCategoryGroup());
             if (generateChildren == 0) {

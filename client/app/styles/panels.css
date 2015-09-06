@@ -145,3 +145,24 @@
 .panel-khaki > a:hover {
     color: #B8860B;
 }
+
+.orange-gradient-background {
+    background-image: linear-gradient(to bottom, #fcf8e3 0, #f8efc0 100%) !important;
+}
+
+.green-gradient-background {
+    background-image: linear-gradient(to bottom, #dff0d8 0, #c8e5bc 100%);
+}
+
+.blue-gradient-background {
+    background-image: linear-gradient(to bottom, #d9edf7 0, #b9def0 100%);
+}
+
+.red-gradient-background {
+    background-image: linear-gradient(to bottom, #f2dede 0, #e7c3c3 100%);
+}
+
+.grey-gradient-background {
+    background-image: linear-gradient(to bottom, #D8D8D8 0, #F0F0F0 100%);
+}
+
