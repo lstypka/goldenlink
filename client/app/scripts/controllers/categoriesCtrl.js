@@ -8,7 +8,7 @@
  * Controller of the clientApp
  */
 angular.module('clientApp')
-    .controller('categoriesCtrl', ['$rootScope', '$scope', '$http', '$timeout', 'categoryService', 'alertMessageService', 'ModalService', 'restServiceConfig', function ($rootScope, $scope, $http, $timeout, categoryService, alertMessageService, ModalService, restServiceConfig) {
+    .controller('categoriesCtrl', ['$rootScope', '$scope', '$http', '$timeout', 'categoryService', 'alertMessageService', 'breadcrumbsService', 'ModalService', 'restServiceConfig', function ($rootScope, $scope, $http, $timeout, categoryService, alertMessageService, breadcrumbsService, ModalService, restServiceConfig) {
 
         $scope.selectedCategory = null;
 
@@ -55,6 +55,9 @@ angular.module('clientApp')
 
             $scope.selectedCategory = selectedCategory;
             $scope.subcategoryDraft = null;
+            breadcrumbsService.getBreadcrumbs(selectedCategory.publicId).then(function (breadcrumbs) {
+                $scope.breadcrumbs = breadcrumbs.data;
+            });
         };
 
         $scope.editCategory = function () {

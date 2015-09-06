@@ -16,7 +16,7 @@ angular.module('clientApp')
 
         var loadBreadcrumbs = function() {
             if($routeParams.category_id) {
-                breadcrumbsService.getBreadcrumbs().then(function (breadcrumbs) {
+                breadcrumbsService.getBreadcrumbs($routeParams.category_id).then(function (breadcrumbs) {
                     $scope.breadcrumbs = breadcrumbs.data;
                 });
             }

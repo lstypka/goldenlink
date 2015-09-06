@@ -8,11 +8,11 @@
  * Service of the clientApp
  */
 angular.module('clientApp')
-    .service('breadcrumbsService', ['$http', '$routeParams', 'restServiceConfig', function ($http, $routeParams, restServiceConfig) {
+    .service('breadcrumbsService', ['$http', 'restServiceConfig', function ($http, restServiceConfig) {
 
-        this.getBreadcrumbs = function () {
+        this.getBreadcrumbs = function (categoryId) {
 
-            var promise = $http.get(restServiceConfig.url + '/categories/' + $routeParams.category_id + '/breadcrumbs').then(function (response) {
+            var promise = $http.get(restServiceConfig.url + '/categories/' + categoryId + '/breadcrumbs').then(function (response) {
                 return response;
             });
             return promise;
