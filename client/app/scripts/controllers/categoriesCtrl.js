@@ -108,6 +108,7 @@ angular.module('clientApp')
                 "kategorie '" + $scope.selectedCategory.label + "'?. Wraz z kategorią usunięte zostaną wszystkie podkategorie oraz cała ich zawartość",
                 function () {
                     categoryService.deleteSubcategory($scope.selectedCategory.publicId).then(function () {
+                        alertMessageService.showMessage($scope, "Kategoria '" + $scope.selectedCategory.label + "' została usunięta");
                         $rootScope.$emit(restServiceConfig.events.CATEGORY_DELETED, $scope.selectedCategory);
                         categoryService.execute($scope.mainCategories, $scope.selectedCategory.parentPublicId, function (foundCategory) {
                             if (foundCategory.children.length === 1) {
