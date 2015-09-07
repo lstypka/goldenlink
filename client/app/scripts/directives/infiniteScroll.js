@@ -9,7 +9,6 @@
  */
 angular.module('clientApp').directive('infiniteScroll', ['$timeout', '$rootScope', function (timeout, $rootScope) {
     return{
-        priority: 10000,
         link: function (scope, element, attr) {
             var
                 lengthThreshold = attr.scrollThreshold || 50,
@@ -35,7 +34,6 @@ angular.module('clientApp').directive('infiniteScroll', ['$timeout', '$rootScope
             element.bind('scroll', function () {
                 var
                     remaining = element[0].scrollHeight - (element[0].clientHeight + element[0].scrollTop);
-                 window.console.log("REMAINING " + remaining );
                 //if we have reached the threshold and we scroll down
                 if (remaining < lengthThreshold && (remaining - lastRemaining) < 0) {
 

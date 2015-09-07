@@ -111,7 +111,7 @@ body {
 }
 
 .wrap_lines {
-    word-wrap: break-word;
+   /* word-wrap: break-word;*/
     overflow: hidden;
     text-overflow: ellipsis;
     display: -webkit-box;
@@ -119,6 +119,8 @@ body {
     -webkit-line-clamp: 2; /* number of lines to show */
     line-height: 1.5;        /* fallback */
     max-height: 3;       /* fallback */
+    line-height: 1.5;
+    height: 3em;
 }
 
 .successfully-saved {

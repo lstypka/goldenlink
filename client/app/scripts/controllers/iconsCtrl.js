@@ -21,18 +21,18 @@ app.controller('iconsCtrl', ['$scope', '$rootScope', 'restServiceConfig', 'icons
 
     var init = function () {
         $rootScope.$on(restServiceConfig.events.ICONS_MODAL_NEXT_PAGE, function () {
-            window.console.log("NEXT PAGE " + page);
             $scope.nextPage();
         });
     };
 
     $scope.nextPage = function () {
-        window.console.log("NEXT PAGE " + page);
+        $scope.isLoading = true;
         var iconsToAdd = icons.slice(offset + (page * resultsPerPage), offset + ((page + 1) * resultsPerPage));
         for (var i = 0; i < iconsToAdd.length; i++) {
             $scope.icons.push(iconsToAdd[i]);
         }
         page++;
+        $scope.isLoading = false;
     };
 
     $scope.close = function (result) {
