@@ -20,8 +20,7 @@ angular
         'ngTouch',
         'ngDragDrop',
         'ui.bootstrap',
-        'angularModalService',
-        'lrInfiniteScroll'
+        'angularModalService'
 
     ]).constant("restServiceConfig", {
         "url": "http://localhost:8080",
