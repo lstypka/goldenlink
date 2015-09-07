@@ -20,14 +20,17 @@ angular
         'ngTouch',
         'ngDragDrop',
         'ui.bootstrap',
-        'angularModalService'
+        'angularModalService',
+        'lrInfiniteScroll'
+
     ]).constant("restServiceConfig", {
         "url": "http://localhost:8080",
         "events" : {
             SHOW_MESSAGE : "show_message",
             CATEGORY_UPDATED : "category_updated",
             SUBCATEGORY_ADDED : "subcategory_added",
-            CATEGORY_DELETED : "category_deleted"
+            CATEGORY_DELETED : "category_deleted",
+            ICONS_MODAL_NEXT_PAGE : "icons_modal_next_page"
         }
     })
     .config(function ($routeProvider) {
