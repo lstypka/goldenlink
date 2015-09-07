@@ -47,6 +47,7 @@ angular.module('clientApp')
             }
         };
 
+
         $scope.selectCategory = function (selectedCategory) {
             if ($scope.selectedCategory) {
                 $scope.selectedCategory._isSelected = false;
@@ -62,7 +63,7 @@ angular.module('clientApp')
             return categoryService.updateCategory($scope.selectedCategory).then(function (updatedCategory) {
                 updatedCategory = updatedCategory.data;
                 $rootScope.$emit(restServiceConfig.events.CATEGORY_UPDATED, updatedCategory);
-                alertMessageService.showMessage($scope, "Kategoria '" + updatedCategory.label + "' zaktualizowana poprawnie");
+                alertMessageService.showMessage("Kategoria '" + updatedCategory.label + "' zaktualizowana poprawnie");
                 updateBreadcrumbs(updatedCategory.publicId);
             });
         };
@@ -86,7 +87,7 @@ angular.module('clientApp')
                     $scope.selectedCategory._isSelected = true;
 
                     $rootScope.$emit(restServiceConfig.events.SUBCATEGORY_ADDED, createdSubcategory);
-                    alertMessageService.showMessage($scope, "Kategoria '" + createdSubcategory.label + "' dodana poprawnie");
+                    alertMessageService.showMessage("Kategoria '" + createdSubcategory.label + "' dodana poprawnie");
                     updateBreadcrumbs(createdSubcategory.publicId);
                 });
 
@@ -108,7 +109,7 @@ angular.module('clientApp')
                 "kategorie '" + $scope.selectedCategory.label + "'?. Wraz z kategorią usunięte zostaną wszystkie podkategorie oraz cała ich zawartość",
                 function () {
                     categoryService.deleteSubcategory($scope.selectedCategory.publicId).then(function () {
-                        alertMessageService.showMessage($scope, "Kategoria '" + $scope.selectedCategory.label + "' została usunięta");
+                        alertMessageService.showMessage("Kategoria '" + $scope.selectedCategory.label + "' została usunięta");
                         $rootScope.$emit(restServiceConfig.events.CATEGORY_DELETED, $scope.selectedCategory);
                         categoryService.execute($scope.mainCategories, $scope.selectedCategory.parentPublicId, function (foundCategory) {
                             if (foundCategory.children.length === 1) {

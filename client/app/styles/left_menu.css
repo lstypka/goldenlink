@@ -2,3 +2,10 @@
     padding-top: 5px !important;
     padding-bottom: 5px !important;
 }
+
+.menu_element>a:hover,
+.menu_element>a:focus
+{
+    color: #fff;
+    background-color: transparent !important;
+}

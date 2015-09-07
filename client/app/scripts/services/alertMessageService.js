@@ -8,16 +8,10 @@
  * Service of the clientApp
  */
 angular.module('clientApp')
-    .service('alertMessageService', ['$timeout', function ($timeout) {
+    .service('alertMessageService', ['$timeout', '$rootScope', 'restServiceConfig', function ($timeout, $rootScope, restServiceConfig) {
 
-        this.showMessage = function (scope, message) {
-            scope.showMessage = true;
-            scope.message = message;
-
-            $timeout(function () {
-                scope.message = null;
-                scope.showMessage = false;
-            }, 4000);
+        this.showMessage = function (message) {
+            $rootScope.$emit(restServiceConfig.events.SHOW_MESSAGE, message);
         };
 
     }]);

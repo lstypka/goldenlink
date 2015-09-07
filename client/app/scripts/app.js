@@ -24,6 +24,7 @@ angular
     ]).constant("restServiceConfig", {
         "url": "http://localhost:8080",
         "events" : {
+            SHOW_MESSAGE : "show_message",
             CATEGORY_UPDATED : "category_updated",
             SUBCATEGORY_ADDED : "subcategory_added",
             CATEGORY_DELETED : "category_deleted"
