@@ -47,6 +47,9 @@
                 <button type="button" class="btn btn-primary" ng-click="addSubcategory(selectedCategory);"
                         style="width: 150px;">Dodaj podkategorie
                 </button>
+                <button type="button" class="btn btn-primary" ng-click="sendToDashboard(selectedCategory);"
+                        style="width: 150px;">Przypnij do pulpitu
+                </button>
                 <button ng-show="selectedCategory.parentPublicId" type="button" class="btn btn-primary"
                         ng-click="deleteCategory();" style="width: 150px;">Usuń kategorie *
                 </button>

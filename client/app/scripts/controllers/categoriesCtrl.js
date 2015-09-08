@@ -8,7 +8,7 @@
  * Controller of the clientApp
  */
 angular.module('clientApp')
-    .controller('categoriesCtrl', ['$rootScope', '$scope', '$http', '$timeout', 'categoryService', 'alertMessageService', 'breadcrumbsService', 'ModalService', 'restServiceConfig', function ($rootScope, $scope, $http, $timeout, categoryService, alertMessageService, breadcrumbsService, ModalService, restServiceConfig) {
+    .controller('categoriesCtrl', ['$rootScope', '$scope', '$http', '$timeout', 'categoryService', 'alertMessageService', 'breadcrumbsService', 'dashboardService', 'ModalService', 'restServiceConfig', function ($rootScope, $scope, $http, $timeout, categoryService, alertMessageService, breadcrumbsService, dashboardService, ModalService, restServiceConfig) {
 
         $scope.selectedCategory = null;
 
@@ -104,6 +104,16 @@ angular.module('clientApp')
             };
         };
 
+        $scope.sendToDashboard = function (category) {
+            $scope.openPanelsModal(category, function (category) {
+                dashboardService.createTile(category).then(function (data) {
+                        var tile = data.data;
+                        alertMessageService.showMessage("Kategoria '" + tile.label + "' została przypięta do pulpitu");
+
+                    });
+            });
+        };
+
         $scope.deleteCategory = function () {
             $scope.showConfirmModal("Usunięcie kategorii " + $scope.selectedCategory.label, "Czy jesteś pewien że chcesz usunąć " +
                 "kategorie '" + $scope.selectedCategory.label + "'?. Wraz z kategorią usunięte zostaną wszystkie podkategorie oraz cała ich zawartość",
@@ -143,6 +153,22 @@ angular.module('clientApp')
                     modal.element.modal();
                     modal.close.then(function (result) {
                         category.icon = 'fa-' + result;
+                    });
+                });
+        };
+
+        $scope.openPanelsModal = function (category, successFn) {
+            ModalService.showModal({
+                templateUrl: "views/partials/panels_modal.html",
+                controller: "panelsCtrl",
+                inputs: {
+
+                }
+            }).then(function (modal) {
+                    modal.element.modal();
+                    modal.close.then(function (result) {
+                        category.colour = result;
+                        successFn(category);
                     });
                 });
         };
