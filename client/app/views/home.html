@@ -26,14 +26,15 @@
           wybrac jaki
           kolor ma miec kafelek oraz jaka ma być ikona przy nim. Ma to pomoc w łatwym przeglądaniu
   -->
-        <div ng-class="{'successfully-saved' : isSaved || isReverted, 'show_save_box' : isDirty}"
-             style="position: fixed; bottom: 5px; z-index: 10000; height: 40px; width: 80%;">
-            <div ng-show="isSaved || isReverted || isDirty" class="row breadcrumb"
-                 style="background-color: rgba(192, 192, 192, 0.8) !important;">
+        <div style="position: fixed; left: 50%; top: -5px; z-index: 100000;"
+             ng-show="isSaved || isReverted || isDirty"  ng-class="{'slide_in_animation' : isSaved || isReverted || isDirty}">
+            <div style="position: relative; left: -50%;"
+                 class="alert alert-warning orange-gradient-background"
+                 role="alert">
                 <div class="text-center">
-
+                    <p><strong>Zawartość pulpitu została zmieniona</strong></p>
                     <div class="btn-group" ng-show="isDirty">
-                        <button type="button" class="btn btn-success" style="width: 150px; margin-right: 10px;"
+                        <button type="button" class="btn btn-primary" style="width: 150px; margin-right: 10px;"
                                 ng-click="save()"> Zapisz
                         </button>
                         <button type="button" class="btn btn-default" style="width: 150px; margin-left: 10px;"
@@ -49,7 +50,7 @@
 
         <div class="row-fluid">
             <ul class="thumbnails">
-                <li class="tail" data-ng-repeat="item in items | filter:{label : tilesFilter}" data-drop="true"
+                <li class="tail" style="width: 25%;" data-ng-repeat="item in items | filter:{label : tilesFilter}" data-drop="true"
                     ng-model='items'
                     jqyoui-droppable="{index: {{$index}}, onDrop:'dropCallback(item, $index)', 'data-drop': false}">
                     <div class="col-lg-3 col-md-6 thumbnail" data-drag="{{item.drag}}"
@@ -57,20 +58,23 @@
                          jqyoui-draggable="{index: {{$index}},animate:false}"
                          style="width: 100%; background-color: transparent;">
                         <div class="panel" ng-class="item.panel">
-                            <div class="panel-heading">
+                            <div class="panel-heading" style="padding-top: 5px; padding-bottom: 0px; ">
                                 <div class="row">
                                     <div class="col-xs-3">
-                                        <i class="fa fa-tasks fa-3x"></i>
+                                        <i class="fa fa-3x" ng-class="item.icon"></i>
                                     </div>
                                     <div class="col-xs-9 text-right">
-                                        <div class="huge">{{item.nrOfLinks}}</div>
-                                        <div class="wrap_lines">{{item.index}} - {{item.label}}</div>
+                                        <div class="huge" style="margin-right: 10px;">{{item.nrOfLinks}}</div>
+                                        <button type="button" style="position: absolute; top: -5px; right: 5px; font-size: 25px;" ng-click="deleteTile(item);" class="close" data-dismiss="alert" aria-hidden="true">&times;</button>
                                     </div>
                                 </div>
+                                <div  class="row">
+                                    <div class="wrap_lines" style="margin: 5px; text-align: right;"><strong>{{item.categoryGroup}} - {{item.label}}</strong></div>
+                                </div>
                             </div>
-                            <a href="#">
+                            <a href="#/{{item.categoryGroup}}/{{item.id}}">
                                 <div class="panel-footer">
-                                    <span class="pull-left">Przeglądaj</span>
+                                    <span class="pull-left">Przeglądaj </span>
                                     <span class="pull-right"><i class="fa fa-arrow-circle-right"></i></span>
 
                                     <div class="clearfix"></div>

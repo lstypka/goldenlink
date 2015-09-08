@@ -2,7 +2,7 @@
 <html xmlns="http://www.w3.org/1999/html">
 <head>
     <meta charset="utf-8">
-    <title></title>
+    <title>Golden Link</title>
     <meta name="description" content="">
     <meta name="viewport" content="width=device-width">
     <!-- Place favicon.ico and apple-touch-icon.png in the root directory -->
@@ -24,6 +24,8 @@
     <link rel="stylesheet" href="styles/left_menu.css">
     <link rel="stylesheet" href="styles/icons.css">
     <link rel="stylesheet" href="styles/animation.css">
+    <link rel="stylesheet" href="//code.jquery.com/ui/1.11.4/themes/smoothness/jquery-ui.css">
+
     <!-- endbuild -->
 </head>
 <body ng-app="clientApp" data-ng-controller="rootCtrl">
@@ -44,11 +46,11 @@
                 <span class="icon-bar"></span>
                 <span class="icon-bar"></span>
             </button>
-            <a class="navbar-brand golden_link_logo" href="index.html">Golden Link</a>
+            <a id="resizable_logo" class="navbar-brand" href="#/">Golden Link</a>
         </div>
 
         <div style="position: absolute; left: 50%; top: -10px;" ng-if="message" class="ng-cloak">
-            <div style="position: relative; left: -50%; height: 40px;"
+            <div style="position: relative; left: -50%;"
                  class="alert alert-warning orange-gradient-background" ng-class="{'show_message' : showMessage}"
                  role="alert">
                 <strong>{{message}}</strong>
@@ -207,6 +209,7 @@
 <script src="scripts/services/categoryService.js"></script>
 <script src="scripts/services/breadcrumbsService.js"></script>
 <script src="scripts/services/alertMessageService.js"></script>
+<script src="scripts/services/dashboardService.js"></script>
 <script src="scripts/directives/infiniteScroll.js"></script>
 
 <script src="scripts/controllers/rootCtrl.js"></script>

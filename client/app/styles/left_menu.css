@@ -1,3 +1,7 @@
+.menu_element {
+    width: 255px !important;
+}
+
 .menu_element>a {
     padding-top: 5px !important;
     padding-bottom: 5px !important;

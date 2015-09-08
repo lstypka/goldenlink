@@ -3,7 +3,7 @@
         position: fixed;
         top: 205px;
         left: 210px;
-        width: 200px;
+        width: 255px;
         margin-left: -200px;
         margin-top: 80px;
         border: 1px;
@@ -20,6 +20,7 @@
         /*background-color: #E0E0E0;*/
         font-size: 13px;
         display: block;
+        white-space: nowrap;
     }
 
     .categories_tree_container li a:hover,
