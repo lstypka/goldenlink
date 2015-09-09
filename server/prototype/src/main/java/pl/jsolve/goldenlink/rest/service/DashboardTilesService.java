@@ -17,7 +17,8 @@ public class DashboardTilesService {
     private List<DashboardTile> tiles;
 
     List<String> colours = Lists.newArrayList("panel-blue", "panel-red", "panel-green", "panel-orange", "panel-yellow",
-            "panel-lavender", "panel-olivedrab", "panel-khaki");
+            "panel-lavender", "panel-olivedrab", "panel-khaki", "panel-purple", "panel-grey", "panel-blue-grey",
+            "panel-pink", "panel-indigo", "panel-green-lighten", "panel-green-darken", "panel-lime");
 
     public List<DashboardTile> getTiles() {
         return tiles;
@@ -37,11 +38,11 @@ public class DashboardTilesService {
         this.tiles.add(newTile);
         return newTile;
     }
-    
 
     public void updateTilesAfterCategoryUpdate(Category updatedCategory) {
-        for(DashboardTile dashboardTile : tiles) {
-            if(dashboardTile.getPublicId().equals(updatedCategory.getPublicId())) {
+        for (DashboardTile dashboardTile : tiles) {
+            if (dashboardTile.getPublicId() != null
+                    && dashboardTile.getPublicId().equals(updatedCategory.getPublicId())) {
                 dashboardTile.setLabel(updatedCategory.getLabel());
                 dashboardTile.setIcon(updatedCategory.getIcon());
             }
@@ -52,14 +53,13 @@ public class DashboardTilesService {
     void setUp() {
         tiles = Lists.newArrayList();
 
-
-        if(CategoryService.categories == null) {
+        if (CategoryService.categories == null) {
             CategoryService.setUp();
         }
 
         List<Category> categories = CategoryService.categories;
         int random = random(categories.size());
-        if(random > 100) {
+        if (random > 100) {
             random = 100;
         }
 

@@ -26,7 +26,7 @@
           wybrac jaki
           kolor ma miec kafelek oraz jaka ma być ikona przy nim. Ma to pomoc w łatwym przeglądaniu
   -->
-        <div style="position: fixed; left: 50%; top: -5px; z-index: 100000;"
+        <div style="position: fixed; left: 50%; top: -5px; z-index: 10000;"
              ng-show="isSaved || isReverted || isDirty"  ng-class="{'slide_in_animation' : isSaved || isReverted || isDirty}">
             <div style="position: relative; left: -50%;"
                  class="alert alert-warning orange-gradient-background"
@@ -57,14 +57,14 @@
                          data-jqyoui-options="{revert: 'invalid'}" ng-model="items"
                          jqyoui-draggable="{index: {{$index}},animate:false}"
                          style="width: 100%; background-color: transparent;">
-                        <div class="panel" ng-class="item.panel">
+                        <div class="panel" ng-class="item.colour">
                             <div class="panel-heading" style="padding-top: 5px; padding-bottom: 0px; ">
                                 <div class="row">
                                     <div class="col-xs-3">
                                         <i class="fa fa-3x" ng-class="item.icon"></i>
                                     </div>
                                     <div class="col-xs-9 text-right">
-                                        <div class="huge" style="margin-right: 10px;">{{item.nrOfLinks}}</div>
+                                        <div class="huge" style="margin-right: 10px;">{{item.numberOfLinks}}</div>
                                         <button type="button" style="position: absolute; top: -5px; right: 5px; font-size: 25px;" ng-click="deleteTile(item);" class="close" data-dismiss="alert" aria-hidden="true">&times;</button>
                                     </div>
                                 </div>
@@ -72,7 +72,7 @@
                                     <div class="wrap_lines" style="margin: 5px; text-align: right;">{{item.categoryGroup}} - {{item.label}}</div>
                                 </div>
                             </div>
-                            <a href="#/{{item.categoryGroup}}/{{item.id}}">
+                            <a href="#/{{item.categoryGroup}}/{{item.publicId}}">
                                 <div class="panel-footer">
                                     <span class="pull-left">Przeglądaj </span>
                                     <span class="pull-right"><i class="fa fa-arrow-circle-right"></i></span>

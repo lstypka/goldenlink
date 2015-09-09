@@ -110,7 +110,7 @@ public class CategoryService {
         return breadcrumbs;
     }
 
-    private Category findCategory(final String publicId) {
+    public Category findCategory(final String publicId) {
         for (Category category : categories) {
             if (category.getPublicId().equals(publicId)) {
                 return category;

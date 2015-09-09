@@ -20,7 +20,8 @@ angular
         'ngTouch',
         'ngDragDrop',
         'ui.bootstrap',
-        'angularModalService'
+        'angularModalService',
+        'ngClipboard'
 
     ]).constant("restServiceConfig", {
         "url": "http://localhost:8080",

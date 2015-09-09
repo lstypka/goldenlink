@@ -20,13 +20,13 @@ angular.module('clientApp')
                 for (var i = 0; i < data.data.length; i++) {
                     var tile = data.data[i];
                     $scope.items.push({
-                        id: tile.publicId,
+                        publicId: tile.publicId,
                         index: i,
                         drag: true,
-                        nrOfLinks: tile.numberOfLinks,
+                        numberOfLinks: tile.numberOfLinks,
                         label: tile.label,
-                        panel: tile.colour,
-                        categoryGroup : tile.categoryGroup,
+                        colour: tile.colour,
+                        categoryGroup: tile.categoryGroup,
                         icon: tile.icon
                     });
                 }
@@ -47,6 +47,7 @@ angular.module('clientApp')
 
             rewriteIndexes();
             $scope.isDirty = true;
+            $scope.message = "Zawartość pulpitu została zmieniona";
         };
 
         function arraymove(arr, fromIndex, toIndex) {
@@ -62,23 +63,31 @@ angular.module('clientApp')
         }
 
         $scope.deleteTile = function (tileToRemove) {
-            //alertMessageService.showMessage("Kategoria '" + tileToRemove.label + "' została odpięta od pulpitu poprawnie");
             $scope.items.splice(tileToRemove.index, 1);
             $scope.isDirty = true;
             rewriteIndexes();
         };
 
         $scope.save = function () {
-            $scope.isDirty = false;
-            $scope.message = "Zawartość pulpitu została zapisana pomyślnie";
-            $scope.isSaved = true;
-            $scope.backup = $scope.items.slice();
-            resetFlags();
+            dashboardService.updateTiles($scope.items).then(function (response) {
+
+                    window.console.log("RESPONSE", response);
+                    $scope.isDirty = false;
+                    $scope.message = "Zawartość pulpitu została zapisana pomyślnie";
+                    $scope.isSaved = true;
+                    $scope.backup = $scope.items.slice();
+                    resetFlags();
+            }, function() {
+                    $scope.message = "Wystąpił błąd podczas zapisywania zawartości pulpitu";
+                    $scope.items = $scope.backup.slice();
+                    rewriteIndexes();
+                    resetFlags();
+            });
         };
 
         $scope.revert = function () {
             $scope.isDirty = false;
-            $scope.message = "Zawartość pulpitu na pulpicie została przywrócona pomyślnie";
+            $scope.message = "Zawartość pulpitu została przywrócona pomyślnie";
             $scope.isReverted = true;
             $scope.items = $scope.backup.slice();
             rewriteIndexes();
