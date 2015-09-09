@@ -146,6 +146,157 @@
     color: #B8860B;
 }
 
+
+
+
+.panel-purple {
+    border-color: #8e24aa;
+}
+
+.panel-purple > .panel-heading {
+    border-color: #8e24aa;
+    color: #fff;
+    background-color: #ab47bc;
+}
+
+.panel-purple > a {
+    color: #ab47bc;
+}
+
+.panel-purple > a:hover {
+    color: #8e24aa;
+}
+
+.panel-grey {
+    border-color: #424242;
+}
+
+.panel-grey > .panel-heading {
+    border-color: #424242;
+    color: #fff;
+    background-color: #757575;
+}
+
+.panel-grey > a {
+    color: #757575;
+}
+
+.panel-grey > a:hover {
+    color: #424242;
+}
+
+
+.panel-blue-grey {
+    border-color: #37474f;
+}
+
+.panel-blue-grey > .panel-heading {
+    border-color: #37474f;
+    color: #fff;
+    background-color: #546e7a ;
+}
+
+.panel-blue-grey > a {
+    color: #546e7a ;
+}
+
+.panel-blue-grey > a:hover {
+    color: #37474f;
+}
+
+.panel-pink {
+    border-color: #880e4f;
+}
+
+.panel-pink > .panel-heading {
+    border-color: #880e4f;
+    color: #fff;
+    background-color: #c2185b ;
+}
+
+.panel-pink > a {
+    color: #c2185b ;
+}
+
+.panel-pink > a:hover {
+    color: #880e4f;
+}
+
+
+.panel-indigo {
+    border-color: #303f9f;
+}
+
+.panel-indigo > .panel-heading {
+    border-color: #303f9f;
+    color: #fff;
+    background-color: #5c6bc0 ;
+}
+
+.panel-indigo > a {
+    color: #5c6bc0 ;
+}
+
+.panel-indigo > a:hover {
+    color: #303f9f;
+}
+
+
+.panel-green-lighten {
+    border-color: #43a047;
+}
+
+.panel-green-lighten > .panel-heading {
+    border-color: #43a047;
+    color: #fff;
+    background-color: #81c784 ;
+}
+
+.panel-green-lighten > a {
+    color: #81c784 ;
+}
+
+.panel-green-lighten > a:hover {
+    color: #43a047;
+}
+
+.panel-green-darken {
+    border-color: #7cb342;
+}
+
+.panel-green-darken > .panel-heading {
+    border-color: #7cb342;
+    color: #fff;
+    background-color: #aed581 ;
+}
+
+.panel-green-darken > a {
+    color: #aed581 ;
+}
+
+.panel-green-darken > a:hover {
+    color: #7cb342;
+}
+
+
+.panel-lime {
+    border-color: #827717;
+}
+
+.panel-lime > .panel-heading {
+    border-color: #827717;
+    color: #fff;
+    background-color: #c0ca33 ;
+}
+
+.panel-lime > a {
+    color: #c0ca33 ;
+}
+
+.panel-lime > a:hover {
+    color: #827717;
+}
+
 .orange-gradient-background {
     background-image: linear-gradient(to bottom, #fcf8e3 0, #f8efc0 100%) !important;
 }
