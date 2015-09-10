@@ -8,7 +8,7 @@
  * Controller of the clientApp
  */
 angular.module('clientApp')
-    .controller('linksCtrl', ['$scope', '$routeParams', 'linkService', function ($scope, $routeParams, linkService) {
+    .controller('linksCtrl', ['$scope', '$routeParams', 'linkService', 'alertMessageService', function ($scope, $routeParams, linkService, alertMessageService) {
 
         $scope.page = 0;
         $scope.resultsPerPage = 25;
@@ -27,6 +27,14 @@ angular.module('clientApp')
                 }
             });
             $scope.page++;
+        };
+
+        $scope.copyFallback = function () {
+            alertMessageService.showMessage("Wtyczka flash została zablokowana, co uniemożliwia automatyczne kopiowanie do schowka");
+        };
+
+        $scope.linkCopied = function (link) {
+            alertMessageService.showMessage("Link '" + link + "' został poprawnie skopiowany do schowka");
         };
 
         init();
