@@ -11,13 +11,14 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
-import com.google.common.collect.Lists;
-
 import pl.jsolve.goldenlink.rest.dto.Author;
 import pl.jsolve.goldenlink.rest.dto.Category;
 import pl.jsolve.goldenlink.rest.dto.Link;
+import pl.jsolve.goldenlink.rest.dto.Links;
 import pl.jsolve.goldenlink.rest.dto.Tag;
 import pl.jsolve.goldenlink.rest.service.CategoryService;
+
+import com.google.common.collect.Lists;
 
 @RestController
 public class LinkController {
@@ -26,19 +27,17 @@ public class LinkController {
     private CategoryService categoryService;
 
     @RequestMapping(value = "/categories/{categoryId}/links", method = RequestMethod.GET)
-    public List<Link> getTiles(@PathVariable("categoryId") String categoryId, @RequestParam("page") Integer page,
+    public Links getLinks(@PathVariable("categoryId") String categoryId, @RequestParam("page") Integer page,
             @RequestParam("resultsPerPage") Integer resultsPerPage) {
-        return generateLinks(categoryId, page, resultsPerPage);
+    	
+        return new Links(generateLinks(categoryId, page, resultsPerPage), page, resultsPerPage, 53);
     }
 
     private List<Link> generateLinks(String categoryId, Integer page, Integer resultsPerPage) {
         List<Link> links = Lists.newArrayList();
         Category category = categoryService.findCategory(categoryId);
         List<Tag> tags = Lists.newArrayList(new Tag(generateId(), "JS"), new Tag(generateId(), "Select2"), new Tag(
-                generateId(), "AngularJS"), new Tag(generateId(), "JS"), new Tag(generateId(), "Select2"), new Tag(
-                generateId(), "AngularJS"), new Tag(generateId(), "JS"), new Tag(generateId(), "Select2"), new Tag(
-                generateId(), "AngularJS"), new Tag(generateId(), "JS"), new Tag(generateId(), "Select2"), new Tag(
-                generateId(), "AngularJS"));
+                generateId(), "AngularJS"), new Tag(generateId(), "JS"), new Tag(generateId(), "Select2"));
         Author author = new Author(generateId(), "Lukasz Stypka");
 
         for (int i = 0; i < resultsPerPage; i++) {

@@ -299,6 +299,8 @@
 
 .orange-gradient-background {
     background-image: linear-gradient(to bottom, #fcf8e3 0, #f8efc0 100%) !important;
+    border-color: #8a6d3b;
+    box-shadow: inset 1px 1px 2px 1px rgba(0, 0, 0, 0.05);
 }
 
 .green-gradient-background {
