@@ -8,11 +8,18 @@
  * Controller of the clientApp
  */
 angular.module('clientApp')
-    .controller('linksCtrl', ['$scope', '$routeParams', 'linkService', 'alertMessageService', '$sce', function ($scope, $routeParams, linkService, alertMessageService, $sce) {
+    .controller('linksCtrl', ['$scope', '$routeParams', 'linkService', 'alertMessageService', function ($scope, $routeParams, linkService, alertMessageService) {
 
         $scope.page = 0;
         $scope.resultsPerPage = 10;
         $scope.totalResults = 10000000000000;
+
+        $scope.defaultCommentLimit = 100;
+
+        $scope.settings = {
+            videoPreload : 'auto',     // possible values: 'auto', 'none', 'metadata'
+            imagePreload : 'auto'          // possible values: 'auto', 'placeholder'
+        };
 
         $scope.preloadVideo = 'metadata';
 
@@ -55,9 +62,24 @@ angular.module('clientApp')
             return $scope.isLoading || $scope.hasNextPage();
         };
 
-        $scope.trustSrc = function(src) {
-            window.console.log($sce);
-            return src;// $sce.trustAsResourceUrl(src);
+        $scope.showMore = function(link) {
+            link.commentLimit = link.comment.length;
+        };
+
+        $scope.showMoreVisible = function(link) {
+            return link.comment.length > $scope.commentLengthLimit(link);
+        };
+
+        $scope.showLess = function(link) {
+            link.commentLimit = $scope.defaultCommentLimit;
+        };
+
+        $scope.showLessVisible = function(link) {
+            return $scope.commentLengthLimit(link) > $scope.defaultCommentLimit;
+        };
+
+        $scope.commentLengthLimit = function(link) {
+           return link.commentLimit || $scope.defaultCommentLimit;
         };
 
         init();

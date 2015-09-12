@@ -18,6 +18,7 @@ import pl.jsolve.goldenlink.rest.dto.Link;
 import pl.jsolve.goldenlink.rest.dto.Links;
 import pl.jsolve.goldenlink.rest.dto.Tag;
 import pl.jsolve.goldenlink.rest.service.CategoryService;
+import pl.jsolve.sweetener.text.Strings;
 
 import com.google.common.collect.Lists;
 
@@ -44,7 +45,6 @@ public class LinkController {
 	List<String> photos = Lists
 			.newArrayList(
 					"http://img3.themebin.com/1920x1080/pier_1080.jpg",
-					"fake url","fake url", "fake url",
 					"http://4.bp.blogspot.com/-ckNQzDUbFzM/U4bf9CpGnLI/AAAAAAAANXQ/Le4D3tYr0AM/s1600/moon+hd+wallpaper+1.jpg",
 					"http://www.hdwallpapersos.com/wp-content/uploads/2015/02/enjoyable-best-top-wallpaper-for-mobile-download-android-free-pc.jpg",
 					"http://th06.deviantart.net/fs71/PRE/i/2011/274/9/3/earth_and_moon_wallpaper_hd_by_loulines-d4bgsel.jpg",
@@ -60,9 +60,15 @@ public class LinkController {
 					"http://download.wavetlan.com/SVV/Media/HTTP/MP4/ConvertedFiles/QuickTime/QuickTime_test1_4m3s_MPEG4SP_CBR_120kbps_480x320_30fps_AAC-LCv4_CBR_32kbps_Stereo_22050Hz.mp4",
 					"http://img-9gag-fun.9cache.com/photo/aepOVqW_460sv.mp4");
 
-	List<String> youtube = Lists.newArrayList("https://www.youtube.com/embed/qv3XX-CMeiw", "https://www.youtube.com/embed/F7AHvILMcSI", "https://www.youtube.com/embed/83VN3DKodNY",
-			"https://www.youtube.com/embed/6vR0Ynzrti4", "https://www.youtube.com/embed/sDJxU-QoNgU", "https://www.youtube.com/embed/QtdEIZdTIsk", "https://www.youtube.com/embed/-3THhtq8Ztc");
-	
+	List<String> youtube = Lists.newArrayList(
+			"https://www.youtube.com/embed/qv3XX-CMeiw",
+			"https://www.youtube.com/embed/F7AHvILMcSI",
+			"https://www.youtube.com/embed/83VN3DKodNY",
+			"https://www.youtube.com/embed/6vR0Ynzrti4",
+			"https://www.youtube.com/embed/sDJxU-QoNgU",
+			"https://www.youtube.com/embed/QtdEIZdTIsk",
+			"https://www.youtube.com/embed/-3THhtq8Ztc");
+
 	private List<Link> generateLinks(String categoryId, Integer page,
 			Integer resultsPerPage) {
 		List<Link> links = Lists.newArrayList();
@@ -94,17 +100,28 @@ public class LinkController {
 				link = youtube.get(random(youtube.size()));
 			}
 
+			LocalDateTime expiryDate = LocalDateTime.now();
+			if (random(5) < 3) {
+				expiryDate = null;
+			} else {
+				expiryDate = LocalDateTime.now(DateTimeZone.UTC)
+						.plusDays(random(365)).plusHours(random(24))
+						.plusMinutes(random(60)).plusSeconds(random(60));
+			}
+
 			links.add(new Link(generateId(), link,
 					"Strona domowa kolesia od select2 Link nr "
 							+ ((page * resultsPerPage) + i + 1), getComment(),
 					category, tags, LocalDateTime.now(DateTimeZone.UTC),
-					LocalDateTime.now(DateTimeZone.UTC).plusDays(1)
-							.plusHours(3).plusMinutes(7), author, false));
+					expiryDate, author, false));
 		}
 		return links;
 	}
 
 	private String getComment() {
+		if (random(5) < 3) {
+			return Strings.random(random(10000));
+		}
 		return "";
 	}
 

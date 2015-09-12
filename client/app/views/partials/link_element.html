@@ -24,37 +24,42 @@
             <div class="panel-body">
 
                 <div class="row link_panel_body">
-                    <div class="col-lg-5 link_content">
+                    <div class="col-lg-5 link_content column">
 
                         <div ng-if="link.category.categoryGroup === 'photos'">
                             <a ng-href="{{link.link}}"
                                class="thumbnail" target="_new">
-                                <img src="{{link.link}}" onerror="this.src = 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRiXEpK2jd3kpswq-For2q1KvRImu9uwoeqQaDgAbfbh8XbTUQJ6g';">
+                                <img ng-if="settings.imagePreload === 'auto'" ng-src="{{link.link}}"
+                                     onerror="this.src = 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRiXEpK2jd3kpswq-For2q1KvRImu9uwoeqQaDgAbfbh8XbTUQJ6g';">
+                                <img ng-if="settings.imagePreload === 'placeholder'" src="images/placeholder.png">
                             </a>
                         </div>
 
                         <div ng-if="link.category.categoryGroup === 'videos'">
-                            <video controls class="thumbnail" controls="controls" preload="auto">
+                            <video controls class="thumbnail" controls="controls" preload="{{settings.videoPreload}}">
                                 <source src="{{link.link}}">
                                 Twoja przeglądarka nie obsługuje odtwarzania filmów.
                             </video>
                         </div>
 
-
                         <div ng-if="link.category.categoryGroup === 'youtube'">
                             <iframe ng-src="{{link.link}}" frameborder="0" allowfullscreen></iframe>
                         </div>
-
 
                         <a href="{{link.link}}" target="_new">{{link.link}}</a>
 
                     </div>
 
-                    <div class="col-lg-4">
+                    <div class="col-lg-4 column">
                         <div class="row">
-                            <div class="category_header">Komentarz</div>
-                            <div class="comment">
-                                {{link.comment}} jakis tam komentarz
+                            <div class="category_header">Komentarz:</div>
+                            <div ng-if="link.comment" class="comment">
+                                {{link.comment | limitTo: commentLengthLimit(link)}}
+                                <a class="row" ng-show="showMoreVisible(link)" ng-click="showMore(link)">Więcej ...</a>
+                                <a class="row" ng-show="showLessVisible(link)" ng-click="showLess(link)">Mniej ...</a>
+                            </div>
+                            <div ng-if="!link.comment" class="comment default_value">
+                                Brak komentarza
                             </div>
                         </div>
 
@@ -62,13 +67,14 @@
 
                         <div class="row">
                             <div class="category_header">Link wygasa:</div>
-                            <div class="expiry_date">{{link.expiryDate | dateTimeFilter }}</div>
+                            <div class="expiry_date" ng-if="link.expiryDate">{{link.expiryDate | dateTimeFilter }}</div>
+                            <div class="expiry_date default_value" ng-if="!link.expiryDate">Nigdy</div>
                         </div>
 
                     </div>
 
 
-                    <div class="col-lg-3">
+                    <div class="col-lg-3 column">
                         <div class="row">
                             <div class="category_header">Autor:</div>
                             <div class="author">{{link.author.name}}</div>
