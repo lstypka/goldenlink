@@ -24,6 +24,7 @@
     <link rel="stylesheet" href="styles/left_menu.css">
     <link rel="stylesheet" href="styles/icons.css">
     <link rel="stylesheet" href="styles/animation.css">
+    <link rel="stylesheet" href="styles/links.css">
     <link rel="stylesheet" href="//code.jquery.com/ui/1.11.4/themes/smoothness/jquery-ui.css">
 
     <!-- endbuild -->
@@ -193,12 +194,14 @@
 <script src="bower_components/angular-dragdrop/src/angular-dragdrop.js"></script>
 <script src="bower_components/angular-messages/angular-messages.js"></script>
 <script src="bower_components/angular-modal-service/dst/angular-modal-service.js"></script>
+<script src="bower_components/moment/moment.js"></script>
+<script src="bower_components/angular-moment/angular-moment.js"></script>
 <script src="bower_components/angular-resource/angular-resource.js"></script>
 <script src="bower_components/angular-route/angular-route.js"></script>
 <script src="bower_components/angular-sanitize/angular-sanitize.js"></script>
 <script src="bower_components/angular-touch/angular-touch.js"></script>
 <script src="bower_components/bootstrap/dist/js/bootstrap.js"></script>
-<script src="bower_components/moment/moment.js"></script>
+<script src="bower_components/moment-duration-format/lib/moment-duration-format.js"></script>
 <script src="bower_components/zeroclipboard/dist/ZeroClipboard.js"></script>
 <script src="bower_components/ng-clip/src/ngClip.js"></script>
 <script src="bower_components/ng-sortable/dist/ng-sortable.js"></script>
@@ -209,12 +212,15 @@
 <!-- build:js({.tmp,app}) scripts/scripts.js -->
 <script src="scripts/app.js"></script>
 
+
 <script src="scripts/services/categoryService.js"></script>
 <script src="scripts/services/breadcrumbsService.js"></script>
 <script src="scripts/services/alertMessageService.js"></script>
 <script src="scripts/services/dashboardService.js"></script>
 <script src="scripts/services/linkService.js"></script>
 <script src="scripts/directives/infiniteScroll.js"></script>
+
+<script src="scripts/filter/dateTimeFilter.js"></script>
 
 <script src="scripts/controllers/rootCtrl.js"></script>
 <script src="scripts/controllers/navbarCtrl.js"></script>
@@ -226,6 +232,7 @@
 <script src="scripts/controllers/confirmModalCtrl.js"></script>
 <script src="scripts/controllers/panelsCtrl.js"></script>
 <script src="scripts/controllers/linksCtrl.js"></script>
+
 
 <!-- endbuild -->
 </body>

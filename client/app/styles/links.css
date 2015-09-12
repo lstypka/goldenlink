@@ -1,0 +1,94 @@
+.link_panel {
+
+}
+
+.link_panel  .link_panel_header {
+    padding-bottom: 28px;
+}
+
+.link_panel .link_panel_header .title {
+    padding-left: 0px;
+    overflow: hidden;
+    height: 20px;
+    line-height: 20px;
+}
+
+.link_panel .link_panel_header .date {
+    text-align: right;
+    padding-right: 0px;
+}
+
+.link_panel .link_panel_header .edit {
+    text-align: right;
+    padding-right: 0px;
+}
+
+.link_panel .link_panel_header .edit > a > i {
+    font-size: 15px;
+    color: #8a6d3b;
+}
+
+.link_panel .action_bar {
+    margin-top: 0px;
+}
+
+.link_panel .action_bar .copy_to_clipboard {
+    float: left;
+    border-radius: 0px 0px 7px 0px;
+}
+
+.link_panel .action_bar .share_link {
+    float: right;
+    border-radius: 0px 0px 0px 7px;
+}
+
+.link_panel .link_panel_body {
+    margin-top: 20px;
+}
+
+.link_panel .link_panel_body .gap {
+    margin-top: 20px;
+}
+
+.link_panel .link_panel_body .link_content {
+    max-width: 100%;
+    max-height: 100%;
+}
+
+.link_panel .link_panel_body .link_content > div > video {
+    max-width: 100%;
+    max-height: 100%;
+}
+
+.link_panel .link_panel_body .link_content > a {
+    color: #8a6d3b;
+    word-wrap: break-word;
+    text-overflow: ellipsis;
+}
+
+.link_panel .link_panel_body .category_header {
+    font-weight: 700;
+    color: #8a6d3b;
+}
+
+.link_panel .link_panel_body .comment {
+
+}
+
+.link_panel .link_panel_body .expired_date {
+
+}
+
+.link_panel .link_panel_body .author {
+
+}
+
+.link_panel .link_panel_body .tags > a {
+    background-color: #8a6d3b;
+}
+
+.link_panel .link_panel_body .tags > span {
+    line-height: 2;
+}
+
+

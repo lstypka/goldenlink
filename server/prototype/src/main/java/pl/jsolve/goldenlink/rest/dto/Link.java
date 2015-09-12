@@ -27,7 +27,7 @@ public class Link {
 
     @JsonSerialize(using = LocalDateTimeSerializer.class)
     @JsonDeserialize(using = LocalDateTimeDeserializer.class)
-    private final LocalDateTime expireDate;
+    private final LocalDateTime expiryDate;
     private final Author author;
     private final boolean isMarked;
 
@@ -35,7 +35,7 @@ public class Link {
     public Link(@JsonProperty("publicId") String publicId, @JsonProperty("link") String link,
             @JsonProperty("title") String title, @JsonProperty("comment") String comment,
             @JsonProperty("category") Category category, @JsonProperty("tags") List<Tag> tags,
-            @JsonProperty("date") LocalDateTime date, @JsonProperty("expireDate") LocalDateTime expireDate,
+            @JsonProperty("date") LocalDateTime date, @JsonProperty("expireDate") LocalDateTime expiryDate,
             @JsonProperty("author") Author author, @JsonProperty("isMarked") boolean isMarked) {
         super();
         this.publicId = publicId;
@@ -45,7 +45,7 @@ public class Link {
         this.category = category;
         this.tags = tags;
         this.date = date;
-        this.expireDate = expireDate;
+        this.expiryDate = expiryDate;
         this.author = author;
         this.isMarked = isMarked;
     }
@@ -78,8 +78,8 @@ public class Link {
         return date;
     }
 
-    public LocalDateTime getExpireDate() {
-        return expireDate;
+    public LocalDateTime getExpiryDate() {
+        return expiryDate;
     }
 
     public Author getAuthor() {

@@ -8,11 +8,13 @@
  * Controller of the clientApp
  */
 angular.module('clientApp')
-    .controller('linksCtrl', ['$scope', '$routeParams', 'linkService', 'alertMessageService', function ($scope, $routeParams, linkService, alertMessageService) {
+    .controller('linksCtrl', ['$scope', '$routeParams', 'linkService', 'alertMessageService', '$sce', function ($scope, $routeParams, linkService, alertMessageService, $sce) {
 
         $scope.page = 0;
         $scope.resultsPerPage = 10;
         $scope.totalResults = 10000000000000;
+
+        $scope.preloadVideo = 'metadata';
 
         $scope.links = [];
 
@@ -21,8 +23,7 @@ angular.module('clientApp')
         };
 
         $scope.nextPage = function () {
-            window.console.log("NEXT PAGE");
-            if(($scope.page * $scope.resultsPerPage) > $scope.totalResults) {
+            if(!$scope.hasNextPage() || $scope.isLoading) {
                 return;
             }
             $scope.isLoading = true;
@@ -44,6 +45,19 @@ angular.module('clientApp')
 
         $scope.linkCopied = function (link) {
             alertMessageService.showMessage("Link '" + link + "' został poprawnie skopiowany do schowka");
+        };
+
+        $scope.hasNextPage = function() {
+             return ($scope.page * $scope.resultsPerPage) < $scope.totalResults;
+        };
+
+        $scope.showLoadingPanel = function() {
+            return $scope.isLoading || $scope.hasNextPage();
+        };
+
+        $scope.trustSrc = function(src) {
+            window.console.log($sce);
+            return src;// $sce.trustAsResourceUrl(src);
         };
 
         init();

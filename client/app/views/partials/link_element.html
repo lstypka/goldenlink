@@ -1,0 +1,90 @@
+<div class="row">
+    <div class="col-lg-12 col-md-12">
+        <div class="panel panel-warning link_panel">
+            <div class="panel-heading orange-gradient-background link_panel_header">
+
+                <div class="col-lg-9 title">
+                    <span class="glyphicon glyphicon-star-empty" aria-hidden="true"></span>
+                    <strong>{{link.category.label}}</strong> {{link.title}}
+                </div>
+                <div class="col-lg-2 date">
+                    {{link.date | dateTimeFilter }}
+                </div>
+                <div class="col-lg-1 edit">
+                    <a href=""><i class="fa fa-pencil-square-o"></i></a>
+                </div>
+            </div>
+            <div class="action_bar">
+                <a auto-hide-on-no-flash="true" clip-click="linkCopied(link.link)"
+                   clip-click-fallback="copyFallback(copy)" class="label label-warning copy_to_clipboard"
+                   clip-copy="link.link">Kopiuj do schowka</a>
+
+                <a class="label label-warning share_link">Udostępnij ...</a>
+            </div>
+            <div class="panel-body">
+
+                <div class="row link_panel_body">
+                    <div class="col-lg-5 link_content">
+
+                        <div ng-if="link.category.categoryGroup === 'photos'">
+                            <a ng-href="{{link.link}}"
+                               class="thumbnail" target="_new">
+                                <img src="{{link.link}}" onerror="this.src = 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRiXEpK2jd3kpswq-For2q1KvRImu9uwoeqQaDgAbfbh8XbTUQJ6g';">
+                            </a>
+                        </div>
+
+                        <div ng-if="link.category.categoryGroup === 'videos'">
+                            <video controls class="thumbnail" controls="controls" preload="auto">
+                                <source src="{{link.link}}">
+                                Twoja przeglądarka nie obsługuje odtwarzania filmów.
+                            </video>
+                        </div>
+
+
+                        <div ng-if="link.category.categoryGroup === 'youtube'">
+                            <iframe ng-src="{{link.link}}" frameborder="0" allowfullscreen></iframe>
+                        </div>
+
+
+                        <a href="{{link.link}}" target="_new">{{link.link}}</a>
+
+                    </div>
+
+                    <div class="col-lg-4">
+                        <div class="row">
+                            <div class="category_header">Komentarz</div>
+                            <div class="comment">
+                                {{link.comment}} jakis tam komentarz
+                            </div>
+                        </div>
+
+                        <div class="row gap"></div>
+
+                        <div class="row">
+                            <div class="category_header">Link wygasa:</div>
+                            <div class="expiry_date">{{link.expiryDate | dateTimeFilter }}</div>
+                        </div>
+
+                    </div>
+
+
+                    <div class="col-lg-3">
+                        <div class="row">
+                            <div class="category_header">Autor:</div>
+                            <div class="author">{{link.author.name}}</div>
+                        </div>
+                        <div class="row gap"></div>
+                        <div class="row">
+                            <div class="category_header">Słowa kluczowe</div>
+                            <div class="tags">
+                                <a class="label label-default"
+                                   ng-repeat-start="tag in link.tags">#{{tag.label}}</a>
+                                <span ng-repeat-end></span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

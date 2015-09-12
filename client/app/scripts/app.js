@@ -21,7 +21,9 @@ angular
         'ngDragDrop',
         'ui.bootstrap',
         'angularModalService',
-        'ngClipboard'
+        'ngClipboard',
+        'angularMoment'
+
     ]).constant("restServiceConfig", {
         "url": "http://localhost:8080",
         "events": {
@@ -65,3 +67,7 @@ angular
                 redirectTo: '/'
             });
     });
+
+angular.module('clientApp').config(function($sceDelegateProvider) {
+    $sceDelegateProvider.resourceUrlWhitelist(['**']);
+});
