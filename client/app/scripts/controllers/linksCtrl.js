@@ -8,7 +8,9 @@
  * Controller of the clientApp
  */
 angular.module('clientApp')
-    .controller('linksCtrl', ['$scope', '$routeParams', 'linkService', 'alertMessageService', function ($scope, $routeParams, linkService, alertMessageService) {
+    .controller('linksCtrl', ['$scope', '$routeParams', 'linkService', 'alertMessageService', 'authorsService', function ($scope, $routeParams, linkService, alertMessageService, authorsService) {
+
+        var authors = [];
 
         $scope.page = 0;
         $scope.resultsPerPage = 10;
@@ -22,8 +24,8 @@ angular.module('clientApp')
         };
 
         $scope.search = {
-            title : null,
-            comment : null,
+            title: null,
+            comment: null,
             author: null,
             tag: null,
             date: null
@@ -32,7 +34,14 @@ angular.module('clientApp')
         $scope.links = [];
 
         var init = function () {
-            $scope.nextPage(); // get first page
+            $scope.nextPage(); // get first page of links
+
+            authorsService.getAuthors(function (results) {
+                for (var i = 0; i < results.length; i++) {
+                    authors.push({ id: results[i].publicId, text: results[i].name});
+                }
+            });
+
         };
 
         $scope.nextPage = function () {
@@ -88,37 +97,36 @@ angular.module('clientApp')
             return link.commentLimit || $scope.defaultCommentLimit;
         };
 
-        $scope.authors = [
-            {id: 1, text: 'Łukasz Stypka'},
-            {id: 2, text: 'Tomasz Kuryłek'}
-        ];
-
         $scope.tags = [
             {id: 1, text: 'Java'},
             {id: 2, text: 'Jquery'},
             {id: 3, text: 'AngularJs'},
             {id: 4, text: 'Jsolve'},
-            {id: 5, text: 'SweetenerSweetenerSweetenerSweetenerSweetenerSweetenerSweetenerSweetenerSweetenerSweetenerSweetenerSweetenerSweetenerSweetenerSweetenerSweetenerSweetenerSweetenerSweetenerSweetener'},
+            {id: 5, text: 'SweetenerSweetener'},
             {id: 6, text: 'Oven'}
         ];
 
         $scope.authorsSearchOptions = {
             placeholder: 'Dowolny autor',
             containerCssClass: 'select2-container',
-            formatNoMatches: function (term) {
+            formatNoMatches: function () {
                 return 'Brak pasujących wyników';
             },
             allowClear: true,
             query: function (query) {
                 var data = {
                     results: []
-                }
-                for (var i = 0; i < $scope.authors.length; i++) {
-                    if ($scope.authors[i].text.indexOf(query.term) > -1) {
-                        data.results.push($scope.authors[i]);
+                };
+                for (var i = 0; i < authors.length; i++) {
+                    if (authors[i].text.indexOf(query.term) > -1) {
+                        data.results.push(authors[i]);
                     }
                 }
                 query.callback(data);
+            },
+            formatSelection: function format(item) {
+                var originalText = item.text;
+                return "<div title ='" + originalText + "'>" + originalText + "</div>";
             }
         };
 
@@ -126,19 +134,23 @@ angular.module('clientApp')
             placeholder: 'Dowolne',
             containerCssClass: 'select2-container',
             allowClear: true,
-            formatNoMatches: function (term) {
+            formatNoMatches: function () {
                 return 'Brak pasujących wyników';
             },
             query: function (query) {
                 var data = {
                     results: []
-                }
+                };
                 for (var i = 0; i < $scope.tags.length; i++) {
                     if ($scope.tags[i].text.indexOf(query.term) > -1) {
                         data.results.push($scope.tags[i]);
                     }
                 }
                 query.callback(data);
+            },
+            formatSelection: function format(item) {
+                var originalText = item.text;
+                return "<div title ='" + originalText + "'>" + originalText + "</div>";
             }
         };
 
@@ -151,17 +163,17 @@ angular.module('clientApp')
                 var data = {
                     results: [
                         {id: 'withoutTimeLimit', text: 'Od początku'},
-                        {id: 'pastWeek', text : 'Ostatni tydzień'},
+                        {id: 'pastWeek', text: 'Ostatni tydzień'},
                         {id: 'pastMonth', text: 'Ostatni miesiąc'},
                         {id: 'past3Months', text: 'Ostatnie 3 miesiące'},
                         {id: 'past6Months', text: 'Ostatnich 6 miesięcy'},
                         {id: 'pastYear', text: 'Ostatni rok'},
-                        {id: 'past2Years', text : 'Ostatnie 2 lata'}
+                        {id: 'past2Years', text: 'Ostatnie 2 lata'}
                     ]
-                }
+                };
                 query.callback(data);
             },
-            formatSelection : function format(item) {
+            formatSelection: function format(item) {
                 var originalText = item.text;
                 return "<div title ='" + originalText + "'>" + originalText + "</div>";
             }
