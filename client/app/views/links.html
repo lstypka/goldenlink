@@ -10,6 +10,44 @@
             </div>
         </div>
 
+        <div class="panel panel-warning link_panel" >
+            <div class="panel-heading orange-gradient-background link_panel_header" style="padding-bottom: 0px; padding-top: 10px;">
+                <div class="row search">
+
+                    <div class="col-lg-2">
+                        <label class="label">Tytuł:</label>
+                        <input type="text" class="form-control input-sm input" placeholder="Dowolny tytuł">
+                    </div>
+                    <div class="col-lg-2">
+                        <label class="label">Komentarz:</label>
+                        <input type="text" class="form-control input-sm input" placeholder="Dowolny komentarz">
+                    </div>
+                    <div class="col-lg-2">
+                        <div class="form-group">
+                            <label class="label">Autor:</label>
+                            <select2 ng-model="search.author" options="authorsSearchOptions"
+                                     style="width: 100%;"></select2>
+                        </div>
+                    </div>
+                    <div class="col-lg-2">
+                        <label class="label">Słowo kluczowe:</label>
+                        <select2 ng-model="search.tag" options="tagsSearchOptions" style="width: 100%;"></select2>
+                    </div>
+                    <div class="col-lg-2">
+                        <label class="label">Data dodania:</label>
+                        <select2 ng-model="search.date" options="dateSearchOptions" style="width: 100%;" title="{{search.date}}"></select2>
+                    </div>
+                    <div class="col-lg-2">
+                        <button type="button" class="btn btn-default btn-sm search-button">
+                            <i class="fa fa-search"></i>
+                            Wyszukaj
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+
         <!--        Tutaj lista zwykłych linków. Linki powinny być w kolejności odwrotnej do kolejności dodawania, a wiec najnowsze
                 najwyzej. Tutaj nie powinno być paginacji, powinna to działać na zasadzie infinite scrolla, czyli linki się
                 dociągają po zjechaniu na dół strony. Uzytkownik może oznaczyć dany link gwiazdką. Linki, które są okresowe

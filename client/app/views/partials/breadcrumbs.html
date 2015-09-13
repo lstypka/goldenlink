@@ -1,7 +1,7 @@
 <ol class="breadcrumb" data-ng-controller="breadcrumbsCtrl">
     <li ng-class="{'active' : $last}" ng-repeat="breadcrumb in breadcrumbs">
 
-        <a ng-if="!$last" href="#/{{breadcrumb.categoryGroup}}/{{breadcrumb.publicId}}">{{breadcrumb.label}}</a>
-        <span ng-if="$last">{{breadcrumb.label}}</span>
+        <a ng-if="!$last" href="#/{{breadcrumb.categoryGroup}}/{{breadcrumb.publicId}}" style="color: #8a6d3b; font-weight: bold;">{{breadcrumb.label}}</a>
+        <span ng-if="$last" style="color: #8a6d3b;">{{breadcrumb.label}}</span>
     </li>
 </ol>

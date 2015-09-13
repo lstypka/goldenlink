@@ -22,7 +22,8 @@ angular
         'ui.bootstrap',
         'angularModalService',
         'ngClipboard',
-        'angularMoment'
+        'angularMoment',
+        'rt.select2'
 
     ]).constant("restServiceConfig", {
         "url": "http://localhost:8080",
