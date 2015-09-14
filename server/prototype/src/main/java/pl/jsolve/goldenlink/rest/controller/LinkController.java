@@ -31,8 +31,15 @@ public class LinkController {
 	@RequestMapping(value = "/categories/{categoryId}/links", method = RequestMethod.GET)
 	public Links getLinks(@PathVariable("categoryId") String categoryId,
 			@RequestParam("page") Integer page,
-			@RequestParam("resultsPerPage") Integer resultsPerPage) {
+			@RequestParam("resultsPerPage") Integer resultsPerPage,
+			@RequestParam(value = "title", required = false) String title,
+			@RequestParam(value = "comment", required = false) String comment,
+			@RequestParam(value = "author", required = false) String author,
+			@RequestParam(value = "tag", required = false) String tag,
+			@RequestParam(value = "date", required = false) String date) {
 
+		System.out.println("SEARCH -> title: " + title + " comment: " + comment
+				+ " author: " + author + " tag: " + tag + " date: " + date);
 		try {
 			Thread.sleep(500);
 		} catch (InterruptedException e) {

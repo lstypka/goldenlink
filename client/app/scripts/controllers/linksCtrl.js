@@ -23,7 +23,7 @@ angular.module('clientApp')
             imagePreload: 'auto'          // possible values: 'auto', 'placeholder'
         };
 
-        $scope.search = {
+        $scope.searchParams = {
             title: null,
             comment: null,
             author: null,
@@ -49,7 +49,7 @@ angular.module('clientApp')
                 return;
             }
             $scope.isLoading = true;
-            linkService.getLinks($routeParams.category_id, $scope.page, $scope.resultsPerPage).then(function (response) {
+            linkService.getLinks($routeParams.category_id, $scope.page, $scope.resultsPerPage, $scope.searchParams).then(function (response) {
                 var results = response.data;
                 $scope.totalResults = results.totalResults;
                 var links = results.links;
@@ -59,6 +59,12 @@ angular.module('clientApp')
                 $scope.isLoading = false;
             });
             $scope.page++;
+        };
+
+        $scope.search = function () {
+            $scope.page = 0;
+            $scope.links = [];
+            $scope.nextPage();
         };
 
         $scope.copyFallback = function () {

@@ -47,16 +47,16 @@ angular
                 templateUrl: 'views/links.html'
             })
             .when('/photos/:category_id', {
-                templateUrl: 'views/photos.html'
+                templateUrl: 'views/links.html'
             })
             .when('/videos/:category_id', {
-                templateUrl: 'views/videos.html'
+                templateUrl: 'views/links.html'
             })
             .when('/youtube/:category_id', {
-                templateUrl: 'views/youtube.html'
+                templateUrl: 'views/links.html'
             })
             .when('/notes/:category_id', {
-                templateUrl: 'views/notes.html'
+                templateUrl: 'views/links.html'
             })
             .when('/search', {
                 templateUrl: 'views/search.html'
