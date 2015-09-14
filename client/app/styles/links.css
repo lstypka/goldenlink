@@ -20,6 +20,7 @@
 
 .link_panel .link_panel_header .edit {
     text-align: right;
+    float: right;
     padding-right: 0px;
 }
 
