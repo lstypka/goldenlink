@@ -16,29 +16,29 @@
 
                     <div class="col-lg-2">
                         <label class="label">Tytuł:</label>
-                        <input type="text" class="form-control input-sm input" placeholder="Dowolny tytuł">
+                        <input type="text" class="form-control input-sm input" placeholder="Dowolny tytuł" ng-disabled="isLoading">
                     </div>
                     <div class="col-lg-2">
                         <label class="label">Komentarz:</label>
-                        <input type="text" class="form-control input-sm input" placeholder="Dowolny komentarz">
+                        <input type="text" class="form-control input-sm input" placeholder="Dowolny komentarz" ng-disabled="isLoading">
                     </div>
                     <div class="col-lg-2">
                         <div class="form-group">
                             <label class="label">Autor:</label>
                             <select2 ng-model="search.author" options="authorsSearchOptions"
-                                     style="width: 100%;"></select2>
+                                     style="width: 100%;" ng-disabled="isLoading"></select2>
                         </div>
                     </div>
                     <div class="col-lg-2">
                         <label class="label">Słowo kluczowe:</label>
-                        <select2 ng-model="search.tag" options="tagsSearchOptions" style="width: 100%;"></select2>
+                        <select2 ng-model="search.tag" options="tagsSearchOptions" style="width: 100%;" ng-disabled="isLoading"></select2>
                     </div>
                     <div class="col-lg-2">
                         <label class="label">Data dodania:</label>
-                        <select2 ng-model="search.date" options="dateSearchOptions" style="width: 100%;" title="{{search.date}}"></select2>
+                        <select2 ng-model="search.date" options="dateSearchOptions" style="width: 100%;" title="{{search.date}}" ng-disabled="isLoading"></select2>
                     </div>
                     <div class="col-lg-2">
-                        <button type="button" class="btn btn-default btn-sm search-button">
+                        <button type="button" class="btn btn-default btn-sm search-button" ng-disabled="isLoading">
                             <i class="fa fa-search"></i>
                             Wyszukaj
                         </button>
