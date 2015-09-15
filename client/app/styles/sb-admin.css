@@ -22,8 +22,7 @@ body {
 }
 
 #page-wrapper {
-    /*width: calc(100% - 20px);*/
-    margin-left: 20px;
+    margin-left: 0px;
     padding: 0;
     background-color: #fff;
     border: 1px;
@@ -38,7 +37,7 @@ body {
 
 @media (min-width:768px) {
     #wrapper {
-        padding-left: 225px;
+        padding-left: 295px;
     }
 
     #page-wrapper {
@@ -124,7 +123,7 @@ ul.alert-dropdown {
         position: fixed;
         top: 51px;
         left: 275px;
-        width: 275px;
+        width: 295px;
         margin-left: -275px;
         border: none;
         border-radius: 0;

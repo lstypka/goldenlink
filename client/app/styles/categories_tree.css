@@ -2,7 +2,7 @@
     .categories_tree_container {
         position: relative;
         height: calc(100% - 205px);
-        width: 225px;
+        width: 275px;
         margin-left: 10px;
         border: 1px;
         border-radius:  7px 0px 0px 0px;

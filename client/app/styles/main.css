@@ -74,7 +74,7 @@ body {
 /* Responsive: Portrait tablets and up */
 @media screen and (min-width: 768px) {
     .container {
-        max-width: 730px;
+       /* max-width: 730px;*/
     }
 
     /* Remove the padding we set earlier */
@@ -99,7 +99,7 @@ body {
         position: absolute;
         top: 55px;
         bottom: 20px;
-        left: 230px;
+        left: 300px;
         right: 5px;
     }
 }
