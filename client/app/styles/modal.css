@@ -1,0 +1,31 @@
+.modal-content {
+    border-radius: 7px;
+    box-shadow: inset 1px 1px 2px 1px rgba(0, 0, 0, 0.2);
+}
+
+.modal-content .modal-header {
+    border-radius: 5px 5px 0px 0px;
+    padding: 3px !important;
+    margin-bottom: 0px;
+}
+
+.modal-content .modal-header .close {
+    margin: 0px 5px;
+    color: #8a6d3b;
+}
+
+.modal-content .modal-header .title {
+    color: #8a6d3b;
+    font-weight: bold;
+}
+
+.modal-content .modal-body .nav-tabs > li > a {
+    color: #8a6d3b;
+    font-size: 12px;
+}
+
+.modal-content .modal-body .nav-tabs > li > a:hover {
+    background-color: transparent;
+    font-weight: bold;
+    cursor: pointer;
+}

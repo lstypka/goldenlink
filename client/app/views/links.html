@@ -12,7 +12,7 @@
 
         <div class="panel panel-warning link_panel" >
             <div class="panel-heading orange-gradient-background link_panel_header" style="padding-bottom: 0px; padding-top: 10px;">
-                <div class="row search">
+                <div class="row orange-form">
 
                     <div class="col-lg-2">
                         <label class="label">Tytuł:</label>
@@ -38,7 +38,7 @@
                         <select2 ng-model="searchParams.date" options="dateSearchOptions" style="width: 100%;" title="{{searchParams.date}}" ng-disabled="isLoading"></select2>
                     </div>
                     <div class="col-lg-2">
-                        <button type="button" class="btn btn-default btn-sm search-button" ng-click="search();" ng-disabled="isLoading">
+                        <button type="button" class="btn btn-default btn-sm button search-button" ng-click="search();" ng-disabled="isLoading">
                             <i class="fa fa-search"></i>
                             Wyszukaj
                         </button>

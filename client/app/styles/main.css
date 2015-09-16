@@ -60,7 +60,7 @@ body {
 }
 
 .without_outline {
-    outline: none;
+    outline: none !important;
 }
 
 @media screen and (max-width: 768px) {

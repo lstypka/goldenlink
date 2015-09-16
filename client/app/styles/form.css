@@ -1,23 +1,26 @@
-.search .label {
+.orange-form .label {
     color: #8a6d3b;
 }
 
-.search .input {
+.orange-form .input {
     color: #8a6d3b;
     border-color: #8a6d3b;
     -webkit-box-shadow: inset 0 1px 1px rgba(252, 248, 227, .075), 0 0 8px rgba(248, 239, 192, .6);
     box-shadow: inset 0 1px 1px rgba(252, 248, 227, .075), 0 0 8px rgba(248, 239, 192, .6);
 }
 
-.search .search-button {
+.orange-form .search-button {
     margin-top: 19px;
-    color: #8a6d3b;
-    border-color: #8a6d3b;
-    font-size: 12px;
     width: 100%;
 }
 
-.search .search-button:hover, .search-button:focus {
+.orange-form .button {
+    color: #8a6d3b;
+    border-color: #8a6d3b;
+    font-size: 12px;
+}
+
+.orange-form .button:hover, .button:focus {
     font-weight: bold;
     background-color: white;
     font-size: 12px;

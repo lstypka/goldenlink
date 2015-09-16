@@ -85,8 +85,8 @@ public class LinkController {
 		 * Category category = categoryService.findCategory(categoryId);
 		 */List<Tag> tags = Lists.newArrayList(new Tag(generateId(), "JS"),
 				new Tag(generateId(), "Select2"), new Tag(generateId(),
-						"AngularJS"), new Tag(generateId(), "JS"), new Tag(
-						generateId(), "Select2"));
+						"AngularJS"), new Tag(generateId(), "Grunt"), new Tag(
+						generateId(), "HTML 5"));
 		Author author = new Author(generateId(), "Lukasz Stypka");
 
 		for (int i = 0; i < resultsPerPage; i++) {

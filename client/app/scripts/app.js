@@ -23,7 +23,8 @@ angular
         'angularModalService',
         'ngClipboard',
         'angularMoment',
-        'rt.select2'
+        'rt.select2',
+        'ui.bootstrap.datetimepicker'
 
     ]).constant("restServiceConfig", {
         "url": "http://localhost:8080",

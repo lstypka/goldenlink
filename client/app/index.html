@@ -8,14 +8,15 @@
     <!-- Place favicon.ico and apple-touch-icon.png in the root directory -->
     <!-- build:css(.) styles/vendor.css -->
     <!-- bower:css -->
+    <link rel="stylesheet" href="bower_components/angular-bootstrap-datetimepicker/src/css/datetimepicker.css" />
     <link rel="stylesheet" href="bower_components/select2/select2.css" />
     <link rel="stylesheet" href="bower_components/bootstrap/dist/css/bootstrap.css" />
+    <link rel="stylesheet" href="bower_components/eonasdan-bootstrap-datetimepicker/build/css/bootstrap-datetimepicker.min.css" />
     <link rel="stylesheet" href="bower_components/font-awesome/css/font-awesome.css" />
     <link rel="stylesheet" href="bower_components/ng-sortable/dist/ng-sortable.css" />
     <link rel="stylesheet" href="bower_components/ng-sortable/dist/ng-sortable.style.css" />
     <!-- endbower -->
     <!-- endbuild -->
-    <link rel="stylesheet" href="//code.jquery.com/ui/1.11.4/themes/smoothness/jquery-ui.css">
 
     <!-- build:css(.tmp) styles/main.css -->
     <link rel="stylesheet" href="styles/main.css">
@@ -30,6 +31,7 @@
     <link rel="stylesheet" href="styles/links.css">
     <link rel="stylesheet" href="styles/form.css">
     <link rel="stylesheet" href="styles/select2.css">
+    <link rel="stylesheet" href="styles/modal.css">
     <!-- endbuild -->
 </head>
 <body ng-app="clientApp" data-ng-controller="rootCtrl">
@@ -192,12 +194,13 @@
 <script src="bower_components/angular-animate/angular-animate.js"></script>
 <script src="bower_components/angular-aria/angular-aria.js"></script>
 <script src="bower_components/angular-bootstrap/ui-bootstrap-tpls.js"></script>
+<script src="bower_components/moment/moment.js"></script>
+<script src="bower_components/angular-bootstrap-datetimepicker/src/js/datetimepicker.js"></script>
 <script src="bower_components/angular-cookies/angular-cookies.js"></script>
 <script src="bower_components/jquery-ui/jquery-ui.js"></script>
 <script src="bower_components/angular-dragdrop/src/angular-dragdrop.js"></script>
 <script src="bower_components/angular-messages/angular-messages.js"></script>
 <script src="bower_components/angular-modal-service/dst/angular-modal-service.js"></script>
-<script src="bower_components/moment/moment.js"></script>
 <script src="bower_components/angular-moment/angular-moment.js"></script>
 <script src="bower_components/angular-resource/angular-resource.js"></script>
 <script src="bower_components/angular-route/angular-route.js"></script>
@@ -206,6 +209,8 @@
 <script src="bower_components/angular-select2/dist/angular-select2.js"></script>
 <script src="bower_components/angular-touch/angular-touch.js"></script>
 <script src="bower_components/bootstrap/dist/js/bootstrap.js"></script>
+<script src="bower_components/moment-timezone/builds/moment-timezone-with-data-2010-2020.js"></script>
+<script src="bower_components/eonasdan-bootstrap-datetimepicker/build/js/bootstrap-datetimepicker.min.js"></script>
 <script src="bower_components/moment-duration-format/lib/moment-duration-format.js"></script>
 <script src="bower_components/zeroclipboard/dist/ZeroClipboard.js"></script>
 <script src="bower_components/ng-clip/src/ngClip.js"></script>
@@ -225,6 +230,7 @@
 <script src="scripts/services/linkService.js"></script>
 <script src="scripts/services/authorsService.js"></script>
 <script src="scripts/directives/infiniteScroll.js"></script>
+<script src="scripts/directives/datePickerDirective.js"></script>
 
 <script src="scripts/filter/dateTimeFilter.js"></script>
 
@@ -238,20 +244,13 @@
 <script src="scripts/controllers/confirmModalCtrl.js"></script>
 <script src="scripts/controllers/panelsCtrl.js"></script>
 <script src="scripts/controllers/linksCtrl.js"></script>
+<script src="scripts/controllers/editLinkModalCtrl.js"></script>
+
+
+
+<script src="scripts/locale/pl.js"></script>
 
 
 <!-- endbuild -->
-
-<script>
-    $(function() {
-        $( "#resizable" ).resizable(
-                {
-                    resize: function( event, ui ) {
-                        $( "categories_tree_container").width('calc(100% - ' + ui.size.width + 'px)');
-                    }
-                }
-        );
-    });
-</script>
 </body>
 </html>

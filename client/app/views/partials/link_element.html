@@ -9,12 +9,9 @@
                 </div>
                 <div class="col-lg-3 ">
                     <div class="row">
-                        <div class="col-lg-12">
-                            <div class="col-lg-11 date">
-                                {{link.date | dateTimeFilter }}
-                            </div>
-                            <div class="col-lg-1 edit"><a href=""><i
-                                    class="fa fa-pencil-square-o"></i></a></div>
+                        <div class="col-lg-12 edit">
+                            <a ng-click="editLink(link);"><i
+                                    class="fa fa-pencil-square-o"></i></a>
                         </div>
                     </div>
                 </div>
@@ -68,6 +65,7 @@
                             </div>
                         </div>
 
+
                         <div class="row gap"></div>
 
                         <div class="row">
@@ -78,12 +76,18 @@
 
                     </div>
 
-
                     <div class="col-lg-3 column">
                         <div class="row">
                             <div class="category_header">Autor:</div>
                             <div class="author">{{link.author.name}}</div>
                         </div>
+                        <div class="row gap"></div>
+
+                        <div class="row">
+                            <div class="category_header">Data dodania:</div>
+                            <div class="expiry_date">{{link.date | dateTimeFilter }}</div>
+                        </div>
+
                         <div class="row gap"></div>
                         <div class="row">
                             <div class="category_header">Słowa kluczowe</div>

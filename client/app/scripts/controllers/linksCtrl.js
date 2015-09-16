@@ -8,7 +8,7 @@
  * Controller of the clientApp
  */
 angular.module('clientApp')
-    .controller('linksCtrl', ['$scope', '$routeParams', 'linkService', 'alertMessageService', 'authorsService', function ($scope, $routeParams, linkService, alertMessageService, authorsService) {
+    .controller('linksCtrl', ['$scope', '$routeParams', 'ModalService', 'linkService', 'alertMessageService', 'authorsService', function ($scope, $routeParams, ModalService, linkService, alertMessageService, authorsService) {
 
         var authors = [];
 
@@ -184,6 +184,26 @@ angular.module('clientApp')
                 return "<div title ='" + originalText + "'>" + originalText + "</div>";
             }
         };
+
+        $scope.editLink = function (link) {
+            if (!link) {
+                return;
+            }
+
+            ModalService.showModal({
+                templateUrl: "views/partials/edit_link_modal.html",
+                controller: "editLinkModalCtrl",
+                inputs: {
+                    link: angular.copy(link)
+                }
+            }).then(function (modal) {
+                    modal.element.modal();
+                    modal.close.then(function (result) {
+                        window.console.log("RESULT ", result);
+                    });
+                });
+        };
+
         init();
 
     }]);

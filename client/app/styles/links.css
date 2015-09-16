@@ -110,3 +110,31 @@
 }
 
 
+
+
+.tag {
+    margin: 5px;
+    background-color: #8a6d3b;
+    color: #fff;
+}
+
+.tag a {
+    color: #fff;
+    cursor: pointer;
+    opacity: 0.6;
+}
+.tag a:hover {
+    opacity: 1.0
+}
+.tag .remove {
+    vertical-align: bottom;
+    top: 0;
+}
+.tag a {
+    margin: 0 0 0 .3em;
+}
+.tag a .glyphicon-white {
+    color: #fff;
+    margin-bottom: 3px;
+    margin-right: 0px;
+}
