@@ -10,11 +10,12 @@
 
 var app = angular.module('clientApp');
 
-app.controller('editLinkModalCtrl', ['$scope', 'restServiceConfig', 'alertMessageService', 'linkService', 'moment', 'link', 'close', function ($scope, restServiceConfig, alertMessageService, linkService, moment, link, close) {
+app.controller('editLinkModalCtrl', ['$scope', 'restServiceConfig', 'alertMessageService', 'linkService', 'settingsService', 'moment', 'link', 'close', function ($scope, restServiceConfig, alertMessageService, linkService, settingsService, moment, link, close) {
 
     $scope.showEdit = true;
     $scope.showPreview = false;
 
+    $scope.settings = settingsService.settings;
 
     $scope.defaultCommentLimit = 100;
 
@@ -59,7 +60,7 @@ app.controller('editLinkModalCtrl', ['$scope', 'restServiceConfig', 'alertMessag
             }
             if (!foundDuplicate) {
                 if (!($scope.tag.length === 0 || !$scope.tag.trim())) {
-                    link.tags.push({id: null, label: $scope.tag.trim() });
+                    link.tags.unshift({id: null, label: $scope.tag.trim() });
                 }
             }
             $scope.tag = '';

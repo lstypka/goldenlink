@@ -8,7 +8,7 @@
  * Controller of the clientApp
  */
 angular.module('clientApp')
-    .controller('linksCtrl', ['$scope', '$routeParams', 'ModalService', 'linkService', 'alertMessageService', 'authorsService', function ($scope, $routeParams, ModalService, linkService, alertMessageService, authorsService) {
+    .controller('linksCtrl', ['$scope', '$routeParams', 'ModalService', 'linkService', 'alertMessageService', 'authorsService', 'settingsService', function ($scope, $routeParams, ModalService, linkService, alertMessageService, authorsService, settingsService) {
 
         var authors = [];
 
@@ -18,10 +18,7 @@ angular.module('clientApp')
 
         $scope.defaultCommentLimit = 100;
 
-        $scope.settings = {
-            videoPreload: 'none',     // possible values: 'auto', 'none', 'metadata'
-            imagePreload: 'auto'          // possible values: 'auto', 'placeholder'
-        };
+        $scope.settings = settingsService.settings;
 
         $scope.searchParams = {
             title: null,
@@ -207,6 +204,19 @@ angular.module('clientApp')
                         window.console.log("RESULT ", result);
                     });
                 });
+        };
+
+        $scope.star = function(link) {
+          link.isMarked = !link.isMarked;
+            linkService.updateLink(link.category.publicId, link.publicId, link, function(){
+                if(link.isMarked) {
+                    alertMessageService.showMessage("Link '" + link.title + "' otrzymał gwiazdkę");
+                } else {
+                    alertMessageService.showMessage("Link '" + link.title + "' stracił gwiazdkę");
+                }
+            }, function() {
+                alertMessageService.showMessage("Błąd podczas aktualizacji linku '" + link.title + "'");
+            });
         };
 
         init();

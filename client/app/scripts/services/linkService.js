@@ -30,7 +30,9 @@ angular.module('clientApp')
         };
 
         this.updateLink = function (categoryPublicId, linkPublicId, link, successFn, errorFn) {
-            link.expiryDate = moment(link.expiryDate).utc().format("YYYY-MM-DD[T]HH:mm:ss[Z]");
+            if(link.expiryDate) {
+                link.expiryDate = moment(link.expiryDate).utc().format("YYYY-MM-DD[T]HH:mm:ss[Z]");
+            }
             $http.put(restServiceConfig.url + '/categories/' + categoryPublicId + '/links/' + linkPublicId, link).then(function (response) {
                 successFn(response.data);
             }, errorFn);

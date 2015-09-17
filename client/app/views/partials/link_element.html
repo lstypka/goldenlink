@@ -4,7 +4,7 @@
             <div class="panel-heading orange-gradient-background link_panel_header">
 
                 <div class="col-lg-9 title">
-                    <span class="glyphicon glyphicon-star-empty star" aria-hidden="true"></span>
+                    <span class="fa star without_outline" ng-class="{'fa-star-o' : !link.isMarked, 'fa-star' : link.isMarked}" aria-hidden="true" ng-click="star(link)"></span>
                     <strong>{{link.category.label}}</strong> {{link.title}}
                 </div>
                 <div class="col-lg-3 ">
