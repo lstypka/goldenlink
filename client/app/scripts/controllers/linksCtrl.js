@@ -196,25 +196,32 @@ angular.module('clientApp')
             }).then(function (modal) {
                     modal.element.modal();
                     modal.close.then(function (result) {
-                        link.link = result.link;
-                        link.title = result.title;
-                        link.comment = result.comment;
-                        link.tags = result.tags;
-                        link.expiryDate = result.expiryDate;
-                        window.console.log("RESULT ", result);
+                        if (result) {
+                            if(result.operationType === 'edit') {
+                                link.link = result.link.link;
+                                link.title = result.link.title;
+                                link.comment = result.link.comment;
+                                link.tags = result.link.tags;
+                                link.expiryDate = result.link.expiryDate;
+                            }
+
+                        }
+                        if(result.operationType === 'changeCategory') {
+                            $scope.search(); // load links once again
+                        }
                     });
                 });
         };
 
-        $scope.star = function(link) {
-          link.isMarked = !link.isMarked;
-            linkService.updateLink(link.category.publicId, link.publicId, link, function(){
-                if(link.isMarked) {
+        $scope.star = function (link) {
+            link.isMarked = !link.isMarked;
+            linkService.updateLink(link.category.publicId, link.publicId, link, function () {
+                if (link.isMarked) {
                     alertMessageService.showMessage("Link '" + link.title + "' otrzymał gwiazdkę");
                 } else {
                     alertMessageService.showMessage("Link '" + link.title + "' stracił gwiazdkę");
                 }
-            }, function() {
+            }, function () {
                 alertMessageService.showMessage("Błąd podczas aktualizacji linku '" + link.title + "'");
             });
         };

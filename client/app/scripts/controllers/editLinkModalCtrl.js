@@ -10,10 +10,11 @@
 
 var app = angular.module('clientApp');
 
-app.controller('editLinkModalCtrl', ['$scope', 'restServiceConfig', 'alertMessageService', 'linkService', 'settingsService', 'moment', 'link', 'close', function ($scope, restServiceConfig, alertMessageService, linkService, settingsService, moment, link, close) {
+app.controller('editLinkModalCtrl', ['$scope', '$timeout', 'restServiceConfig', 'alertMessageService', 'linkService', 'settingsService', 'categoryService', 'moment', 'link', 'close', function ($scope, $timeout, restServiceConfig, alertMessageService, linkService, settingsService, categoryService, moment, link, close) {
 
     $scope.showEdit = true;
     $scope.showPreview = false;
+    $scope.mainCategories = [];
 
     $scope.settings = settingsService.settings;
 
@@ -21,31 +22,48 @@ app.controller('editLinkModalCtrl', ['$scope', 'restServiceConfig', 'alertMessag
 
     var init = function () {
         $scope.link = link;
+        $scope.categoryPrefix = '' + Math.random();
+        categoryService.getCategories().then(function (categories) {
+            $scope.mainCategories = categories.data;
+            window.console.log("Wczytalem kategorie ", $scope.mainCategories);
+        });
     };
+
+
+    init();
 
     $scope.close = function (result) {
-        close(result, 500);
-    };
-
-    $scope.expireDateSet = function (param1, param2) {
-        window.console.log("PARAMS ", param1, param2);
+        close(
+            {
+                operationType: 'close',
+                link: result
+            }, 500);
     };
 
     $scope.setActiveTab = function (tabName) {
         if (tabName === 'preview') {
             $scope.showEdit = false;
+            $scope.showChangeCategory = false;
             $scope.showPreview = true;
+        } else if (tabName === 'changeCategory') {
+            $scope.showEdit = false;
+            $scope.showChangeCategory = true;
+            $scope.showPreview = false;
         } else {
             $scope.showEdit = true;
+            $scope.showChangeCategory = false;
             $scope.showPreview = false;
         }
     };
 
-    $scope.updateLink = function() {
-        linkService.updateLink($scope.link.category.publicId, $scope.link.publicId, $scope.link, function(response){
+    $scope.updateLink = function () {
+        linkService.updateLink($scope.link.category.publicId, $scope.link.publicId, $scope.link, function (response) {
             alertMessageService.showMessage("Link '" + response.title + "' został zaktualizowany");
-            close(response, 500);
-        }, function() {
+            close({
+                operationType: 'edit',
+                link: response
+            }, 500);
+        }, function () {
             alertMessageService.showMessage("Wystąpił błąd podczas aktualizowania linku '" + $scope.link.title + "'");
         });
     };
@@ -95,6 +113,50 @@ app.controller('editLinkModalCtrl', ['$scope', 'restServiceConfig', 'alertMessag
         return link.commentLimit || $scope.defaultCommentLimit;
     };
 
-    init();
+    $scope.loadChildren = function (category) {
+        if (category._opened) {
+            category._opened = false;
+        } else {
+            category._opened = true;
+        }
+
+        category.isLoadingChildren = true;
+
+        if (!category._childrenLoaded) {
+
+            $timeout(
+                function () {
+                    return categoryService.getChildren(category.publicId).then(function (children) {
+                        category.children = children.data;
+                        category._childrenLoaded = true;
+                        category.isLoadingChildren = false;
+                    });
+                }, 50);
+        } else {
+            category.isLoadingChildren = false;
+        }
+    };
+
+    $scope.selectCategory = function (selectedCategory) {
+        if ($scope.selectedCategory) {
+            $scope.selectedCategory._isSelected = false;
+        }
+        selectedCategory._isSelected = true;
+        $scope.selectedCategory = selectedCategory;
+    };
+
+    $scope.changeCategory = function () {
+        var previousCategory = $scope.link.category;
+        $scope.link.category = $scope.selectedCategory;
+        linkService.updateLink(previousCategory.publicId, $scope.link.publicId, $scope.link, function (response) {
+            alertMessageService.showMessage("Link '" + response.title + "' został przypisany do kategorii '" + response.category.label + "'");
+            close({
+                operationType: 'changeCategory',
+                link: response
+            }, 500);
+        }, function () {
+            alertMessageService.showMessage("Wystąpił błąd podczas zmiany kategorii linku '" + $scope.link.title + "'");
+        });
+    };
 
 }]);

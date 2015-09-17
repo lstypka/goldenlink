@@ -1,10 +1,10 @@
-<div id="editLinkModal" class="modal orange-modal fade" role="dialog">
+<div id="editLinkModal" class="modal orange-modal fade" role="dialog" data-backdrop="static" data-keyboard="false">
     <div class="modal-dialog modal-lg">
 
         <!-- Modal content-->
         <div class="modal-content">
             <div class="modal-header orange-gradient-background">
-                <button type="button" class="close" data-dismiss="modal">&times;</button>
+                <button type="button" class="close" data-dismiss="modal" ng-click="close()">&times;</button>
                 <h5 class="modal-title title">Edytuj link</h5>
             </div>
             <div class="modal-body">
@@ -13,6 +13,9 @@
                     <li role="presentation" class="active"><a ng-click="setActiveTab('edit')"
                                                               class="without_outline"
                                                               data-toggle="tab">Edycja</a></li>
+                    <li role="presentation"><a ng-click="setActiveTab('changeCategory')"
+                                                              class="without_outline"
+                                                              data-toggle="tab">Zmiana kategorii</a></li>
                     <li role="presentation"><a ng-click="setActiveTab('preview')"
                                                class="without_outline"
                                                data-toggle="tab">Podgląd</a></li>
@@ -77,6 +80,19 @@
                         </form>
                     </div>
 
+                </div>
+
+                <div class="tab-pane" ng-show="showChangeCategory">
+                    <div style="margin-top: 15px;">
+                        <ul class="categories_container container-fluid">
+                            <li ng-repeat="category in mainCategories"
+                                ng-include="'views/partials/manage_category_element.html?{{categoryPrefix}}'">
+                            </li>
+                        </ul>
+                        <button type="button" ng-disabled="!selectedCategory" class="btn btn-default button button-full-width" ng-click="changeCategory()"
+                                data-dismiss="modal">Przypisz do kategorii {{selectedCategory.label}}
+                        </button>
+                    </div>
                 </div>
                 <div class="tab-pane" ng-show="showPreview">
                     <div style="margin-top: 15px;">
