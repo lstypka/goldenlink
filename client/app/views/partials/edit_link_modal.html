@@ -86,7 +86,7 @@
                     <div style="margin-top: 15px;">
                         <ul class="categories_container container-fluid">
                             <li ng-repeat="category in mainCategories"
-                                ng-include="'views/partials/manage_category_element.html?{{categoryPrefix}}'">
+                                ng-include="'views/partials/manage_category_element.html'">
                             </li>
                         </ul>
                         <button type="button" ng-disabled="!selectedCategory" class="btn btn-default button button-full-width" ng-click="changeCategory()"
