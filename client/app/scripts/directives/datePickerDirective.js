@@ -16,8 +16,8 @@ angular.module('clientApp').directive('dateTimePicker', ['$timeout', '$parse', '
                         useCurrent: false,
                         date:  ngModelGetter($scope),
                         format: 'YYYY.MM.DD',
-                        useStrict: true,
-                        defaultDate : moment().add(1, 'd').toDate()
+                        useStrict: true/*,
+                        defaultDate : moment().add(1, 'd').toDate()*/
                     }
                 ).on('dp.change', function (event) {
                         $scope.$apply(function () {

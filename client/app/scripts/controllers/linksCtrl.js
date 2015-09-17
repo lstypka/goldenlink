@@ -199,6 +199,11 @@ angular.module('clientApp')
             }).then(function (modal) {
                     modal.element.modal();
                     modal.close.then(function (result) {
+                        link.link = result.link;
+                        link.title = result.title;
+                        link.comment = result.comment;
+                        link.tags = result.tags;
+                        link.expiryDate = result.expiryDate;
                         window.console.log("RESULT ", result);
                     });
                 });

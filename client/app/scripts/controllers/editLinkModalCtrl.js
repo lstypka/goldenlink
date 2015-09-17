@@ -10,10 +10,13 @@
 
 var app = angular.module('clientApp');
 
-app.controller('editLinkModalCtrl', ['$scope', 'restServiceConfig', 'moment', 'link', 'close', function ($scope, restServiceConfig, moment, link, close) {
+app.controller('editLinkModalCtrl', ['$scope', 'restServiceConfig', 'alertMessageService', 'linkService', 'moment', 'link', 'close', function ($scope, restServiceConfig, alertMessageService, linkService, moment, link, close) {
 
     $scope.showEdit = true;
     $scope.showPreview = false;
+
+
+    $scope.defaultCommentLimit = 100;
 
     var init = function () {
         $scope.link = link;
@@ -35,6 +38,15 @@ app.controller('editLinkModalCtrl', ['$scope', 'restServiceConfig', 'moment', 'l
             $scope.showEdit = true;
             $scope.showPreview = false;
         }
+    };
+
+    $scope.updateLink = function() {
+        linkService.updateLink($scope.link.category.publicId, $scope.link.publicId, $scope.link, function(response){
+            alertMessageService.showMessage("Link '" + response.title + "' został zaktualizowany");
+            close(response, 500);
+        }, function() {
+            alertMessageService.showMessage("Wystąpił błąd podczas aktualizowania linku '" + $scope.link.title + "'");
+        });
     };
 
     $scope.tagKeypress = function (link, event) {
@@ -60,6 +72,26 @@ app.controller('editLinkModalCtrl', ['$scope', 'restServiceConfig', 'moment', 'l
                 link.tags.splice(i, 1);
             }
         }
+    };
+
+    $scope.showMore = function (link) {
+        link.commentLimit = link.comment.length;
+    };
+
+    $scope.showMoreVisible = function (link) {
+        return link.comment.length > $scope.commentLengthLimit(link);
+    };
+
+    $scope.showLess = function (link) {
+        link.commentLimit = $scope.defaultCommentLimit;
+    };
+
+    $scope.showLessVisible = function (link) {
+        return $scope.commentLengthLimit(link) > $scope.defaultCommentLimit;
+    };
+
+    $scope.commentLengthLimit = function (link) {
+        return link.commentLimit || $scope.defaultCommentLimit;
     };
 
     init();

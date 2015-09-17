@@ -8,7 +8,7 @@
  * Service of the clientApp
  */
 angular.module('clientApp')
-    .service('linkService', ['$http', 'restServiceConfig', function ($http, restServiceConfig) {
+    .service('linkService', ['$http', 'restServiceConfig', 'moment', function ($http, restServiceConfig, moment) {
 
         this.getLinks = function (categoryId, page, resultsPerPage, search) {
             window.console.log("SEARCH ", search);
@@ -27,6 +27,14 @@ angular.module('clientApp')
                     return response;
                 });
             return promise;
+        };
+
+        this.updateLink = function (categoryPublicId, linkPublicId, link, successFn, errorFn) {
+            link.expiryDate = moment(link.expiryDate).utc().format("YYYY-MM-DD[T]HH:mm:ss[Z]");
+            $http.put(restServiceConfig.url + '/categories/' + categoryPublicId + '/links/' + linkPublicId, link).then(function (response) {
+                successFn(response.data);
+            }, errorFn);
+
         };
 
     }]);

@@ -33,13 +33,13 @@
                                class="thumbnail" target="_new">
                                 <img ng-if="settings.imagePreload === 'auto'" ng-src="{{link.link}}"
                                      onerror="this.src = 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRiXEpK2jd3kpswq-For2q1KvRImu9uwoeqQaDgAbfbh8XbTUQJ6g';">
-                                <img ng-if="settings.imagePreload === 'placeholder'" src="images/placeholder.png">
+                                <img ng-if="settings.imagePreload === 'placeholder'" ng-src="images/placeholder.png">
                             </a>
                         </div>
 
                         <div ng-if="link.category.categoryGroup === 'videos'">
                             <video controls class="thumbnail" controls="controls" preload="{{settings.videoPreload}}">
-                                <source src="{{link.link}}">
+                                <source ng-src="{{link.link}}">
                                 Twoja przeglądarka nie obsługuje odtwarzania filmów.
                             </video>
                         </div>
@@ -48,7 +48,7 @@
                             <iframe ng-src="{{link.link}}" frameborder="0" allowfullscreen></iframe>
                         </div>
 
-                        <a href="{{link.link}}" target="_new">{{link.link}}</a>
+                        <a ng-href="{{link.link}}" target="_new">{{link.link}}</a>
 
                     </div>
 

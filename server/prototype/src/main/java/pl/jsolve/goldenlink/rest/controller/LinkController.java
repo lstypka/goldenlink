@@ -7,6 +7,7 @@ import org.joda.time.DateTimeZone;
 import org.joda.time.LocalDateTime;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -47,6 +48,14 @@ public class LinkController {
 		}
 		return new Links(generateLinks(categoryId, page, resultsPerPage), page,
 				resultsPerPage, 53);
+	}
+
+	@RequestMapping(value = "/categories/{categoryPublicId}/links/{linkPublicId}", method = RequestMethod.PUT)
+	public Link updateLink(
+			@PathVariable("categoryPublicId") final String categoryPublicId,
+			@PathVariable("linkPublicId") final String linkPublicId,
+			@RequestBody Link linkToUpdate) {
+		return linkToUpdate;
 	}
 
 	List<String> photos = Lists
