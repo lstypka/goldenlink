@@ -12,7 +12,7 @@ angular.module('clientApp')
 
         this.settings = {
             videoPreload: 'none',     // possible values: 'auto', 'none', 'metadata'
-            imagePreload: 'placeholder'          // possible values: 'auto', 'placeholder'
+            imagePreload: 'auto'      // possible values: 'auto', 'placeholder'
         };
 
 

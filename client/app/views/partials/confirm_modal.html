@@ -1,34 +1,29 @@
-<div id="iconsModal" class="modal fade" role="dialog" style=" border-radius:  7px;
-        box-shadow: inset 1px 1px 2px 1px rgba(0, 0, 0, 0.2);">
+<div id="iconsModal" class="modal orange-modal fade">
     <div class="modal-dialog">
 
         <!-- Modal content-->
         <div class="modal-content">
-            <div class="modal-header" style="background-color: rgba(208, 208, 208, 1); border-radius:  5px 5px 0px 0px;
-        box-shadow: inset 1px 1px 2px 1px rgba(0, 0, 0, 0.2);">
+            <div class="modal-header orange-gradient-background">
                 <button type="button" class="close" data-dismiss="modal">&times;</button>
-                <h4 class="modal-title">{{modalTitle}}</h4>
+                <h5 class="modal-title title">{{modalTitle}}</h5>
             </div>
             <div class="modal-body">
-                <div class="row" style="margin-left: 10px; margin-right: 10px;">
+                <div class="row">
                     {{modalMessage}}
                 </div>
                 <div class="row">
                     <div class="text-center">
-                    <div class="btn-group" style="margin-top: 30px;">
-                        <button type="button" class="btn btn-default" ng-click="yes()"
-                                style="width: 150px;" data-dismiss="modal">TAK
+                    <div class="btn-group">
+                        <button type="button" class="btn btn-default button" ng-click="yes()"
+                                data-dismiss="modal">TAK
                         </button>
-                        <button type="button" class="btn btn-primary"
-                                ng-click="no();" style="width: 150px;" data-dismiss="modal">NIE
+                        <button type="button" class="btn btn-default button"
+
+                                ng-click="no();"  data-dismiss="modal">NIE
                         </button>
                     </div>
                         </div>
                 </div>
-            </div>
-            <div class="modal-footer" style="background-color: rgba(208, 208, 208, 1); border-radius:  0px 0px 5px 5px;
-        box-shadow: inset 1px 1px 2px 1px rgba(0, 0, 0, 0.2);">
-                <button type="button" class="btn btn-default" data-dismiss="modal">Anuluj</button>
             </div>
         </div>
 

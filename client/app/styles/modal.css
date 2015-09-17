@@ -19,6 +19,22 @@
     font-weight: bold;
 }
 
+.modal-content .modal-body {
+    margin: 5px 0px 5px 5px;
+}
+
+.modal-content .modal-body .button {
+    color: #8a6d3b;
+    background-color: #fff;
+    border-color: #8a6d3b;
+    font-size: 12px;
+    width: 150px;
+}
+
+.modal-content .modal-body .button:hover, .button:focus {
+    font-weight: bold;
+}
+
 .modal-content .modal-body .nav-tabs > li > a {
     color: #8a6d3b;
     font-size: 12px;
