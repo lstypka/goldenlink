@@ -25,6 +25,19 @@
     margin-top: 2px;
 }
 
+.link_panel .link_panel_header .star {
+    color: goldenrod;
+    font-size: 15px;
+}
+
+.link_panel .link_panel_header .star:hover {
+    font-weight: bold;
+}
+
+.link_panel .link_panel_header .edit > a > i:hover {
+    font-weight: bold;
+}
+
 .link_panel .link_panel_header .edit > a > i {
     font-size: 15px;
     color: #8a6d3b;
@@ -77,6 +90,8 @@
     color: #8a6d3b;
 }
 
+
+
 .link_panel .link_panel_body .default_value {
     color: #c0c0c0;
 }
@@ -109,9 +124,6 @@
     line-height: 2;
 }
 
-
-
-
 .tag {
     margin: 5px;
     background-color: #8a6d3b;
@@ -123,16 +135,20 @@
     cursor: pointer;
     opacity: 0.6;
 }
+
 .tag a:hover {
     opacity: 1.0
 }
+
 .tag .remove {
     vertical-align: bottom;
     top: 0;
 }
+
 .tag a {
     margin: 0 0 0 .3em;
 }
+
 .tag a .glyphicon-white {
     color: #fff;
     margin-bottom: 3px;

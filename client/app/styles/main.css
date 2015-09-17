@@ -161,13 +161,6 @@ body {
     opacity: 1;
 }
 
-.star {
-    font-size: 14px;
-}
-
-.star:hover {
-    color: goldenrod;
-}
 
 .golden_link_logo {
     color: #D5AD6D;
