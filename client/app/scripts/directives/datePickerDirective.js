@@ -7,8 +7,6 @@ angular.module('clientApp').directive('dateTimePicker', ['$timeout', '$parse', '
         link: function ($scope, element, $attrs) {
             return $timeout(function () {
                 var ngModelGetter = $parse($attrs.ngModel);
-
-                window.console.log("MODEL VALUE ", ngModelGetter($scope));
                 return $(element).datetimepicker(
                     {
                         minDate: moment().toDate(),
@@ -16,8 +14,10 @@ angular.module('clientApp').directive('dateTimePicker', ['$timeout', '$parse', '
                         allowInputToggle: true,
                         locale: "pl",
                         useCurrent: false,
-                        format: 'YYYY-MM-DD',
-                        defaultDate : ngModelGetter($scope)
+                        date:  ngModelGetter($scope),
+                        format: 'YYYY.MM.DD',
+                        useStrict: true,
+                        defaultDate : moment().add(1, 'd').toDate()
                     }
                 ).on('dp.change', function (event) {
                         $scope.$apply(function () {

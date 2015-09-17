@@ -17,10 +17,6 @@ app.controller('editLinkModalCtrl', ['$scope', 'restServiceConfig', 'moment', 'l
 
     var init = function () {
         $scope.link = link;
-        if ($scope.link.expiryDate) {
-         /* $scope.link.expiryDate = moment($scope.link.expiryDate, "yyyy-MM-dd'T'HH:mm:ss'Z'").toDate();
-*/
-        }
     };
 
     $scope.close = function (result) {
