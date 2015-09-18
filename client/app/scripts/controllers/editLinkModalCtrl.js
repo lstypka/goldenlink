@@ -143,4 +143,16 @@ app.controller('editLinkModalCtrl', ['$scope', '$timeout', 'restServiceConfig', 
         });
     };
 
+    $scope.deleteLink = function() {
+        linkService.deleteLink($scope.link.category.publicId, $scope.link.publicId, function () {
+            alertMessageService.showMessage("Link '" + $scope.link.title + "' został usunięty");
+            close({
+                operationType: 'delete',
+                link: $scope.link
+            }, 500);
+        }, function () {
+            alertMessageService.showMessage("Wystąpił błąd podczas usuwania linku '" + $scope.link.title + "'");
+        });
+    };
+
 }]);

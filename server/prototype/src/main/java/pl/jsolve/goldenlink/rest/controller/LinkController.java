@@ -57,6 +57,13 @@ public class LinkController {
 			@RequestBody Link linkToUpdate) {
 		return linkToUpdate;
 	}
+	
+	@RequestMapping(value = "/categories/{categoryPublicId}/links/{linkPublicId}", method = RequestMethod.DELETE)
+	public Void deleteLink(
+			@PathVariable("categoryPublicId") final String categoryPublicId,
+			@PathVariable("linkPublicId") final String linkPublicId) {
+		return null;
+	}
 
 	List<String> photos = Lists
 			.newArrayList(

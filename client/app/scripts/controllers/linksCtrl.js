@@ -209,6 +209,13 @@ angular.module('clientApp')
                         if(result.operationType === 'changeCategory') {
                             $scope.search(); // load links once again
                         }
+                        if(result.operationType === 'delete') {
+                           for(var i=0 ; i< $scope.links.length; i++){
+                               if($scope.links[i].publicId === result.link.publicId) {
+                                   $scope.links.splice(i, 1);
+                               }
+                           }
+                        }
                     });
                 });
         };

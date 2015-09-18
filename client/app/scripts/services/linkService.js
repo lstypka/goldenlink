@@ -11,7 +11,6 @@ angular.module('clientApp')
     .service('linkService', ['$http', 'restServiceConfig', 'moment', function ($http, restServiceConfig, moment) {
 
         this.getLinks = function (categoryId, page, resultsPerPage, search) {
-            window.console.log("SEARCH ", search);
             var promise = $http.get(restServiceConfig.url + '/categories/' + categoryId + '/links',
                 {
                     params: {
@@ -36,7 +35,12 @@ angular.module('clientApp')
             $http.put(restServiceConfig.url + '/categories/' + categoryPublicId + '/links/' + linkPublicId, link).then(function (response) {
                 successFn(response.data);
             }, errorFn);
+        };
 
+        this.deleteLink = function (categoryPublicId, linkPublicId, successFn, errorFn) {
+            $http.delete(restServiceConfig.url + '/categories/' + categoryPublicId + '/links/' + linkPublicId).then(function (response) {
+                successFn(response);
+            }, errorFn);
         };
 
     }]);
