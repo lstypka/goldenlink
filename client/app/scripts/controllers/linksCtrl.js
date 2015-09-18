@@ -8,9 +8,7 @@
  * Controller of the clientApp
  */
 angular.module('clientApp')
-    .controller('linksCtrl', ['$scope', '$routeParams', 'ModalService', 'linkService', 'alertMessageService', 'authorsService', 'settingsService', function ($scope, $routeParams, ModalService, linkService, alertMessageService, authorsService, settingsService) {
-
-        var authors = [];
+    .controller('linksCtrl', ['$scope', '$routeParams', 'ModalService', 'linkService', 'alertMessageService', 'settingsService', 'select2Date', 'select2Author', 'select2Tag', function ($scope, $routeParams, ModalService, linkService, alertMessageService, settingsService, select2Date, select2Author, select2Tag) {
 
         $scope.page = 0;
         $scope.resultsPerPage = 10;
@@ -19,6 +17,12 @@ angular.module('clientApp')
         $scope.defaultCommentLimit = 100;
 
         $scope.settings = settingsService.settings;
+
+        $scope.authorsSearchOptions = select2Author;
+
+        $scope.tagsSearchOptions = select2Tag;
+
+        $scope.dateSearchOptions = select2Date;
 
         $scope.searchParams = {
             title: null,
@@ -32,13 +36,6 @@ angular.module('clientApp')
 
         var init = function () {
             $scope.nextPage(); // get first page of links
-
-            authorsService.getAuthors(function (results) {
-                for (var i = 0; i < results.length; i++) {
-                    authors.push({ id: results[i].publicId, text: results[i].name});
-                }
-            });
-
         };
 
         $scope.nextPage = function () {
@@ -98,88 +95,6 @@ angular.module('clientApp')
 
         $scope.commentLengthLimit = function (link) {
             return link.commentLimit || $scope.defaultCommentLimit;
-        };
-
-        $scope.tags = [
-            {id: 1, text: 'Java'},
-            {id: 2, text: 'Jquery'},
-            {id: 3, text: 'AngularJs'},
-            {id: 4, text: 'Jsolve'},
-            {id: 5, text: 'SweetenerSweetener'},
-            {id: 6, text: 'Oven'}
-        ];
-
-        $scope.authorsSearchOptions = {
-            placeholder: 'Dowolny autor',
-            containerCssClass: 'select2-container',
-            formatNoMatches: function () {
-                return 'Brak pasujących wyników';
-            },
-            allowClear: true,
-            query: function (query) {
-                var data = {
-                    results: []
-                };
-                for (var i = 0; i < authors.length; i++) {
-                    if (authors[i].text.indexOf(query.term) > -1) {
-                        data.results.push(authors[i]);
-                    }
-                }
-                query.callback(data);
-            },
-            formatSelection: function format(item) {
-                var originalText = item.text;
-                return "<div title ='" + originalText + "'>" + originalText + "</div>";
-            }
-        };
-
-        $scope.tagsSearchOptions = {
-            placeholder: 'Dowolne',
-            containerCssClass: 'select2-container',
-            allowClear: true,
-            formatNoMatches: function () {
-                return 'Brak pasujących wyników';
-            },
-            query: function (query) {
-                var data = {
-                    results: []
-                };
-                for (var i = 0; i < $scope.tags.length; i++) {
-                    if ($scope.tags[i].text.indexOf(query.term) > -1) {
-                        data.results.push($scope.tags[i]);
-                    }
-                }
-                query.callback(data);
-            },
-            formatSelection: function format(item) {
-                var originalText = item.text;
-                return "<div title ='" + originalText + "'>" + originalText + "</div>";
-            }
-        };
-
-        $scope.dateSearchOptions = {
-            placeholder: 'Od początku',
-            containerCssClass: 'select2-container',
-            allowClear: true,
-            minimumResultsForSearch: Infinity,
-            query: function (query) {
-                var data = {
-                    results: [
-                        {id: 'withoutTimeLimit', text: 'Od początku'},
-                        {id: 'pastWeek', text: 'Ostatni tydzień'},
-                        {id: 'pastMonth', text: 'Ostatni miesiąc'},
-                        {id: 'past3Months', text: 'Ostatnie 3 miesiące'},
-                        {id: 'past6Months', text: 'Ostatnich 6 miesięcy'},
-                        {id: 'pastYear', text: 'Ostatni rok'},
-                        {id: 'past2Years', text: 'Ostatnie 2 lata'}
-                    ]
-                };
-                query.callback(data);
-            },
-            formatSelection: function format(item) {
-                var originalText = item.text;
-                return "<div title ='" + originalText + "'>" + originalText + "</div>";
-            }
         };
 
         $scope.editLink = function (link) {

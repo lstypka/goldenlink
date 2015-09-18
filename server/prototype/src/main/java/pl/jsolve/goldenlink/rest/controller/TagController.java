@@ -14,7 +14,7 @@ import com.google.common.collect.Lists;
 @RestController
 public class TagController {
 
-	@RequestMapping(value = "/tags/", method = RequestMethod.GET)
+	@RequestMapping(value = "/tags", method = RequestMethod.GET)
 	public List<Tag> getTags() {
 
 		try {
@@ -25,7 +25,7 @@ public class TagController {
 
 		List<Tag> tags = Lists.newArrayList();
 		for (int i = 0; i < 50; i++) {
-			tags.add(new Tag(generateId(), "Znajomy nr " + (i + 1)));
+			tags.add(new Tag(generateId(), "Tag nr " + (i + 1)));
 		}
 		return tags;
 	}
