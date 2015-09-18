@@ -124,8 +124,9 @@ body {
     float: left;
     height: 180px;
     /* width: 250px;*/
-    max-width: 24%;
-    margin-right: 10px;
+    max-width: 25%;
+    min-width: 150px;
+    /*margin-right: 10px;*/
     list-style-type: none;
     text-decoration: none;
     background: transparent !important;

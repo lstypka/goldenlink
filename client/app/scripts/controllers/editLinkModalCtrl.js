@@ -40,22 +40,6 @@ app.controller('editLinkModalCtrl', ['$scope', '$timeout', 'restServiceConfig', 
             }, 500);
     };
 
-    $scope.setActiveTab = function (tabName) {
-        if (tabName === 'preview') {
-            $scope.showEdit = false;
-            $scope.showChangeCategory = false;
-            $scope.showPreview = true;
-        } else if (tabName === 'changeCategory') {
-            $scope.showEdit = false;
-            $scope.showChangeCategory = true;
-            $scope.showPreview = false;
-        } else {
-            $scope.showEdit = true;
-            $scope.showChangeCategory = false;
-            $scope.showPreview = false;
-        }
-    };
-
     $scope.updateLink = function () {
         linkService.updateLink($scope.link.category.publicId, $scope.link.publicId, $scope.link, function (response) {
             alertMessageService.showMessage("Link '" + response.title + "' został zaktualizowany");

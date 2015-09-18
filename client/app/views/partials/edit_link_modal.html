@@ -10,19 +10,22 @@
             <div class="modal-body">
                 <!-- Nav tabs -->
                 <ul class="nav nav-tabs" role="tablist" id="editLinkTabs">
-                    <li role="presentation" class="active"><a ng-click="setActiveTab('edit')"
+                    <li role="presentation" class="active"><a ng-click="activeTab = 'edit'"
                                                               class="without_outline"
                                                               data-toggle="tab">Edycja</a></li>
-                    <li role="presentation"><a ng-click="setActiveTab('changeCategory')"
-                                                              class="without_outline"
-                                                              data-toggle="tab">Zmiana kategorii</a></li>
-                    <li role="presentation"><a ng-click="setActiveTab('preview')"
+                    <li role="presentation"><a ng-click="activeTab = 'changeCategory'"
+                                               class="without_outline"
+                                               data-toggle="tab">Zmiana kategorii</a></li>
+                    <li role="presentation"><a ng-click="activeTab = 'deleteLink'"
+                                               class="without_outline"
+                                               data-toggle="tab">Usunięcie</a></li>
+                    <li role="presentation"><a ng-click="activeTab = 'preview'"
                                                class="without_outline"
                                                data-toggle="tab">Podgląd</a></li>
                 </ul>
 
 
-                <div class="tab-content" ng-show="showEdit">
+                <div class="tab-content" ng-show="activeTab === 'edit' || !activeTab">
                     <div class="row orange-form" style="margin: 5px;">
                         <form>
                             <div class="form-group">
@@ -57,7 +60,9 @@
                                 <label class="label">Słowa kluczowe</label>
 
                                 <div style="border-radius: 5px 5px 0px 0px; border: 1px solid #8a6d3b; padding-top: 0px; padding-bottom: 10px; margin-top: 10px;">
-                                    <input type="text" class="form-control input" style="border: transparent;" ng-model="tag" ng-keypress="tagKeypress(link, $event)" placeholder="Słowo kluczowe">
+                                    <input type="text" class="form-control input" style="border: transparent;"
+                                           ng-model="tag" ng-keypress="tagKeypress(link, $event)"
+                                           placeholder="Słowo kluczowe">
 
                                     <span class="tag label label-info" style="background-color: #8a6d3b; color: #fff;">
                                       <span>#{{tag}}</span>
@@ -67,14 +72,16 @@
                                     <span class="tag label label-info" style="background-color: #8a6d3b; color: #fff;"
                                           ng-repeat-start="tag in link.tags">
                                       <span>#{{tag.label}}</span>
-                                      <a ng-click="deleteTag(link, tag);"><i class="remove glyphicon glyphicon-remove-sign glyphicon-white"></i></a>
+                                      <a ng-click="deleteTag(link, tag);"><i
+                                              class="remove glyphicon glyphicon-remove-sign glyphicon-white"></i></a>
                                     </span><span ng-repeat-end></span>
                                 </div>
                             </div>
 
 
-                            <span type="submit" class="btn btn-default button" ng-click="updateLink()" data-dismiss="modal"
-                                    style="float: right; width: 100px;">
+                            <span type="submit" class="btn btn-default button" ng-click="updateLink()"
+                                  data-dismiss="modal"
+                                  style="float: right; width: 100px;">
                                 Edytuj
                             </span>
                         </form>
@@ -82,19 +89,33 @@
 
                 </div>
 
-                <div class="tab-pane" ng-show="showChangeCategory">
+                <div class="tab-pane" ng-show="activeTab === 'changeCategory'">
                     <div style="margin-top: 15px;">
-                        <ul class="categories_container container-fluid">
+                        <ul class="categories_container container-fluid" style="max-height: 300px;">
                             <li ng-repeat="category in mainCategories"
                                 ng-include="'views/partials/manage_category_element.html'">
                             </li>
                         </ul>
-                        <button type="button" ng-disabled="!selectedCategory" class="btn btn-default button button-full-width" ng-click="changeCategory()"
+                        <button type="button" ng-disabled="!selectedCategory"
+                                class="btn btn-default button button-full-width" ng-click="changeCategory()"
                                 data-dismiss="modal">Przypisz do kategorii {{selectedCategory.label}}
                         </button>
                     </div>
                 </div>
-                <div class="tab-pane" ng-show="showPreview">
+                <div class="tab-pane" ng-show="activeTab === 'deleteLink'">
+                    <div class="row orange-form" style="margin: 5px;">
+                        <div class="title" style="margin: 10px;">
+                            Czy jesteś pewien, że chcesz usunąć link <strong>'{{link.title}}'</strong> ? Operacja ta nie może zostać
+                            cofnięta
+                        </div>
+                    </div>
+                    <button type="button"
+                            class="btn btn-default button button-full-width" style="margin-top: 20px;"
+                            ng-click="deleteLink(link)"
+                            data-dismiss="modal">Usunięcie linku '{{link.title}}'
+                    </button>
+                </div>
+                <div class="tab-pane" ng-show="activeTab === 'preview'">
                     <div style="margin-top: 15px;">
                         <div ng-include="'views/partials/link_element.html'"></div>
                     </div>
