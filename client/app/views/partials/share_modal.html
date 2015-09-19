@@ -1,0 +1,55 @@
+<div id="iconsModal" class="modal orange-modal fade" role="dialog" data-backdrop="static" data-keyboard="false">
+    <div class="modal-dialog">
+
+        <!-- Modal content-->
+        <div class="modal-content">
+            <div class="modal-header orange-gradient-background">
+                <button type="button" class="close" data-dismiss="modal">&times;</button>
+                <div class="row">
+                    <div class="col-lg-7">
+                        <h5 class="modal-title title">Wybierz osoby, którym chcesz udostępnić link
+
+                        </h5></div>
+                    <div class="col-lg-4">
+                        <input type="text" class="form-control input-sm search-friends-input" placeholder="Znajomy"
+                               ng-model="friendsSearch" style="float: right; padding-right: 0px;">
+                    </div>
+                </div>
+            </div>
+            <div class="modal-body" style="padding-top: 0px; padding-bottom: 0px;">
+                <div class="row">
+                    <div class="friends-container">
+                        <span class="row friend without_outline"
+                              data-ng-repeat="friend in friends | filter:{name : friendsSearch}"
+                              ng-click="toggleFriend(friend)"
+                              ng-class="{'selected_friend' : friend._isSelected}">
+                                    <div class="col-lg-3" style="padding-left: 5px;">
+                                        <div class="thumbnail"
+                                             style="width: 60px; height: 60px;">
+                                            <img ng-if="friend.thumbnail" ng-src="{{friend.thumbnail}}" style="width: 50px; height: 50px;" />
+                                            <img ng-if="!friend.thumbnail && friend.sex === 'M'" src="assets/man-placeholder.jpg" style="width: 50px; height: 50px;"/>
+                                            <img ng-if="!friend.thumbnail && friend.sex === 'F'" src="assets/woman-placeholder.jpg" style="width: 50px; height: 50px;"/>
+                                            <img ng-if="!friend.thumbnail && friend.isGroup" src="assets/group-placeholder.jpg" style="width: 50px; height: 50px;"/>
+
+                                        </div>
+                                    </div>
+                                    <div class="col-lg-9 title">
+                                        <p class="name"><strong>{{friend.name}}</strong></p>
+
+                                        <p>Wspólnych linków: {{friend.numberOfSharedLinks}}</p>
+                                    </div>
+                        </span>
+                    </div>
+
+                </div>
+                <div class="row">
+                    <button type="text" class="btn btn-default btn-sm share-link-button" ng-click="share();" ng-disabled="isLoading">
+                        Udostępnij ({{numberOfSelectedItems}})
+                    </button>
+                </div>
+            </div>
+
+        </div>
+
+    </div>
+</div>

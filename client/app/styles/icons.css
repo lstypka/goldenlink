@@ -1,8 +1,9 @@
 .icons_container {
-    width: 596px;
+    width: 580px;
     height: 300px;
     margin: auto;
     overflow-y: scroll;
+    border: 1px solid;
 }
 
 .icon_tile {

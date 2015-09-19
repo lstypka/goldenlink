@@ -84,7 +84,7 @@ angular.module('clientApp')
         };
 
         $scope.star = function (link) {
-            if($scope.editMode) {
+            if ($scope.editMode) {
                 return;
             }
             link.isMarked = !link.isMarked;
@@ -97,6 +97,21 @@ angular.module('clientApp')
             }, function () {
                 alertMessageService.showMessage("Błąd podczas aktualizacji linku '" + link.title + "'");
             });
+        };
+
+        $scope.share = function (link) {
+            ModalService.showModal({
+                templateUrl: "views/partials/share_modal.html",
+                controller: "shareModalCtrl",
+                inputs: {
+                    link: angular.copy(link)
+                }
+            }).then(function (modal) {
+                    modal.element.modal();
+                    modal.close.then(function (result) {
+                          window.console.log("RESULT ", result);
+                    });
+                });
         };
 
         init();

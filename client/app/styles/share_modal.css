@@ -1,0 +1,69 @@
+.friends-container {
+    width: 586px;
+    height: 300px;
+    /*margin: auto;*/
+    overflow-y: scroll;
+    overflow-x: hidden;
+    border: 1px solid;
+}
+
+.friends-container .search-panel {
+    padding-bottom: 4px;
+    padding-top: 4px;
+    margin-right: 14px;
+}
+
+.search-friends-input {
+    color: #8a6d3b;
+    border-color: #8a6d3b;
+    height: 25px;
+    margin-right: -30px;
+    float: right;
+}
+
+.share-link-button {
+    color: #8a6d3b;
+    border-color: #8a6d3b;
+    float: right;
+    margin-right: 20px;
+    margin-top: 10px;
+    font-size: 12px;
+}
+
+.share-link-button:hover, .share-link-button:focus {
+    font-weight: bold;
+    background-color: white;
+    font-size: 12px;
+    border-color: #8a6d3b;
+    -webkit-box-shadow: inset 0 1px 1px rgba(252, 248, 227, .075), 0 0 8px rgba(248, 239, 192, .6);
+    box-shadow: inset 0 1px 1px rgba(252, 248, 227, .075), 0 0 8px rgba(248, 239, 192, .6);
+}
+
+.friends-container .friend {
+    border: 1px solid #999;
+    border-radius: 7px;
+   /* box-shadow: inset 1px 1px 2px 1px rgba(0, 0, 0, 0.2);*/
+    display: inline-flex;
+    width: 260px;
+    height: 70px;
+    font-size: 12px;
+    border: 1px solid #999;
+    padding: 5px;
+    margin: 2px;
+    color: #8a6d3b;
+}
+
+.friends-container .friend:hover {
+    background-color: #F8EFC0;
+    cursor: pointer;
+}
+
+.friends-container .friend .name {
+    color: #8a6d3b;
+    font-weight: bold;
+}
+
+.friends-container .selected_friend {
+    background-color: rgba(180, 180, 180, 0.15);
+    box-shadow: inset 1px 1px 2px 1px rgba(0, 0, 0, 0.2);
+}
