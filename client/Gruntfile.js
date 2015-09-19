@@ -377,7 +377,8 @@ module.exports = function (grunt) {
                             '*.html',
                             'images/{,*/}*.{webp}',
                             'styles/fonts/{,*/}*.*',
-                            'assets/*.*'
+                            'assets/*.*',
+                            'locale/*.*'
                         ]
                     },
                     {
@@ -403,7 +404,13 @@ module.exports = function (grunt) {
                         cwd: 'bower_components/select2',
                         src: ['select2-spinner.gif', 'select2x2.png', 'select2.png'],
                         dest: '<%= yeoman.dist %>/styles'
-                    }
+                    }/*,
+                    {
+                        expand: true,
+                        cwd: 'bower_components/font-awesome',
+                        src: 'fonts*//*',
+                        dest: '<%= yeoman.dist %>'
+                    },*/
                 ]
             },
             styles: {

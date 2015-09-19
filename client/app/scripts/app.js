@@ -24,7 +24,8 @@ angular
         'ngClipboard',
         'angularMoment',
         'rt.select2',
-        'ui.bootstrap.datetimepicker'
+        'ui.bootstrap.datetimepicker',
+        'pascalprecht.translate'
 
     ]).constant("restServiceConfig", {
         "url": "http://localhost:8080",
@@ -70,6 +71,21 @@ angular
             });
     });
 
-angular.module('clientApp').config(function($sceDelegateProvider) {
+angular.module('clientApp').config(['$sceDelegateProvider', function($sceDelegateProvider) {
     $sceDelegateProvider.resourceUrlWhitelist(['**']);
-});
+}]);
+
+angular.module('clientApp').config(['$translateProvider', function($translateProvider) {
+    $translateProvider.useStaticFilesLoader({
+        prefix: 'locale/locale-',
+        suffix: '.json'
+    });
+
+    $translateProvider.useCookieStorage();
+    $translateProvider.preferredLanguage('en');
+
+    $translateProvider.registerAvailableLanguageKeys(['en', 'pl'], {
+        'en_US': 'en_EN',
+        'pl_PL': 'pl_PL'
+    }).determinePreferredLanguage();
+}]);
