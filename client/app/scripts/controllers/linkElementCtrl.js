@@ -46,7 +46,7 @@ angular.module('clientApp')
         };
 
         $scope.editLink = function (link) {
-            if (!link) {
+            if (!link || $scope.editMode) {
                 return;
             }
 
@@ -84,6 +84,9 @@ angular.module('clientApp')
         };
 
         $scope.star = function (link) {
+            if($scope.editMode) {
+                return;
+            }
             link.isMarked = !link.isMarked;
             linkService.updateLink(link.category.publicId, link.publicId, link, function () {
                 if (link.isMarked) {

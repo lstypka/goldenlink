@@ -12,13 +12,10 @@ var app = angular.module('clientApp');
 
 app.controller('editLinkModalCtrl', ['$scope', '$timeout', 'restServiceConfig', 'alertMessageService', 'linkService', 'settingsService', 'categoryService', 'moment', 'link', 'close', function ($scope, $timeout, restServiceConfig, alertMessageService, linkService, settingsService, categoryService, moment, link, close) {
 
-    $scope.showEdit = true;
-    $scope.showPreview = false;
     $scope.mainCategories = [];
-
     $scope.settings = settingsService.settings;
 
-    $scope.defaultCommentLimit = 100;
+    $scope.editMode = true;
 
     var init = function () {
         $scope.link = link;
@@ -28,7 +25,6 @@ app.controller('editLinkModalCtrl', ['$scope', '$timeout', 'restServiceConfig', 
             window.console.log("Wczytalem kategorie ", $scope.mainCategories);
         });
     };
-
 
     init();
 
@@ -75,26 +71,6 @@ app.controller('editLinkModalCtrl', ['$scope', '$timeout', 'restServiceConfig', 
                 link.tags.splice(i, 1);
             }
         }
-    };
-
-    $scope.showMore = function (link) {
-        link.commentLimit = link.comment.length;
-    };
-
-    $scope.showMoreVisible = function (link) {
-        return link.comment.length > $scope.commentLengthLimit(link);
-    };
-
-    $scope.showLess = function (link) {
-        link.commentLimit = $scope.defaultCommentLimit;
-    };
-
-    $scope.showLessVisible = function (link) {
-        return $scope.commentLengthLimit(link) > $scope.defaultCommentLimit;
-    };
-
-    $scope.commentLengthLimit = function (link) {
-        return link.commentLimit || $scope.defaultCommentLimit;
     };
 
     $scope.loadChildren = function (category) {
