@@ -37,7 +37,7 @@ app.controller('editLinkModalCtrl', ['$scope', '$timeout', 'restServiceConfig', 
 
     $scope.updateLink = function () {
         linkService.updateLink($scope.link.category.publicId, $scope.link.publicId, $scope.link, function (response) {
-            alertMessageService.showMessage("LINK_UPDATED_MESSAGE", {label: response.title});
+            alertMessageService.showMessage("LINK_UPDATE_MESSAGE", {label: response.title});
             close({
                 operationType: 'edit',
                 link: response
