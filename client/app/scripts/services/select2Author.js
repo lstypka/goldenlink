@@ -8,11 +8,11 @@
  * Service of the clientApp
  */
 angular.module('clientApp')
-    .service('select2Author', ['authorsService', function (authorsService) {
+    .service('select2Author', ['authorsService', '$translate', function (authorsService, $translate) {
 
         var authors = [];
 
-        var init = function() {
+        var init = function () {
             authorsService.getAuthors(function (results) {
                 for (var i = 0; i < results.length; i++) {
                     authors.push({ id: results[i].publicId, text: results[i].name});
@@ -23,10 +23,9 @@ angular.module('clientApp')
         init();
 
         return  {
-            placeholder: 'Dowolny autor',
             containerCssClass: 'select2-container',
             formatNoMatches: function () {
-                return 'Brak pasujących wyników';
+                return $translate.instant('NO_MATCHES_FOUND');
             },
             allowClear: true,
             query: function (query) {

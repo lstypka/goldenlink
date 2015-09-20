@@ -4,14 +4,14 @@
             <div class="panel-heading orange-gradient-background link_panel_header">
 
                 <div class="col-lg-9 title">
-                    <span class="fa star without_outline" ng-class="{'fa-star-o' : !link.isMarked, 'fa-star' : link.isMarked}" aria-hidden="true" ng-click="star(link)"></span>
+                    <span class="fa star without_outline" ng-class="{'fa-star-o' : !link.isMarked, 'fa-star' : link.isMarked}" aria-hidden="true" ng-click="star(link)" title="{{'ADD_STAR' | translate}}"></span>
                     <strong>{{link.category.label | translate}}</strong> {{link.title}}
                 </div>
                 <div class="col-lg-3 ">
                     <div class="row">
                         <div class="col-lg-12 edit">
                             <a ng-click="editLink(link);" class="without_outline"><i
-                                    class="fa fa-pencil-square-o"></i></a>
+                                    class="fa fa-pencil-square-o" title="{{'EDIT' | translate}}"></i></a>
                         </div>
                     </div>
                 </div>
@@ -19,9 +19,9 @@
             <div class="action_bar">
                 <a auto-hide-on-no-flash="true" clip-click="linkCopied(link.link)"
                    clip-click-fallback="copyFallback(copy)" class="label label-warning copy_to_clipboard"
-                   clip-copy="link.link">Kopiuj do schowka</a>
+                   clip-copy="link.link"><span translate="COPY_TO_CLIPBOARD"/></a>
 
-                <a class="label label-warning share_link without_outline" ng-click="share(link)">Udostępnij ...</a>
+                <a class="label label-warning share_link without_outline" ng-click="share(link)"><span translate="SHARE"/> ...</a>
             </div>
             <div class="panel-body">
 
@@ -39,7 +39,7 @@
                         <div ng-if="link.category.categoryGroup === 'VIDEOS'">
                             <video controls class="thumbnail" controls="controls" preload="{{settings.videoPreload}}">
                                 <source ng-src="{{link.link}}">
-                                Twoja przeglądarka nie obsługuje odtwarzania filmów.
+                                <span translate="BROWSER_DOESNT_SUPPORT_VIDEO"/>
                             </video>
                         </div>
 
@@ -53,43 +53,42 @@
 
                     <div class="col-lg-4 column">
                         <div class="row">
-                            <div class="category_header">Komentarz:</div>
+                            <div class="category_header"><span translate="COMMENT"/>:</div>
                             <div ng-if="link.comment" class="comment">
                                 {{link.comment | limitTo: commentLengthLimit(link)}}
-                                <a class="row" ng-show="showMoreVisible(link)" ng-click="showMore(link)">Więcej ...</a>
-                                <a class="row" ng-show="showLessVisible(link)" ng-click="showLess(link)">Mniej ...</a>
+                                <a class="row" ng-show="showMoreVisible(link)" ng-click="showMore(link)"><span translate="MORE"/> ...</a>
+                                <a class="row" ng-show="showLessVisible(link)" ng-click="showLess(link)"><span translate="LESS"/> ...</a>
                             </div>
                             <div ng-if="!link.comment" class="comment default_value">
-                                Brak komentarza
+                                <span translate="NO_COMMENT"/>
                             </div>
                         </div>
-
 
                         <div class="row gap"></div>
 
                         <div class="row">
-                            <div class="category_header">Link wygasa:</div>
+                            <div class="category_header"><span translate="EXPIRY_DATE"/>:</div>
                             <div class="expiry_date" ng-if="link.expiryDate">{{link.expiryDate | dateTimeFilter }}</div>
-                            <div class="expiry_date default_value" ng-if="!link.expiryDate">Nigdy</div>
+                            <div class="expiry_date default_value" ng-if="!link.expiryDate"><span translate="NEVER"/></div>
                         </div>
 
                     </div>
 
                     <div class="col-lg-3 column">
                         <div class="row">
-                            <div class="category_header">Autor:</div>
+                            <div class="category_header"><span translate="AUTHOR"/>:</div>
                             <div class="author">{{link.author.name}}</div>
                         </div>
                         <div class="row gap"></div>
 
                         <div class="row">
-                            <div class="category_header">Data dodania:</div>
+                            <div class="category_header"><span translate="CREATION_DATE"/>:</div>
                             <div class="expiry_date">{{link.date | dateTimeFilter }}</div>
                         </div>
 
                         <div class="row gap"></div>
                         <div class="row">
-                            <div class="category_header">Słowa kluczowe</div>
+                            <div class="category_header"><span translate="TAGS"/>:</div>
                             <div class="tags">
                                 <a class="label label-default"
                                    ng-repeat-start="tag in link.tags">#{{tag.label}}</a>

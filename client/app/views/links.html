@@ -26,40 +26,26 @@
                         <div class="form-group">
                             <label class="label"><span translate="AUTHOR"/>:</label>
                             <select2 ng-model="searchParams.author" options="authorsSearchOptions"
-                                     style="width: 100%;" ng-disabled="isLoading"></select2>
+                                     style="width: 100%;" ng-disabled="isLoading" placeholder="{{'ANY_AUTHOR' | translate}}"></select2>
                         </div>
                     </div>
                     <div class="col-lg-2">
-                        <label class="label">Słowo kluczowe:</label>
-                        <select2 ng-model="searchParams.tag" options="tagsSearchOptions" style="width: 100%;" ng-disabled="isLoading"></select2>
+                        <label class="label"><span translate="TAG"/>:</label>
+                        <select2 ng-model="searchParams.tag" options="tagsSearchOptions" style="width: 100%;" ng-disabled="isLoading" placeholder="{{'ANY_TAG' | translate}}"></select2>
                     </div>
                     <div class="col-lg-2">
-                        <label class="label">Data dodania:</label>
-                        <select2 ng-model="searchParams.date" options="dateSearchOptions" style="width: 100%;" title="{{searchParams.date}}" ng-disabled="isLoading"></select2>
+                        <label class="label"><span translate="CREATION_DATE"/>:</label>
+                        <select2 ng-model="searchParams.date" options="dateSearchOptions" style="width: 100%;" title="{{searchParams.date}}" ng-disabled="isLoading" placeholder="{{'ANY_DATE' | translate}}"></select2>
                     </div>
                     <div class="col-lg-2">
                         <button type="button" class="btn btn-default btn-sm button search-button" ng-click="search();" ng-disabled="isLoading">
                             <i class="fa fa-search"></i>
-                            Wyszukaj
+                            <span translate="SEARCH"/>
                         </button>
                     </div>
                 </div>
             </div>
         </div>
-
-
-        <!--        Tutaj lista zwykłych linków. Linki powinny być w kolejności odwrotnej do kolejności dodawania, a wiec najnowsze
-                najwyzej. Tutaj nie powinno być paginacji, powinna to działać na zasadzie infinite scrolla, czyli linki się
-                dociągają po zjechaniu na dół strony. Uzytkownik może oznaczyć dany link gwiazdką. Linki, które są okresowe
-                (powinny same wygasnąć po danym czasie ustalonym przez użytkownika) powinny wyswietlać informację, kiedy ten
-                czas upłynie. Przy każdym palenu użytkownik moze edytować dany link. W tym panelu powinna też być informacja o
-                autorze linku, czyli czy sam to dodałem, czy link został mi zaproponowany przez znajomego. Poniżej linkim
-                powinna znajdować się lista słów kluczowych, które też można edytować, dodawac nowe, usuwać. Pod linkiem powinna
-                być także możliwość dodawania jakiejś notatki.
-
-                Gdzies u gory powinna byc lista kategorii zdefiniowanych przez uzytkownika, tak aby mogl w łatwy sposob
-                odfiltrować sobie wyswietlane linki. Bardziej zaawansowane wyszukiwanie powinno być w zakładce 'Wyszukiwarka'
-         -->
 
         <div data-ng-repeat="link in links">
             <div ng-include="'views/partials/link_element.html'"></div>
@@ -67,7 +53,7 @@
 
         <div ng-show="showLoadingPanel()" style="height: 50px;">
             <div class="alert alert-warning orange-gradient-background text-center" ng-show="isLoading"
-                 style="height:30px; padding-top: 5px; border-color: #8a6d3b;"><strong>Ładowanie <i class="fa fa-spinner fa-pulse"></i></strong> </div>
+                 style="height:30px; padding-top: 5px; border-color: #8a6d3b;"><strong><span translate="LOADING"/> <i class="fa fa-spinner fa-pulse"></i></strong> </div>
         </div>
 
 

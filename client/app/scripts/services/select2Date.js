@@ -8,23 +8,22 @@
  * Service of the clientApp
  */
 angular.module('clientApp')
-    .service('select2Date', [function () {
+    .service('select2Date', ['$translate', function ($translate) {
 
         return  {
-            placeholder: 'Od początku',
             containerCssClass: 'select2-container',
             allowClear: true,
             minimumResultsForSearch: Infinity,
             query: function (query) {
                 var data = {
                     results: [
-                        {id: 'withoutTimeLimit', text: 'Od początku'},
-                        {id: 'pastWeek', text: 'Ostatni tydzień'},
-                        {id: 'pastMonth', text: 'Ostatni miesiąc'},
-                        {id: 'past3Months', text: 'Ostatnie 3 miesiące'},
-                        {id: 'past6Months', text: 'Ostatnich 6 miesięcy'},
-                        {id: 'pastYear', text: 'Ostatni rok'},
-                        {id: 'past2Years', text: 'Ostatnie 2 lata'}
+                        {id: 'withoutTimeLimit', text: $translate.instant('ANY_DATE')},
+                        {id: 'pastWeek', text: $translate.instant('LAST_WEEK')},
+                        {id: 'pastMonth', text: $translate.instant('LAST_MONTH')},
+                        {id: 'past3Months', text: $translate.instant('LAST_3_MONTHS')},
+                        {id: 'past6Months', text: $translate.instant('LAST_6_MONTHS')},
+                        {id: 'pastYear', text: $translate.instant('LAST_YEAR')},
+                        {id: 'past2Years', text: $translate.instant('LAST_2_YEARS')}
                     ]
                 };
                 query.callback(data);

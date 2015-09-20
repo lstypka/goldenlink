@@ -34,7 +34,8 @@ angular
             CATEGORY_UPDATED: "category_updated",
             SUBCATEGORY_ADDED: "subcategory_added",
             CATEGORY_DELETED: "category_deleted",
-            ICONS_MODAL_NEXT_PAGE: "icons_modal_next_page"
+            ICONS_MODAL_NEXT_PAGE: "icons_modal_next_page",
+            LANGUAGE_CHANGED: "language_changed"
         }
     })
     .config(function ($routeProvider) {

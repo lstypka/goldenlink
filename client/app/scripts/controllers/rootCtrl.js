@@ -8,7 +8,7 @@
  * Controller of the clientApp
  */
 angular.module('clientApp')
-    .controller('rootCtrl', ['$scope', '$translate', function ($scope, $translate) {
+    .controller('rootCtrl', ['$rootScope', '$scope', '$location', '$translate', 'restServiceConfig', function ($rootScope, $scope, $location, $translate, restServiceConfig) {
 
         var init = function () {
 
@@ -16,7 +16,8 @@ angular.module('clientApp')
 
         $scope.changeLanguage = function (key) {
             $translate.use(key);
-            window.console.log("ZMIENILEM JEZYK na ", key);
+            $location.path("");
+            $rootScope.$emit(restServiceConfig.events.LANGUAGE_CHANGED, key);
         };
 
         init();

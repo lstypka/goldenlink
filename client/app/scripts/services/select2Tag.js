@@ -8,7 +8,7 @@
  * Service of the clientApp
  */
 angular.module('clientApp')
-    .service('select2Tag', ['tagService', function (tagService) {
+    .service('select2Tag', ['tagService', '$translate', function (tagService, $translate) {
 
         var tags = [];
 
@@ -23,11 +23,10 @@ angular.module('clientApp')
         init();
 
         return {
-            placeholder: 'Dowolne',
             containerCssClass: 'select2-container',
             allowClear: true,
             formatNoMatches: function () {
-                return 'Brak pasujących wyników';
+                return $translate.instant('NO_MATCHES_FOUND');
             },
             query: function (query) {
                 var data = {
