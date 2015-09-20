@@ -8,7 +8,7 @@
  * Controller of the clientApp
  */
 angular.module('clientApp')
-    .controller('DashboardCtrl', ['$scope', '$timeout', 'alertMessageService', 'dashboardService', function ($scope, $timeout, alertMessageService, dashboardService) {
+    .controller('DashboardCtrl', ['$scope', '$timeout', '$translate', 'alertMessageService', 'dashboardService', function ($scope, $timeout, $translate, alertMessageService, dashboardService) {
 
         $scope.isDirty = false;
         $scope.backup = [];
@@ -47,7 +47,6 @@ angular.module('clientApp')
 
             rewriteIndexes();
             $scope.isDirty = true;
-            $scope.message = "Zawartość pulpitu została zmieniona";
         };
 
         function arraymove(arr, fromIndex, toIndex) {
@@ -73,12 +72,12 @@ angular.module('clientApp')
 
                     window.console.log("RESPONSE", response);
                     $scope.isDirty = false;
-                    $scope.message = "Zawartość pulpitu została zapisana pomyślnie";
+                    $scope.message = $translate.instant("DASHBOARD_SAVE_MESSAGE");
                     $scope.isSaved = true;
                     $scope.backup = $scope.items.slice();
                     resetFlags();
             }, function() {
-                    $scope.message = "Wystąpił błąd podczas zapisywania zawartości pulpitu";
+                    $scope.message = $translate.instant("DASHBOARD_SAVE_ERROR_MESSAGE");
                     $scope.items = $scope.backup.slice();
                     rewriteIndexes();
                     resetFlags();
@@ -87,7 +86,7 @@ angular.module('clientApp')
 
         $scope.revert = function () {
             $scope.isDirty = false;
-            $scope.message = "Zawartość pulpitu została przywrócona pomyślnie";
+            $scope.message = $translate.instant("DASHBOARD_REVERT_MESSAGE");
             $scope.isReverted = true;
             $scope.items = $scope.backup.slice();
             rewriteIndexes();

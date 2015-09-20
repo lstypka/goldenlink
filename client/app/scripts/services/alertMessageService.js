@@ -8,9 +8,10 @@
  * Service of the clientApp
  */
 angular.module('clientApp')
-    .service('alertMessageService', ['$timeout', '$rootScope', 'restServiceConfig', function ($timeout, $rootScope, restServiceConfig) {
+    .service('alertMessageService', ['$timeout', '$rootScope', 'restServiceConfig', '$translate', function ($timeout, $rootScope, restServiceConfig, $translate) {
 
-        this.showMessage = function (message) {
+        this.showMessage = function (messageKey, params) {
+            var message = $translate.instant(messageKey, params);
             $rootScope.$emit(restServiceConfig.events.SHOW_MESSAGE, message);
         };
 

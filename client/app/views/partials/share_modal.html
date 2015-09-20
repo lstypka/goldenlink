@@ -7,11 +7,11 @@
                 <button type="button" class="close" data-dismiss="modal">&times;</button>
                 <div class="row">
                     <div class="col-lg-7">
-                        <h5 class="modal-title title">Wybierz osoby, którym chcesz udostępnić link
+                        <h5 class="modal-title title"><span translate="SELECT_PERSON_TO_SHARE_LINK"/>
 
                         </h5></div>
                     <div class="col-lg-4">
-                        <input type="text" class="form-control input-sm search-friends-input" placeholder="Znajomy"
+                        <input type="text" class="form-control input-sm search-friends-input" placeholder="{{'FRIEND' | translate}}"
                                ng-model="friendsSearch" style="float: right; padding-right: 0px;">
                     </div>
                 </div>
@@ -36,7 +36,7 @@
                                     <div class="col-lg-9 title">
                                         <p class="name"><strong>{{friend.name}}</strong></p>
 
-                                        <p>Udostępnionych linków: {{friend.numberOfSharedLinks}}</p>
+                                        <p><span translate="SHARED_LINKS"/>: {{friend.numberOfSharedLinks}}</p>
                                     </div>
                         </span>
                     </div>
@@ -44,7 +44,7 @@
                 </div>
                 <div class="row">
                     <button type="text" class="btn btn-default btn-sm share-link-button" ng-click="share();" ng-disabled="isLoading">
-                        Udostępnij ({{numberOfSelectedItems}})
+                        <span translate="SHARE"/> ({{numberOfSelectedItems}})
                     </button>
                 </div>
             </div>

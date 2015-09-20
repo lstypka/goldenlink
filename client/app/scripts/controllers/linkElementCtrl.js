@@ -18,11 +18,11 @@ angular.module('clientApp')
         };
 
         $scope.copyFallback = function () {
-            alertMessageService.showMessage("Wtyczka flash została zablokowana, co uniemożliwia automatyczne kopiowanie do schowka");
+            alertMessageService.showMessage("BLOCKED_FLASH_PLUGIN_MESSAGE");
         };
 
         $scope.linkCopied = function (link) {
-            alertMessageService.showMessage("Link '" + link + "' został poprawnie skopiowany do schowka");
+            alertMessageService.showMessage("LINK_COPIED_TO_CLIPBOARD", {label: link });
         };
 
         $scope.showMore = function (link) {
@@ -90,16 +90,19 @@ angular.module('clientApp')
             link.isMarked = !link.isMarked;
             linkService.updateLink(link.category.publicId, link.publicId, link, function () {
                 if (link.isMarked) {
-                    alertMessageService.showMessage("Link '" + link.title + "' otrzymał gwiazdkę");
+                    alertMessageService.showMessage("LINK_GAINED_STAR_MESSAGE", {label: link.title });
                 } else {
-                    alertMessageService.showMessage("Link '" + link.title + "' stracił gwiazdkę");
+                    alertMessageService.showMessage("LINK_LOST_STAR_MESSAGE", {label: link.title });
                 }
             }, function () {
-                alertMessageService.showMessage("Błąd podczas aktualizacji linku '" + link.title + "'");
+                alertMessageService.showMessage("LINK_UPDATED_MESSAGE", {label: link.title});
             });
         };
 
         $scope.share = function (link) {
+            if ($scope.editMode) {
+                return;
+            }
             ModalService.showModal({
                 templateUrl: "views/partials/share_modal.html",
                 controller: "shareModalCtrl",
@@ -109,7 +112,7 @@ angular.module('clientApp')
             }).then(function (modal) {
                     modal.element.modal();
                     modal.close.then(function (result) {
-                          window.console.log("RESULT ", result);
+                        window.console.log("RESULT ", result);
                     });
                 });
         };

@@ -22,7 +22,6 @@ app.controller('editLinkModalCtrl', ['$scope', '$timeout', 'restServiceConfig', 
         $scope.categoryPrefix = '' + Math.random();
         categoryService.getCategories().then(function (categories) {
             $scope.mainCategories = categories.data;
-            window.console.log("Wczytalem kategorie ", $scope.mainCategories);
         });
     };
 
@@ -38,13 +37,13 @@ app.controller('editLinkModalCtrl', ['$scope', '$timeout', 'restServiceConfig', 
 
     $scope.updateLink = function () {
         linkService.updateLink($scope.link.category.publicId, $scope.link.publicId, $scope.link, function (response) {
-            alertMessageService.showMessage("Link '" + response.title + "' został zaktualizowany");
+            alertMessageService.showMessage("LINK_UPDATED_MESSAGE", {label: response.title});
             close({
                 operationType: 'edit',
                 link: response
             }, 500);
         }, function () {
-            alertMessageService.showMessage("Wystąpił błąd podczas aktualizowania linku '" + $scope.link.title + "'");
+            alertMessageService.showMessage("LINK_UPDATE_ERROR_MESSAGE", {label: $scope.link.title});
         });
     };
 
@@ -109,25 +108,25 @@ app.controller('editLinkModalCtrl', ['$scope', '$timeout', 'restServiceConfig', 
         var previousCategory = $scope.link.category;
         $scope.link.category = $scope.selectedCategory;
         linkService.updateLink(previousCategory.publicId, $scope.link.publicId, $scope.link, function (response) {
-            alertMessageService.showMessage("Link '" + response.title + "' został przypisany do kategorii '" + response.category.label + "'");
+            alertMessageService.showMessage("LINK_ASSIGN_TO_CATEGORY_MESSAGE", {linkLabel: response.title, categoryLabel: response.category.label});
             close({
                 operationType: 'changeCategory',
                 link: response
             }, 500);
         }, function () {
-            alertMessageService.showMessage("Wystąpił błąd podczas zmiany kategorii linku '" + $scope.link.title + "'");
+            alertMessageService.showMessage("LINK_ASSIGN_TO_CATEGORY_ERROR_MESSAGE", { linkLabel: $scope.link.title, categoryLabel: $scope.link.category.label });
         });
     };
 
-    $scope.deleteLink = function() {
+    $scope.deleteLink = function () {
         linkService.deleteLink($scope.link.category.publicId, $scope.link.publicId, function () {
-            alertMessageService.showMessage("Link '" + $scope.link.title + "' został usunięty");
+            alertMessageService.showMessage("LINK_REMOVE_MESSAGE", {label: $scope.link.title});
             close({
                 operationType: 'delete',
                 link: $scope.link
             }, 500);
         }, function () {
-            alertMessageService.showMessage("Wystąpił błąd podczas usuwania linku '" + $scope.link.title + "'");
+            alertMessageService.showMessage("LINK_REMOVE_ERROR_MESSAGE", {label: $scope.link.title });
         });
     };
 

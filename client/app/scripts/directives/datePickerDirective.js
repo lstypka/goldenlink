@@ -1,6 +1,6 @@
 'use strict';
 
-angular.module('clientApp').directive('dateTimePicker', ['$timeout', '$parse', 'moment', function ($timeout, $parse, moment) {
+angular.module('clientApp').directive('dateTimePicker', ['$timeout', '$translate', '$parse', 'moment', function ($timeout, $translate, $parse, moment) {
     return {
         require: '?ngModel',
         restrict: 'AE',
@@ -12,7 +12,8 @@ angular.module('clientApp').directive('dateTimePicker', ['$timeout', '$parse', '
                         minDate: moment().toDate(),
                         sideBySide: false,
                         allowInputToggle: true,
-                        locale: "pl",
+                        showClear : true,
+                        locale: $translate.use(),
                         useCurrent: false,
                         date:  ngModelGetter($scope),
                         format: 'YYYY.MM.DD',
