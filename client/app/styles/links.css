@@ -83,6 +83,12 @@
     color: #8a6d3b;
     word-wrap: break-word;
     text-overflow: ellipsis;
+    -ms-word-break: break-all;
+    /* Be VERY careful with this, breaks normal words wherever */
+    word-break: break-all;
+    -webkit-hyphens: auto;
+    -moz-hyphens: auto;
+    hyphens: auto;
 }
 
 .link_panel .link_panel_body .category_header {
