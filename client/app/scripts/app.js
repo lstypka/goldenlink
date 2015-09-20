@@ -70,11 +70,12 @@ angular.module('clientApp').config(['$translateProvider', function($translatePro
         suffix: '.json'
     });
 
-    $translateProvider.useCookieStorage();
+
     $translateProvider.preferredLanguage('en');
 
     $translateProvider.registerAvailableLanguageKeys(['en', 'pl'], {
         'en_US': 'en_EN',
         'pl_PL': 'pl_PL'
     }).determinePreferredLanguage();
+    $translateProvider.useLocalStorage();
 }]);
