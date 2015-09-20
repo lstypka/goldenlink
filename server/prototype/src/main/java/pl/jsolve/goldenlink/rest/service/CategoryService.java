@@ -134,11 +134,10 @@ public class CategoryService {
         // icons
 
         // main categories
-        categories.add(new Category(generateId(), "Linki", true, null, "links", randomIcon()));
-        categories.add(new Category(generateId(), "Zdjęcia", true, null, "photos", randomIcon()));
-        categories.add(new Category(generateId(), "Filmy", true, null, "videos", randomIcon()));
-        categories.add(new Category(generateId(), "Youtube", true, null, "youtube", randomIcon()));
-        categories.add(new Category(generateId(), "Notatki", true, null, "notes", randomIcon()));
+        categories.add(new Category(generateId(), "LINKS", true, null, "LINKS", randomIcon()));
+        categories.add(new Category(generateId(), "PHOTOS", true, null, "PHOTOS", randomIcon()));
+        categories.add(new Category(generateId(), "VIDEOS", true, null, "VIDEOS", randomIcon()));
+        categories.add(new Category(generateId(), "YOUTUBE", true, null, "YOUTUBE", randomIcon()));
 
         // inner categories
         for (int i = 0; i < 10; i++) {

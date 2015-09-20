@@ -110,16 +110,16 @@ public class LinkController {
 			String link = "";
 			int random = random(4);
 			Category category = mainCategories.get(random);
-			if (category.getCategoryGroup().equals("links")) {
+			if (category.getCategoryGroup().equals("LINKS")) {
 				link = "https://kevin-brown.com/#/home";
 			}
-			if (category.getCategoryGroup().equals("photos")) {
+			if (category.getCategoryGroup().equals("PHOTOS")) {
 				link = photos.get(random(photos.size()));
 			}
-			if (category.getCategoryGroup().equals("videos")) {
+			if (category.getCategoryGroup().equals("VIDEOS")) {
 				link = videos.get(random(videos.size()));
 			}
-			if (category.getCategoryGroup().equals("youtube")) {
+			if (category.getCategoryGroup().equals("YOUTUBE")) {
 				link = youtube.get(random(youtube.size()));
 			}
 

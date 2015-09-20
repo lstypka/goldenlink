@@ -45,19 +45,7 @@ angular
             .when('/', {
                 templateUrl: 'views/home.html'
             })
-            .when('/links/:category_id', {
-                templateUrl: 'views/links.html'
-            })
-            .when('/photos/:category_id', {
-                templateUrl: 'views/links.html'
-            })
-            .when('/videos/:category_id', {
-                templateUrl: 'views/links.html'
-            })
-            .when('/youtube/:category_id', {
-                templateUrl: 'views/links.html'
-            })
-            .when('/notes/:category_id', {
+            .when('/categories/:category_id/links', {
                 templateUrl: 'views/links.html'
             })
             .when('/search', {

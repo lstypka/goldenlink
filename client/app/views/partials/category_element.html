@@ -7,15 +7,15 @@
         </span>
         <span class="highlight_row">
             <a ng-if="category.hasChildren"  ng-class="{'active_category' : category._isSelected}" class="without_outline"
-               ng-click="loadCategory(category)" href="#/{{category.categoryGroup}}/{{category.publicId}}">
+               ng-click="loadCategory(category)" href="#/categories/{{category.publicId}}/links">
                 <i ng-if="category.icon" class="fa fa-fw " ng-class="category.icon"></i>
-               {{category.label}}
+               {{category.label | translate}}
             </a>
 
             <a ng-if="!category.hasChildren" ng-class="{'active_category' : category._isSelected}" class="without_outline"
-               ng-click="loadCategory(category)" href="#/{{category.categoryGroup}}/{{category.publicId}}">
+               ng-click="loadCategory(category)" href="#/categories/{{category.publicId}}/links">
                 <i ng-if="category.icon" class="fa fa-fw " ng-class="category.icon"></i>
-               {{category.label}}
+               {{category.label | translate}}
             </a>
         </span>
     </div>

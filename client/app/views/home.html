@@ -9,11 +9,11 @@
                     <div class="row">
                         <div class="col-lg-8" style="margin-top: 6px;">
                             <li class="active">
-                                <i class="fa fa-dashboard"></i> Pulpit
+                                <i class="fa fa-dashboard"></i> <span translate="DASHBOARD"></span>
                             </li>
                         </div>
                         <div class="col-lg-4">
-                            <input type="text" class="form-control" placeholder="Wyszukaj" ng-model="tilesFilter">
+                            <input type="text" class="form-control" placeholder="{{ 'SEARCH' | translate }}" ng-model="tilesFilter">
                         </div>
                     </div>
                 </ol>
@@ -32,17 +32,14 @@
                  class="alert alert-warning orange-gradient-background"
                  role="alert">
                 <div class="text-center">
-                    <p><strong>Zawartość pulpitu została zmieniona</strong></p>
+                    <p><strong> <span translate="DASHBOARD_HAS_BEEN_CHANGED"></span></strong></p>
                     <div class="btn-group" ng-show="isDirty">
                         <button type="button" class="btn btn-primary" style="width: 150px; margin-right: 10px;"
-                                ng-click="save()"> Zapisz
+                                ng-click="save()"> <span translate="SAVE"></span>
                         </button>
                         <button type="button" class="btn btn-default" style="width: 150px; margin-left: 10px;"
-                                ng-click="revert()">Przywróć
+                                ng-click="revert()"><span translate="REVERT"></span>
                         </button>
-                    </div>
-                    <div ng-show="!isDirty">
-                        {{message}}
                     </div>
                 </div>
             </div>
@@ -69,12 +66,12 @@
                                     </div>
                                 </div>
                                 <div  class="row">
-                                    <div class="wrap_lines" style="margin: 5px; text-align: right;">{{item.categoryGroup}} - {{item.label}}</div>
+                                    <div class="wrap_lines" style="margin: 5px; text-align: right;">{{item.categoryGroup | translate }} - {{item.label | translate }}</div>
                                 </div>
                             </div>
-                            <a href="#/{{item.categoryGroup}}/{{item.publicId}}">
+                            <a href="#/categories/{{item.publicId}}/links">
                                 <div class="panel-footer">
-                                    <span class="pull-left">Przeglądaj </span>
+                                    <span class="pull-left"><span translate="OPEN"></span> </span>
                                     <span class="pull-right"><i class="fa fa-arrow-circle-right"></i></span>
 
                                     <div class="clearfix"></div>

@@ -15,16 +15,16 @@
                 <div class="row orange-form">
 
                     <div class="col-lg-2">
-                        <label class="label">Tytuł:</label>
-                        <input type="text" ng-model="searchParams.title" class="form-control input-sm input" placeholder="Dowolny tytuł" ng-disabled="isLoading">
+                        <label class="label"><span translate="TITLE"/>:</label>
+                        <input type="text" ng-model="searchParams.title" class="form-control input-sm input" placeholder="{{ 'ANY_TITLE' | translate}}" ng-disabled="isLoading">
                     </div>
                     <div class="col-lg-2">
-                        <label class="label">Komentarz:</label>
-                        <input type="text" ng-model="searchParams.comment" class="form-control input-sm input" placeholder="Dowolny komentarz" ng-disabled="isLoading">
+                        <label class="label"><span translate="COMMENT"/>:</label>
+                        <input type="text" ng-model="searchParams.comment" class="form-control input-sm input" placeholder="{{ 'ANY_COMMENT' | translate}}" ng-disabled="isLoading">
                     </div>
                     <div class="col-lg-2">
                         <div class="form-group">
-                            <label class="label">Autor:</label>
+                            <label class="label"><span translate="AUTHOR"/>:</label>
                             <select2 ng-model="searchParams.author" options="authorsSearchOptions"
                                      style="width: 100%;" ng-disabled="isLoading"></select2>
                         </div>

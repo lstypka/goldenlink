@@ -11,7 +11,7 @@
                class="without_outline"
                ng-click="selectCategory(category)">
                 <i ng-if="category.icon" class="fa fa-fw " ng-class="category.icon"></i>
-                {{category.label}}
+                {{category.label | translate}}
             </a>
 
             <a ng-if="!category.hasChildren" ng-class="{'active_managed_category' : category._isSelected}"
@@ -20,7 +20,7 @@
 
 
                 <i ng-if="category.icon" class="fa fa-fw " ng-class="category.icon"></i>
-                {{category.label}}
+                {{category.label | translate}}
             </a>
         </span>
     </div>

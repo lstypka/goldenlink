@@ -5,7 +5,7 @@
 
                 <div class="col-lg-9 title">
                     <span class="fa star without_outline" ng-class="{'fa-star-o' : !link.isMarked, 'fa-star' : link.isMarked}" aria-hidden="true" ng-click="star(link)"></span>
-                    <strong>{{link.category.label}}</strong> {{link.title}}
+                    <strong>{{link.category.label | translate}}</strong> {{link.title}}
                 </div>
                 <div class="col-lg-3 ">
                     <div class="row">
@@ -27,8 +27,7 @@
 
                 <div class="row link_panel_body">
                     <div class="col-lg-5 link_content column">
-
-                        <div ng-if="link.category.categoryGroup === 'photos'">
+                        <div ng-if="link.category.categoryGroup === 'PHOTOS'">
                             <a ng-href="{{link.link}}"
                                class="thumbnail" target="_new">
                                 <img ng-if="settings.imagePreload === 'auto'" ng-src="{{link.link}}"
@@ -37,14 +36,14 @@
                             </a>
                         </div>
 
-                        <div ng-if="link.category.categoryGroup === 'videos'">
+                        <div ng-if="link.category.categoryGroup === 'VIDEOS'">
                             <video controls class="thumbnail" controls="controls" preload="{{settings.videoPreload}}">
                                 <source ng-src="{{link.link}}">
                                 Twoja przeglądarka nie obsługuje odtwarzania filmów.
                             </video>
                         </div>
 
-                        <div ng-if="link.category.categoryGroup === 'youtube'">
+                        <div ng-if="link.category.categoryGroup === 'YOUTUBE'">
                             <iframe ng-src="{{link.link}}" frameborder="0" allowfullscreen></iframe>
                         </div>
 
