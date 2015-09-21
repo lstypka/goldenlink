@@ -10,7 +10,7 @@
 
 var app = angular.module('clientApp');
 
-app.controller('editLinkModalCtrl', ['$scope', '$timeout', 'restServiceConfig', 'alertMessageService', 'linkService', 'settingsService', 'categoryService', 'moment', 'link', 'close', function ($scope, $timeout, restServiceConfig, alertMessageService, linkService, settingsService, categoryService, moment, link, close) {
+app.controller('editLinkModalCtrl', ['$scope', '$timeout', 'restServiceConfig', 'alertMessageService', 'linkService', 'settingsService', 'utilService', 'categoryService', 'moment', 'link', 'close', function ($scope, $timeout, restServiceConfig, alertMessageService, linkService, settingsService, utilService, categoryService, moment, link, close) {
 
     $scope.mainCategories = [];
     $scope.settings = settingsService.settings;
@@ -48,7 +48,9 @@ app.controller('editLinkModalCtrl', ['$scope', '$timeout', 'restServiceConfig', 
     };
 
     $scope.tagKeypress = function (link, event) {
+
         if (event.which === 13) {
+            event.preventDefault();
             if (!link._tag) {
                 return;
             }
@@ -131,6 +133,10 @@ app.controller('editLinkModalCtrl', ['$scope', '$timeout', 'restServiceConfig', 
         }, function () {
             alertMessageService.showMessage("LINK_REMOVE_ERROR_MESSAGE", {label: $scope.link.title });
         });
+    };
+
+    $scope.isBlank = function (value) {
+        return utilService.isBlank(value);
     };
 
 }]);
