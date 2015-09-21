@@ -50,6 +50,13 @@ public class LinkController {
 				resultsPerPage, 53);
 	}
 
+	@RequestMapping(value = "/categories/{categoryPublicId}/links", method = RequestMethod.POST)
+	public Link createLink(
+			@PathVariable("categoryPublicId") final String categoryPublicId,
+			@RequestBody Link linkToAdd) {
+		return linkToAdd;
+	}
+	
 	@RequestMapping(value = "/categories/{categoryPublicId}/links/{linkPublicId}", method = RequestMethod.PUT)
 	public Link updateLink(
 			@PathVariable("categoryPublicId") final String categoryPublicId,

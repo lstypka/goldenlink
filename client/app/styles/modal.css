@@ -40,14 +40,3 @@
 .modal-content .modal-body .button:hover, .button:focus {
     font-weight: bold;
 }
-
-.modal-content .modal-body .nav-tabs > li > a {
-    color: #8a6d3b;
-    font-size: 12px;
-}
-
-.modal-content .modal-body .nav-tabs > li > a:hover {
-    background-color: transparent;
-    font-weight: bold;
-    cursor: pointer;
-}

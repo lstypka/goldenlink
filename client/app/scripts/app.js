@@ -55,6 +55,9 @@ angular
             .when('/categories', {
                 templateUrl: 'views/categories.html'
             })
+            .when('/addlink', {
+                templateUrl: 'views/add_link.html'
+            })
             .otherwise({
                 redirectTo: '/'
             });

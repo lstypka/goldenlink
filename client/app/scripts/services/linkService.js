@@ -8,7 +8,7 @@
  * Service of the clientApp
  */
 angular.module('clientApp')
-    .service('linkService', ['$http', 'restServiceConfig', 'moment', function ($http, restServiceConfig, moment) {
+    .service('linkService', ['$http', 'restServiceConfig', 'timeService', function ($http, restServiceConfig, timeService) {
 
         this.getLinks = function (categoryId, page, resultsPerPage, search) {
             var promise = $http.get(restServiceConfig.url + '/categories/' + categoryId + '/links',
@@ -28,14 +28,17 @@ angular.module('clientApp')
             return promise;
         };
 
-        this.updateLink = function (categoryPublicId, linkPublicId, link, successFn, errorFn) {
+        this.addLink = function(categoryPublicId, link, successFn, errorFn) {
+            link.expiryDate = timeService.formatDate(link.expiryDate);
 
-            if(link.expiryDate) {
-                link.expiryDate = moment(link.expiryDate).utc().format("YYYY-MM-DD[T]HH:mm:ss[Z]");
-            }
-            if(link.expiryDate && link.expiryDate.trim().length === 0) {
-                link.expiryDate = null;
-            }
+            $http.post(restServiceConfig.url + '/categories/' + categoryPublicId + '/links' , link).then(function (response) {
+                successFn(response.data);
+            }, errorFn);
+        };
+
+        this.updateLink = function (categoryPublicId, linkPublicId, link, successFn, errorFn) {
+            link.expiryDate = timeService.formatDate(link.expiryDate);
+
             $http.put(restServiceConfig.url + '/categories/' + categoryPublicId + '/links/' + linkPublicId, link).then(function (response) {
                 successFn(response.data);
             }, errorFn);

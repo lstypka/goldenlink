@@ -8,7 +8,7 @@
  * Controller of the clientApp
  */
 angular.module('clientApp')
-    .controller('categoriesCtrl', ['$rootScope', '$scope', '$http', '$timeout', '$translate', 'categoryService', 'alertMessageService', 'breadcrumbsService', 'dashboardService', 'ModalService', 'restServiceConfig', function ($rootScope, $scope, $http, $timeout, $translate, categoryService, alertMessageService, breadcrumbsService, dashboardService, ModalService, restServiceConfig) {
+    .controller('categoriesCtrl', ['$rootScope', '$scope', '$http', '$timeout', '$translate', 'utilService', 'categoryService', 'alertMessageService', 'breadcrumbsService', 'dashboardService', 'ModalService', 'restServiceConfig', function ($rootScope, $scope, $http, $timeout, $translate, utilService, categoryService, alertMessageService, breadcrumbsService, dashboardService, ModalService, restServiceConfig) {
 
         $scope.selectedCategory = null;
 
@@ -198,7 +198,7 @@ angular.module('clientApp')
         };
 
         $scope.isBlank = function (value) {
-            return !!(value || '').match(/^\s*$/);
+            return utilService.isBlank(value);
         };
 
         var updateBreadcrumbs = function (publicId) {

@@ -1,0 +1,49 @@
+<div id="page-wrapper" class="panel_width" data-ng-controller="addLinkCtrl" infinite-scroll="nextPage" scroll-threshold="200" style=" overflow-y: auto; height: 100%;">
+
+
+    <div class="container-fluid">
+
+        <!-- Page Heading -->
+        <div class="row">
+            <div class="col-lg-12">
+                <ol class="breadcrumb">
+                    <li class="active">
+                        <i class="fa fa-plus"></i> <span translate="ADD_LINK"></span>
+                    </li>
+                </ol>
+            </div>
+        </div>
+
+        <div>
+
+            <ul class="categories_container container-fluid" style="max-height: 40vh !important;">
+                <li ng-repeat="category in mainCategories"
+                    ng-include="'views/partials/manage_category_element.html'">
+                </li>
+            </ul>
+
+            <div ng-show="link.category">
+            <ul class="nav nav-tabs" role="tablist" id="addLinkTabs">
+                <li role="presentation" class="active"><a ng-click="activeTab = 'edit'"
+                                                          class="without_outline"
+                                                          data-toggle="tab"><span translate="EDIT"/></a></li>
+                <li role="presentation"><a ng-click="activeTab = 'preview'"
+                                           class="without_outline"
+                                           data-toggle="tab"><span translate="OVERVIEW"/></a></li>
+            </ul>
+
+            <div style="margin-top: 15px;" ng-show="!activeTab || activeTab === 'edit'">
+                <div ng-include="'views/partials/edit_link_form.html'"></div>
+
+            </div>
+
+            <div ng-show="activeTab ==='preview'">
+                <div ng-include="'views/partials/link_element.html'"></div>
+            </div>
+        </div>
+        </div>
+
+    </div>
+
+</div>
+

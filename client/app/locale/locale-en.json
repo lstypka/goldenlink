@@ -5,6 +5,7 @@
     "ADD_LINK": "Add link",
     "SEARCH": "Search",
     "FRIENDS": "Friends",
+    "CATEGORY" : "Category",
     "CATEGORIES": "Categories",
     "SETTINGS": "Settings",
     "OPEN": "Open",
@@ -55,6 +56,7 @@
     "CATEGORY_NAME": "Category name",
     "CHANGE_CATEGORY": "Change category",
     "DELETE": "Delete",
+    "SAVE" : "Save",
     "OVERVIEW": "Overview",
     "EDIT_LINK": "Edit link",
     "LINK": "Link",
@@ -70,6 +72,7 @@
     "CATEGORY_DELETING_HEADER": "Deleting category {{label}}",
     "CATEGORY_DELETING_MESSAGE": "Are you sure you want delete '{{label}}' category ? All subcategories and whole content will be removed",
     "CATEGORY_DELETED_CORRECTLY_MESSAGE" : "Category '{{label}}' has been removed",
+    "ADD" : "Add",
 
     "BROWSER_DOESNT_SUPPORT_VIDEO": "Your browser doesn't support video player",
     "DASHBOARD_HAS_BEEN_CHANGED": "The content of the dashboard has been changed ",
@@ -77,6 +80,8 @@
     "DASHBOARD_SAVE_MESSAGE" : "Dashboard content has been saved",
     "DASHBOARD_SAVE_ERROR_MESSAGE" : "An error occurred while saving the contents of dashboard",
 
+    "LINK_ADD_MESSAGE" : "Link '{{label}}' has been added",
+    "LINK_ADD_ERROR_MESSAGE" : "An error occurred while adding the '{{label}}' link",
     "LINK_UPDATE_MESSAGE" : "Link '{{label}}' has been updated",
     "LINK_UPDATE_ERROR_MESSAGE" : "An error occurred while updating the '{{label}}' link",
     "LINK_ASSIGN_TO_CATEGORY_MESSAGE" : "Link '{{linkLabel}}' has been assigned to '{{categoryLabel}}' category",

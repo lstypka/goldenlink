@@ -35,7 +35,7 @@ app.controller('editLinkModalCtrl', ['$scope', '$timeout', 'restServiceConfig', 
             }, 500);
     };
 
-    $scope.updateLink = function () {
+    $scope.saveLink = function () {
         linkService.updateLink($scope.link.category.publicId, $scope.link.publicId, $scope.link, function (response) {
             alertMessageService.showMessage("LINK_UPDATE_MESSAGE", {label: response.title});
             close({
@@ -49,18 +49,21 @@ app.controller('editLinkModalCtrl', ['$scope', '$timeout', 'restServiceConfig', 
 
     $scope.tagKeypress = function (link, event) {
         if (event.which === 13) {
+            if (!link._tag) {
+                return;
+            }
             var foundDuplicate = false;
             for (var i = 0; i < link.tags.length; i++) {
-                if (link.tags[i].label.trim() === $scope.tag.trim()) {
+                if (link.tags[i].label.trim() === link._tag.trim()) {
                     foundDuplicate = true;
                 }
             }
             if (!foundDuplicate) {
-                if (!($scope.tag.length === 0 || !$scope.tag.trim())) {
-                    link.tags.unshift({id: null, label: $scope.tag.trim() });
+                if (!(link._tag.length === 0 || !link._tag.trim())) {
+                    link.tags.unshift({id: null, label: link._tag.trim() });
                 }
             }
-            $scope.tag = '';
+            link._tag = null;
         }
     };
 
