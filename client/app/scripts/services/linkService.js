@@ -28,6 +28,24 @@ angular.module('clientApp')
             return promise;
         };
 
+        this.search = function(page, resultsPerPage, search) {
+            var promise = $http.get(restServiceConfig.url + '/search',
+                {
+                    params: {
+                        page: page,
+                        resultsPerPage: resultsPerPage,
+                        title: search.title,
+                        comment: search.comment,
+                        author: search.author,
+                        tag: search.tag,
+                        date: search.date
+                    }
+                }).then(function (response) {
+                    return response;
+                });
+            return promise;
+        };
+
         this.addLink = function(categoryPublicId, link, successFn, errorFn) {
             link.expiryDate = timeService.formatDate(link.expiryDate);
 

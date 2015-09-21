@@ -1,23 +1,88 @@
-<div id="page-wrapper">
+<div id="page-wrapper" data-ng-controller="searchCtrl" infinite-scroll="nextPage" scroll-threshold="400"
+     style="overflow-y: auto; height: 100%;">
 
     <div class="container-fluid">
 
         <!-- Page Heading -->
         <div class="row">
             <div class="col-lg-12">
-                <h1 class="page-header">
-                    Linki
-                </h1>
-                <div  ng-include="'views/partials/breadcrumbs.html'"></div>
+                <ol class="breadcrumb">
+                    <li class="active">
+                        <i class="fa fa-search"></i> <span translate="SEARCH"></span>
+                    </li>
+                </ol>
             </div>
         </div>
 
-        Tutaj zaawansowana wyszukiwarka. Powinna szukac po slowach kluczowych, po zawartosci tytułu, po tym czy link
-        dostał gwiazdke, po przedziale czasowym, po typie, po kategorii, po autorze (czy moj link czy link ktory
-        dostałem od znajomego)
+        <div class="panel panel-warning link_panel">
+            <div class="panel-heading orange-gradient-background link_panel_header"
+                 style="padding-bottom: 0px; padding-top: 10px;">
+                <div class="row orange-form">
+
+                    <div class="col-lg-2">
+                        <label class="label"><span translate="TITLE"/>:</label>
+                        <input type="text" ng-model="searchParams.title" class="form-control input-sm input"
+                               placeholder="{{ 'ANY_TITLE' | translate}}" ng-disabled="isLoading">
+                    </div>
+                    <div class="col-lg-2">
+                        <label class="label"><span translate="COMMENT"/>:</label>
+                        <input type="text" ng-model="searchParams.comment" class="form-control input-sm input"
+                               placeholder="{{ 'ANY_COMMENT' | translate}}" ng-disabled="isLoading">
+                    </div>
+                    <div class="col-lg-2">
+                        <div class="form-group">
+                            <label class="label"><span translate="AUTHOR"/>:</label>
+                            <select2 ng-model="searchParams.author" options="authorsSearchOptions"
+                                     style="width: 100%;" ng-disabled="isLoading"
+                                     placeholder="{{'ANY_AUTHOR' | translate}}"></select2>
+                        </div>
+                    </div>
+                    <div class="col-lg-2">
+                        <label class="label"><span translate="TAG"/>:</label>
+                        <select2 ng-model="searchParams.tag" options="tagsSearchOptions" style="width: 100%;"
+                                 ng-disabled="isLoading" placeholder="{{'ANY_TAG' | translate}}"></select2>
+                    </div>
+                    <div class="col-lg-2">
+                        <label class="label"><span translate="CREATION_DATE"/>:</label>
+                        <select2 ng-model="searchParams.date" options="dateSearchOptions" style="width: 100%;"
+                                 title="{{searchParams.date}}" ng-disabled="isLoading"
+                                 placeholder="{{'ANY_DATE' | translate}}"></select2>
+                    </div>
+                    <div class="col-lg-2">
+                        <button type="button" class="btn btn-default btn-sm button search-button" ng-click="search();"
+                                ng-disabled="isLoading">
+                            <i class="fa fa-search"></i>
+                            <span translate="SEARCH"/>
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div data-ng-repeat="link in links">
+            <div ng-include="'views/partials/link_element.html'"></div>
+        </div>
+
+        <div ng-show="showLoadingPanel()" style="height: 50px;">
+            <div class="alert alert-warning orange-gradient-background text-center" ng-show="isLoading"
+                 style="height:30px; padding-top: 5px; border-color: #8a6d3b;"><strong><span translate="LOADING"/> <i
+                    class="fa fa-spinner fa-pulse"></i></strong></div>
+        </div>
+
+        <div ng-show="showNoResultsPanel()" style="height: 50px;">
+            <div class="alert alert-warning orange-gradient-background text-center"
+                 style="height:30px; padding-top: 5px; border-color: #8a6d3b;"><strong><span
+                    translate="NO_RESULT"/></strong>
+            </div>
+        </div>
+
 
     </div>
     <!-- /.container-fluid -->
 
 </div>
 <!-- /#page-wrapper -->
+
+</div>
+<!-- /#wrapper -->
+

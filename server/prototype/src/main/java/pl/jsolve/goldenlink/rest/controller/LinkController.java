@@ -1,8 +1,5 @@
 package pl.jsolve.goldenlink.rest.controller;
 
-import java.util.List;
-import java.util.UUID;
-
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -13,19 +10,13 @@ import org.springframework.web.bind.annotation.RestController;
 
 import pl.jsolve.goldenlink.rest.dto.Link;
 import pl.jsolve.goldenlink.rest.dto.Links;
-import pl.jsolve.goldenlink.rest.service.CategoryService;
-
-import com.google.common.base.Predicate;
-import com.google.common.collect.Collections2;
-import com.google.common.collect.Lists;
+import pl.jsolve.goldenlink.rest.service.LinkService;
 
 @RestController
 public class LinkController {
 
-	private List<Link> links = Lists.newArrayList();
-
 	@Autowired
-	private CategoryService categoryService;
+	private LinkService linkService;
 
 	@RequestMapping(value = "/categories/{categoryId}/links", method = RequestMethod.GET)
 	public Links getLinks(
@@ -46,37 +37,35 @@ public class LinkController {
 			e.printStackTrace();
 		}
 
-		List<Link> filteredLinks = Lists.newArrayList(Collections2.filter(
-				links, new Predicate<Link>() {
-
-					@Override
-					public boolean apply(Link input) {
-						return input.getCategory().getPublicId()
-								.equals(categoryId);
-					}
-
-				}));
-
-		int totalResults = filteredLinks.size();
-		if (filteredLinks.size() > resultsPerPage) {
-			int fromIndex = page * resultsPerPage;
-			int toIndex = (page + 1) * resultsPerPage;
-			if (toIndex > filteredLinks.size()) {
-				toIndex = filteredLinks.size();
-			}
-			filteredLinks = filteredLinks.subList(fromIndex, toIndex);
-		}
-
-		return new Links(filteredLinks, page, resultsPerPage, totalResults);
+		return linkService.searchLinks(categoryId, page, resultsPerPage, title, comment, author, tag, date);
 	}
 
+	@RequestMapping(value = "/search", method = RequestMethod.GET)
+	public Links search(
+			@RequestParam("page") final Integer page,
+			@RequestParam("resultsPerPage") final Integer resultsPerPage,
+			@RequestParam(value = "title", required = false) final String title,
+			@RequestParam(value = "comment", required = false) final String comment,
+			@RequestParam(value = "author", required = false) final String author,
+			@RequestParam(value = "tag", required = false) final String tag,
+			@RequestParam(value = "date", required = false) final String date) {
+
+		System.out.println("SEARCH -> title: " + title + " comment: " + comment
+				+ " author: " + author + " tag: " + tag + " date: " + date);
+		try {
+			Thread.sleep(500);
+		} catch (InterruptedException e) {
+			e.printStackTrace();
+		}
+
+		return linkService.searchLinks(null, page, resultsPerPage, title, comment, author, tag, date);
+	}
+	
 	@RequestMapping(value = "/categories/{categoryPublicId}/links", method = RequestMethod.POST)
 	public Link createLink(
 			@PathVariable("categoryPublicId") final String categoryPublicId,
 			@RequestBody Link linkToAdd) {
-		linkToAdd.setPublicId(generateId());
-		links.add(linkToAdd);
-		return linkToAdd;
+		return linkService.addLink(linkToAdd);
 	}
 
 	@RequestMapping(value = "/categories/{categoryPublicId}/links/{linkPublicId}", method = RequestMethod.PUT)
@@ -85,18 +74,7 @@ public class LinkController {
 			@PathVariable("linkPublicId") final String linkPublicId,
 			@RequestBody Link linkToUpdate) {
 
-		int foundIndex = -1;
-		for (int i = 0; i < links.size(); i++) {
-			if (linkToUpdate.getPublicId().equals(links.get(i).getPublicId())) {
-				foundIndex = i;
-			}
-		}
-		if (foundIndex > -1) {
-			links.remove(foundIndex);
-			links.add(linkToUpdate);
-		}
-
-		return linkToUpdate;
+		return linkService.updateLink(linkToUpdate);
 	}
 
 	@RequestMapping(value = "/categories/{categoryPublicId}/links/{linkPublicId}", method = RequestMethod.DELETE)
@@ -104,20 +82,7 @@ public class LinkController {
 			@PathVariable("categoryPublicId") final String categoryPublicId,
 			@PathVariable("linkPublicId") final String linkPublicId) {
 
-		int foundIndex = -1;
-		for (int i = 0; i < links.size(); i++) {
-			if (linkPublicId.equals(links.get(i).getPublicId())) {
-				foundIndex = i;
-			}
-		}
-		if (foundIndex > -1) {
-			links.remove(foundIndex);
-		}
-		return null;
-	}
-
-	private static String generateId() {
-		return UUID.randomUUID().toString().substring(0, 32);
+		return linkService.deleteLink(linkPublicId);
 	}
 
 }
