@@ -8,7 +8,7 @@
  * Controller of the clientApp
  */
 angular.module('clientApp')
-    .controller('searchCtrl', ['$scope', '$routeParams', 'ModalService', 'linkService', 'alertMessageService', 'settingsService', 'select2Date', 'select2Author', 'select2Tag', function ($scope, $routeParams, ModalService, linkService, alertMessageService, settingsService, select2Date, select2Author, select2Tag) {
+    .controller('searchCtrl', ['$scope', '$routeParams', 'ModalService', 'linkService', 'alertMessageService', 'settingsService', 'select2Date', 'select2Author', 'select2Tag', 'select2CategoryType', 'select2Star', 'select2ExpiryDate', function ($scope, $routeParams, ModalService, linkService, alertMessageService, settingsService, select2Date, select2Author, select2Tag, select2CategoryType, select2Star, select2ExpiryDate) {
 
         $scope.page = 0;
         $scope.resultsPerPage = 10;
@@ -20,12 +20,21 @@ angular.module('clientApp')
 
         $scope.dateSearchOptions = select2Date;
 
+        $scope.categoryTypeSearchOptions = select2CategoryType;
+
+        $scope.starSearchOptions = select2Star;
+
+        $scope.expiryDateSearchOptions = select2ExpiryDate;
+
         $scope.searchParams = {
             title: null,
             comment: null,
             author: null,
             tag: null,
-            date: null
+            date: null,
+            expiryDate : null,
+            categoryType : null,
+            star : null
         };
 
         $scope.links = [];
