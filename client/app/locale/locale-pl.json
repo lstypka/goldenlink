@@ -73,6 +73,7 @@
     "CATEGORY_DELETING_MESSAGE": "Jesteś pewien, że chcesz usunąć kategorię '{{label}}'? Wszystkie podkategorie oraz cała zawartość zostaną także usunięte",
     "CATEGORY_DELETED_CORRECTLY_MESSAGE": "Kategoria '{{label}}' została usunięta",
     "ADD": "Dodaj",
+    "NO_RESULT" : "Brak wyników do wyświetlenia",
 
     "BROWSER_DOESNT_SUPPORT_VIDEO": "Twoja przeglądarka nie obsługuje odtwarzania filmów",
 

@@ -34,6 +34,13 @@ angular.module('clientApp')
             $scope.nextPage(); // get first page of links
         };
 
+        var resetSearchParams = function() {
+            $scope.page = 0;
+            $scope.resultsPerPage = 10;
+            $scope.totalResults = 10000000000000;
+            $scope.links = [];
+        };
+
         $scope.nextPage = function () {
             if (!$scope.hasNextPage() || $scope.isLoading) {
                 return;
@@ -52,8 +59,8 @@ angular.module('clientApp')
         };
 
         $scope.search = function () {
-            $scope.page = 0;
-            $scope.links = [];
+            resetSearchParams();
+
             $scope.nextPage();
         };
 
@@ -63,6 +70,10 @@ angular.module('clientApp')
 
         $scope.showLoadingPanel = function () {
             return $scope.isLoading || $scope.hasNextPage();
+        };
+
+        $scope.showNoResultsPanel = function() {
+            return !$scope.isLoading && $scope.links.length === 0;
         };
 
         init();

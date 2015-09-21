@@ -57,6 +57,7 @@ angular.module('clientApp')
 
         $scope.tagKeypress = function (link, event) {
             if (event.which === 13) {
+                event.preventDefault();
                 if (!link._tag) {
                     return;
                 }

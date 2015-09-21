@@ -73,6 +73,7 @@
     "CATEGORY_DELETING_MESSAGE": "Are you sure you want delete '{{label}}' category ? All subcategories and whole content will be removed",
     "CATEGORY_DELETED_CORRECTLY_MESSAGE" : "Category '{{label}}' has been removed",
     "ADD" : "Add",
+    "NO_RESULT" : "There are no results to display",
 
     "BROWSER_DOESNT_SUPPORT_VIDEO": "Your browser doesn't support video player",
     "DASHBOARD_HAS_BEEN_CHANGED": "The content of the dashboard has been changed ",
