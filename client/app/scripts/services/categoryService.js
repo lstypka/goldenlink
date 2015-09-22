@@ -17,6 +17,18 @@ angular.module('clientApp')
             return promise;
         };
 
+        this.searchCategories = function (term) {
+            var promise = $http.get(restServiceConfig.url + '/categories/search', {
+                params: {
+                    term : term
+                }
+            }).then(function (response) {
+                return response;
+            });
+            return promise;
+        };
+
+
         this.getChildren = function (publicId) {
             var promise = $http.get(restServiceConfig.url + '/categories/' + publicId + '/children').then(function (response) {
                 return response;

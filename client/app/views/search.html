@@ -32,9 +32,9 @@
                         <div class="col-lg-4">
                             <div class="form-group">
                                 <label class="label"><span translate="CATEGORY"/>:</label>
-                                <select2 ng-model="searchParams.author" options="authorsSearchOptions"
+                                <select2 ng-model="searchParams.categoryId" options="categorySearchOptions"
                                          style="width: 100%;" ng-disabled="isLoading"
-                                         placeholder="{{'ANY_AUTHOR' | translate}}"></select2>
+                                         placeholder="{{'ANY_CATEGORY' | translate}}"></select2>
                             </div>
                         </div>
 
@@ -43,9 +43,9 @@
                     <div class="row">
                         <div class="col-lg-2">
                             <label class="label"><span translate="TYPE"/>:</label>
-                            <select2 ng-model="searchParams.categoryType" options="categoryTypeSearchOptions"
+                            <select2 ng-model="searchParams.type" options="categoryTypeSearchOptions"
                                      style="width: 100%;"
-                                     title="{{searchParams.date}}" ng-disabled="isLoading"
+                                     ng-disabled="isLoading"
                                      placeholder="{{'ANY' | translate}}"></select2>
                         </div>
                         <div class="col-lg-2">
@@ -65,7 +65,7 @@
                         <div class="col-lg-2">
                             <label class="label"><span translate="CREATION_DATE"/>:</label>
                             <select2 ng-model="searchParams.date" options="dateSearchOptions" style="width: 100%;"
-                                     title="{{searchParams.date}}" ng-disabled="isLoading"
+                                     ng-disabled="isLoading"
                                      placeholder="{{'ANY_DATE' | translate}}"></select2>
                         </div>
 
@@ -74,14 +74,14 @@
                             <label class="label"><span translate="EXPIRY_DATE"/>:</label>
                             <select2 ng-model="searchParams.expiryDate" options="expiryDateSearchOptions"
                                      style="width: 100%;"
-                                     title="{{searchParams.expiryDate}}" ng-disabled="isLoading"
+                                     ng-disabled="isLoading"
                                      placeholder="{{'ANY_DATE' | translate}}"></select2>
                         </div>
                         <div class="col-lg-2">
                             <label class="label"><span translate="STAR"/>:</label>
-                            <select2 ng-model="searchParams.star" options="starSearchOptions"
+                            <select2 ng-model="searchParams.marked" options="starSearchOptions"
                                      style="width: 100%;"
-                                     title="{{searchParams.star}}" ng-disabled="isLoading"
+                                     ng-disabled="isLoading"
                                      placeholder="{{'ANY' | translate}}"></select2>
                         </div>
 

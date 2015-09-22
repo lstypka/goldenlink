@@ -7,6 +7,7 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 import pl.jsolve.goldenlink.rest.dto.Category;
@@ -23,6 +24,11 @@ public class CategoryController {
         return categoryService.getMainCategories();
     }
 
+    @RequestMapping(value = "/categories/search", method = RequestMethod.GET)
+    public List<Category> searchCategories(@RequestParam("term") String term) {
+        return categoryService.searchCategories(term);
+    }
+    
     @RequestMapping(value = "/categories/{parentPublicId}/children", method = RequestMethod.GET)
     public List<Category> getCategoriesChildren(@PathVariable("parentPublicId") final String parentPublicId)
             throws InterruptedException {
@@ -52,5 +58,7 @@ public class CategoryController {
             throws InterruptedException {
         return categoryService.getBreadcrumbs(parentPublicId);
     }
+    
+    
 
 }

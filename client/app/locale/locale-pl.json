@@ -52,7 +52,7 @@
     "WITHIN_6_MONTHS" : "W ciągu 6 miesięcy",
     "WITHIN_YEAR" : "W ciągu roku",
 
-
+    "ENTER_THREE_CHARACTERS" : "Wpisz przynajmniej 3 znaki",
     "NO_MATCHES_FOUND": "Brak pasujących wyników",
     "SEARCH": "Wyszukaj",
     "LOADING": "Ładowanie",
@@ -68,6 +68,7 @@
     "CHOOSE_LAYOUT": "Wybierz wygląd",
     "CATEGORY_NAME": "Nazwa kategorii",
     "CHANGE_CATEGORY": "Zmiana kategorii",
+    "ANY_CATEGORY" : "Dowolna kategoria",
     "DELETE": "Usunięcie",
     "SAVE" : "Zapisz",
     "OVERVIEW": "Podgląd",

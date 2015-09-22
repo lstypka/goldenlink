@@ -37,7 +37,8 @@ public class LinkController {
 			e.printStackTrace();
 		}
 
-		return linkService.searchLinks(categoryId, page, resultsPerPage, title, comment, author, tag, date);
+		return linkService.searchLinks(categoryId, page, resultsPerPage, title,
+				comment, null, tag, author, date, null, null);
 	}
 
 	@RequestMapping(value = "/search", method = RequestMethod.GET)
@@ -46,9 +47,13 @@ public class LinkController {
 			@RequestParam("resultsPerPage") final Integer resultsPerPage,
 			@RequestParam(value = "title", required = false) final String title,
 			@RequestParam(value = "comment", required = false) final String comment,
-			@RequestParam(value = "author", required = false) final String author,
+			@RequestParam(value = "categoryPublicId", required = false) final String categoryPublicId,
+			@RequestParam(value = "type", required = false) final String type,
 			@RequestParam(value = "tag", required = false) final String tag,
-			@RequestParam(value = "date", required = false) final String date) {
+			@RequestParam(value = "author", required = false) final String author,
+			@RequestParam(value = "date", required = false) final String date,
+			@RequestParam(value = "expiryDate", required = false) final String expiryDate,
+			@RequestParam(value = "marked", required = false) final String marked) {
 
 		System.out.println("SEARCH -> title: " + title + " comment: " + comment
 				+ " author: " + author + " tag: " + tag + " date: " + date);
@@ -58,9 +63,10 @@ public class LinkController {
 			e.printStackTrace();
 		}
 
-		return linkService.searchLinks(null, page, resultsPerPage, title, comment, author, tag, date);
+		return linkService.searchLinks(categoryPublicId, page, resultsPerPage,
+				title, comment, type, tag, author, date, expiryDate, marked);
 	}
-	
+
 	@RequestMapping(value = "/categories/{categoryPublicId}/links", method = RequestMethod.POST)
 	public Link createLink(
 			@PathVariable("categoryPublicId") final String categoryPublicId,

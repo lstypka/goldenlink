@@ -28,7 +28,7 @@ angular.module('clientApp')
             return promise;
         };
 
-        this.search = function(page, resultsPerPage, search) {
+        this.search = function (page, resultsPerPage, search) {
             var promise = $http.get(restServiceConfig.url + '/search',
                 {
                     params: {
@@ -38,7 +38,11 @@ angular.module('clientApp')
                         comment: search.comment,
                         author: search.author,
                         tag: search.tag,
-                        date: search.date
+                        date: search.date,
+                        expiryDate: search.expiryDate,
+                        type: search.type,
+                        marked: search.marked,
+                        categoryPublicId: search.categoryId
                     }
                 }).then(function (response) {
                     return response;
@@ -46,10 +50,10 @@ angular.module('clientApp')
             return promise;
         };
 
-        this.addLink = function(categoryPublicId, link, successFn, errorFn) {
+        this.addLink = function (categoryPublicId, link, successFn, errorFn) {
             link.expiryDate = timeService.formatDate(link.expiryDate);
 
-            $http.post(restServiceConfig.url + '/categories/' + categoryPublicId + '/links' , link).then(function (response) {
+            $http.post(restServiceConfig.url + '/categories/' + categoryPublicId + '/links', link).then(function (response) {
                 successFn(response.data);
             }, errorFn);
         };

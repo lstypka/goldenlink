@@ -17,9 +17,9 @@ angular.module('clientApp')
             query: function (query) {
                 var data = {
                     results: [
-                        {id: 'LINK', text: $translate.instant('LINKS')},
-                        {id: 'PHOTO', text: $translate.instant('PHOTOS')},
-                        {id: 'VIDEO', text: $translate.instant('VIDEOS')},
+                        {id: 'LINKS', text: $translate.instant('LINKS')},
+                        {id: 'PHOTOS', text: $translate.instant('PHOTOS')},
+                        {id: 'VIDEOS', text: $translate.instant('VIDEOS')},
                         {id: 'YOUTUBE', text: $translate.instant('YOUTUBE')}
                     ]
                 };

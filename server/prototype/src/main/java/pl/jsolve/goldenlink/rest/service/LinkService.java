@@ -24,35 +24,38 @@ public class LinkService {
 		return link;
 	}
 
+	// comment, categoryPublicId, type, tag, author, date, expiryDate,marked
 	public Links searchLinks(final String categoryId, final Integer page,
 			final Integer resultsPerPage, final String title,
-			final String comment, final String author, final String tag,
-			final String date) {
+			final String comment, final String type,
+			final String tag, final String author, final String date,
+			final String expiryDate, final String marked) {
 		List<Link> filteredLinks = Lists.newArrayList(Collections2.filter(
 				links, new Predicate<Link>() {
 
 					@Override
 					public boolean apply(Link input) {
-						boolean result = false;
+						boolean result = true;
 						if (categoryId != null) {
-							if (input.getCategory().getPublicId()
+							if (!input.getCategory().getPublicId()
 									.equals(categoryId)) {
-								result = true;
+								result = false;
 							}
 						}
 						if (!Strings.isEmpty(title)
 								&& !Strings.isEmpty(input.getTitle())) {
-							if (input.getTitle().contains(title)) {
-								result = true;
+							if (!input.getTitle().contains(title)) {
+								result = false;
 							}
 						}
 
 						if (!Strings.isEmpty(comment)
 								&& !Strings.isEmpty(input.getComment())) {
-							if (input.getComment().contains(comment)) {
-								result = true;
+							if (!input.getComment().contains(comment)) {
+								result = false;
 							}
 						}
+						
 
 						return result;
 					}
