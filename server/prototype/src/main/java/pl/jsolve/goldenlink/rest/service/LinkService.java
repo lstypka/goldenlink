@@ -3,10 +3,12 @@ package pl.jsolve.goldenlink.rest.service;
 import java.util.List;
 import java.util.UUID;
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import pl.jsolve.goldenlink.rest.dto.Link;
 import pl.jsolve.goldenlink.rest.dto.Links;
+import pl.jsolve.goldenlink.rest.dto.Tag;
 import pl.jsolve.sweetener.text.Strings;
 
 import com.google.common.base.Predicate;
@@ -16,51 +18,51 @@ import com.google.common.collect.Lists;
 @Service
 public class LinkService {
 
+	@Autowired
+	private TagService tagService;
+
 	public static List<Link> links = Lists.newArrayList();
 
 	public Link addLink(Link link) {
 		link.setPublicId(generateId());
 		links.add(link);
+
+		if (link.getTags() != null) {
+			for (Tag tag : link.getTags()) {
+				tagService.addTag(tag);
+			}
+		}
 		return link;
 	}
 
-	// comment, categoryPublicId, type, tag, author, date, expiryDate,marked
-	public Links searchLinks(final String categoryId, final Integer page,
-			final Integer resultsPerPage, final String title,
-			final String comment, final String type,
-			final String tag, final String author, final String date,
-			final String expiryDate, final String marked) {
-		List<Link> filteredLinks = Lists.newArrayList(Collections2.filter(
-				links, new Predicate<Link>() {
+	public Links searchLinks(final String categoryId, final Integer page, final Integer resultsPerPage, final String title, final String comment, final String type, final String tag,
+			final String author, final String date, final String expiryDate, final String marked) {
+		List<Link> filteredLinks = Lists.newArrayList(Collections2.filter(links, new Predicate<Link>() {
 
-					@Override
-					public boolean apply(Link input) {
-						boolean result = true;
-						if (categoryId != null) {
-							if (!input.getCategory().getPublicId()
-									.equals(categoryId)) {
-								result = false;
-							}
-						}
-						if (!Strings.isEmpty(title)
-								&& !Strings.isEmpty(input.getTitle())) {
-							if (!input.getTitle().contains(title)) {
-								result = false;
-							}
-						}
-
-						if (!Strings.isEmpty(comment)
-								&& !Strings.isEmpty(input.getComment())) {
-							if (!input.getComment().contains(comment)) {
-								result = false;
-							}
-						}
-						
-
-						return result;
+			@Override
+			public boolean apply(Link input) {
+				boolean result = true;
+				if (categoryId != null) {
+					if (!input.getCategory().getPublicId().equals(categoryId)) {
+						result = false;
 					}
+				}
+				if (!Strings.isEmpty(title) && !Strings.isEmpty(input.getTitle())) {
+					if (!input.getTitle().contains(title)) {
+						result = false;
+					}
+				}
 
-				}));
+				if (!Strings.isEmpty(comment) && !Strings.isEmpty(input.getComment())) {
+					if (!input.getComment().contains(comment)) {
+						result = false;
+					}
+				}
+
+				return result;
+			}
+
+		}));
 
 		int totalResults = filteredLinks.size();
 		if (filteredLinks.size() > resultsPerPage) {

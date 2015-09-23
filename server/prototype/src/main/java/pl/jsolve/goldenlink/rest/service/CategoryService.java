@@ -3,67 +3,58 @@ package pl.jsolve.goldenlink.rest.service;
 import java.util.List;
 import java.util.UUID;
 
-import javax.annotation.PostConstruct;
-
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+
+import pl.jsolve.goldenlink.rest.dto.Category;
+import pl.jsolve.goldenlink.rest.dto.DashboardTile;
 
 import com.google.common.base.Predicate;
 import com.google.common.collect.Collections2;
 import com.google.common.collect.Lists;
 
-import pl.jsolve.goldenlink.rest.dto.Category;
-
 @Service
 public class CategoryService {
 
-	public static List<Category> categories;
+	List<String> colours = Lists.newArrayList("panel-blue", "panel-red", "panel-green", "panel-orange", "panel-yellow", "panel-lavender", "panel-olivedrab", "panel-khaki", "panel-purple",
+			"panel-grey", "panel-blue-grey", "panel-pink", "panel-indigo", "panel-green-lighten", "panel-green-darken", "panel-lime");
 
-	private static boolean shouldInit = true;
+	public static List<Category> categories = Lists.newArrayList();
 
 	@Autowired
 	private DashboardTilesService dashboardTilesService;
 
-	static List<String> icons = Lists.newArrayList("fa-asterisk", "fa-bomb",
-			"fa-bell", "fa-book", "fa-bus", "fa-bed", "fa-ban", "fa-check",
-			"fa-dashboard", "fa-diamond", "fa-edit");
-
 	public List<Category> getMainCategories() {
-		return Lists.newArrayList(Collections2.filter(categories,
-				new Predicate<Category>() {
+		return Lists.newArrayList(Collections2.filter(categories, new Predicate<Category>() {
 
-					@Override
-					public boolean apply(Category input) {
-						return input.getParentPublicId() == null;
-					}
+			@Override
+			public boolean apply(Category input) {
+				return input.getParentPublicId() == null;
+			}
 
-				}));
+		}));
 	}
 
 	public List<Category> searchCategories(final String term) {
-		return Lists.newArrayList(Collections2.filter(categories,
-				new Predicate<Category>() {
+		return Lists.newArrayList(Collections2.filter(categories, new Predicate<Category>() {
 
-					@Override
-					public boolean apply(Category input) {
-						return input.getLabel().toLowerCase().contains(term.toLowerCase());
-					}
+			@Override
+			public boolean apply(Category input) {
+				return input.getLabel().toLowerCase().contains(term.toLowerCase());
+			}
 
-				}));
+		}));
 	}
 
 	public List<Category> getChildrenCategories(final String parentPublicId) {
-		return Lists.newArrayList(Collections2.filter(categories,
-				new Predicate<Category>() {
+		return Lists.newArrayList(Collections2.filter(categories, new Predicate<Category>() {
 
-					@Override
-					public boolean apply(Category input) {
-						return input.getParentPublicId() != null
-								&& input.getParentPublicId().equals(
-										parentPublicId);
-					}
+			@Override
+			public boolean apply(Category input) {
+				return input.getParentPublicId() != null && input.getParentPublicId().equals(parentPublicId);
+			}
 
-				}));
+		}));
 	}
 
 	public Category updateCategory(String publicId, Category categoryToUpdate) {
@@ -75,30 +66,38 @@ public class CategoryService {
 		return categoryToUpdate;
 	}
 
-	public Category createSubcategory(String parentPublicId,
-			Category categoryToAdd) {
+	public Category createMainCategory(Category categoryToAdd) {
+		categories.add(categoryToAdd);
+		return categoryToAdd;
+	}
+
+	public Category createSubcategory(String parentPublicId, Category categoryToAdd) {
 		Category parentCategory = findCategory(parentPublicId);
-		Category subcategory = new Category(generateId(),
-				categoryToAdd.getLabel(), false, parentPublicId,
-				parentCategory.getCategoryGroup(), categoryToAdd.getIcon());
+		Category subcategory = new Category(generateId(), categoryToAdd.getLabel(), false, parentPublicId, parentCategory.getCategoryGroup(), categoryToAdd.getIcon());
 		categories.add(subcategory);
 		if (!parentCategory.isHasChildren()) {
 			parentCategory.setHasChildren(true);
 		}
 
+		dashboardTilesService.createTile(new DashboardTile(subcategory.getPublicId(), subcategory.getLabel(), randomColour(), random(100), subcategory.getCategoryGroup(), subcategory.getIcon()));
 		return subcategory;
+	}
+
+	private String randomColour() {
+		return colours.get(random(colours.size() - 1));
+	}
+
+	private static int random(int max) {
+		return (int) (Math.random() * max);
 	}
 
 	public void deleteCategory(String publicId) {
 		for (int i = 0; i < categories.size(); i++) {
 			if (categories.get(i).getPublicId().equals(publicId)) {
-				Category parentCategory = findCategory(categories.get(i)
-						.getParentPublicId());
+				Category parentCategory = findCategory(categories.get(i).getParentPublicId());
 				int numberOfChildren = 0;
 				for (Category category : categories) {
-					if (category.getParentPublicId() != null
-							&& category.getParentPublicId().equals(
-									parentCategory.getPublicId())) {
+					if (category.getParentPublicId() != null && category.getParentPublicId().equals(parentCategory.getPublicId())) {
 						numberOfChildren++;
 					}
 				}
@@ -139,67 +138,6 @@ public class CategoryService {
 			}
 		}
 		return null;
-	}
-
-	@PostConstruct
-	void postConstruct() {
-		if (shouldInit) {
-			setUp();
-		}
-	}
-
-	public static void setUp() {
-		shouldInit = false;
-		categories = Lists.newArrayList();
-
-		// icons
-
-		// main categories
-		categories.add(new Category(generateId(), "LINKS", true, null, "LINKS",
-				randomIcon()));
-		categories.add(new Category(generateId(), "PHOTOS", true, null,
-				"PHOTOS", randomIcon()));
-		categories.add(new Category(generateId(), "VIDEOS", true, null,
-				"VIDEOS", randomIcon()));
-		categories.add(new Category(generateId(), "YOUTUBE", true, null,
-				"YOUTUBE", randomIcon()));
-
-		// inner categories
-		for (int i = 0; i < 10; i++) {
-			int generateChildren = generateChildren(categories.get(i)
-					.getPublicId(), 0, categories.get(i).getCategoryGroup());
-			if (generateChildren == 0) {
-				categories.get(i).setHasChildren(false);
-			}
-		}
-	}
-
-	private static String randomIcon() {
-		return icons.get(random(icons.size() - 1));
-	}
-
-	private static int generateChildren(String parentId, int level,
-			String categoryGroup) {
-		if (level > 6) {
-			return 0;
-		}
-		int numberOfChildren = randomNumberOfChildren();
-		for (int j = 0; j < numberOfChildren; j++) {
-
-			String publicId = generateId();
-			int children = generateChildren(publicId, level + 1, categoryGroup);
-			categories.add(new Category(publicId, publicId, children > 0,
-					parentId, categoryGroup, randomIcon()));
-		}
-		return numberOfChildren;
-	}
-
-	private static int randomNumberOfChildren() {
-		return random(4);
-	}
-
-	private static int random(int max) {
-		return (int) (Math.random() * max);
 	}
 
 	private static String generateId() {
