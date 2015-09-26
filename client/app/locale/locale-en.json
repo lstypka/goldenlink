@@ -71,7 +71,7 @@
     "ANY_CATEGORY" : "Any category",
     "DELETE": "Delete",
     "SAVE" : "Save",
-    "OVERVIEW": "Overview",
+    "PREVIEW": "Preview",
     "EDIT_LINK": "Edit link",
     "LINK": "Link",
     "ASSIGN_TO_CATEGORY": "Assign to category",
@@ -86,6 +86,9 @@
     "CATEGORY_DELETING_HEADER": "Deleting category {{label}}",
     "CATEGORY_DELETING_MESSAGE": "Are you sure you want delete '{{label}}' category ? All subcategories and whole content will be removed",
     "CATEGORY_DELETED_CORRECTLY_MESSAGE" : "Category '{{label}}' has been removed",
+    "LINK_SHARED_CORRECTLY_MESSAGE": "Link '{{label}}' has been shared",
+    "LINK_SHARED_ERROR_MESSAGE" : "An error occured while sharing the '{{label}}' link",
+
     "ADD" : "Add",
     "NO_RESULT" : "There are no results to display",
 

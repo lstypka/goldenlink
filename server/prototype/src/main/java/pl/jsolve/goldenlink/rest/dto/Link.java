@@ -32,16 +32,9 @@ public class Link {
 	private final boolean isMarked;
 
 	@JsonCreator
-	public Link(@JsonProperty("publicId") String publicId,
-			@JsonProperty("link") String link,
-			@JsonProperty("title") String title,
-			@JsonProperty("comment") String comment,
-			@JsonProperty("category") Category category,
-			@JsonProperty("tags") List<Tag> tags,
-			@JsonProperty("date") LocalDateTime date,
-			@JsonProperty("expireDate") LocalDateTime expiryDate,
-			@JsonProperty("author") Author author,
-			@JsonProperty("isMarked") boolean isMarked) {
+	public Link(@JsonProperty("publicId") String publicId, @JsonProperty("link") String link, @JsonProperty("title") String title, @JsonProperty("comment") String comment,
+			@JsonProperty("category") Category category, @JsonProperty("tags") List<Tag> tags, @JsonProperty("date") LocalDateTime date, @JsonProperty("expireDate") LocalDateTime expiryDate,
+			@JsonProperty("author") Author author, @JsonProperty("isMarked") boolean isMarked) {
 		super();
 		this.publicId = publicId;
 		this.link = link;
@@ -97,6 +90,12 @@ public class Link {
 
 	public void setPublicId(String publicId) {
 		this.publicId = publicId;
+	}
+
+	@Override
+	public String toString() {
+		return "Link [publicId=" + publicId + ", link=" + link + ", title=" + title + ", comment=" + comment + ", category=" + category + ", tags=" + tags + ", date=" + date + ", expiryDate="
+				+ expiryDate + ", author=" + author + ", isMarked=" + isMarked + "]";
 	}
 
 }

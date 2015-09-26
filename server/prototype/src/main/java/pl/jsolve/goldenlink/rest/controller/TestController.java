@@ -61,7 +61,7 @@ public class TestController {
 
 	private Category VIDEOS = new Category(generateId(), "VIDEOS", false, null, "VIDEOS", randomIcon());
 
-	private Category YOUTUBE = new Category(generateId(), "YOUTUBE", false, null, "VIDEOS", randomIcon());
+	private Category YOUTUBE = new Category(generateId(), "YOUTUBE", false, null, "YOUTUBE", randomIcon());
 
 	private Author LUKASZ = new Author(generateId(), "Lukasz Stypka");
 

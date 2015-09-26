@@ -7,7 +7,7 @@
         </div>
         <div class="form-group">
             <label class="label" translate="LINK"></label>
-            <input type="text" class="form-control input-sm input" ng-model="link.link" ng-change="checkUrl(link.link)"
+            <input type="text" class="form-control input-sm input" ng-model="link.link" ng-blur="checkUrl(link)"
                    placeholder="{{'LINK' | translate}}" ng-class="{'has-error' : isBlank(link.link)}">
         </div>
         <div class="form-group">

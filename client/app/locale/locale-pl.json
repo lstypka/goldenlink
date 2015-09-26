@@ -71,7 +71,7 @@
     "ANY_CATEGORY" : "Dowolna kategoria",
     "DELETE": "Usunięcie",
     "SAVE" : "Zapisz",
-    "OVERVIEW": "Podgląd",
+    "PREVIEW": "Podgląd",
     "EDIT_LINK": "Edytuj link",
     "LINK": "Link",
     "ASSIGN_TO_CATEGORY": "Przypisz do kategorii",
@@ -86,6 +86,9 @@
     "CATEGORY_DELETING_HEADER": "Usunięcie kategorii {{label}}",
     "CATEGORY_DELETING_MESSAGE": "Jesteś pewien, że chcesz usunąć kategorię '{{label}}'? Wszystkie podkategorie oraz cała zawartość zostaną także usunięte",
     "CATEGORY_DELETED_CORRECTLY_MESSAGE": "Kategoria '{{label}}' została usunięta",
+    "LINK_SHARED_CORRECTLY_MESSAGE": "Link '{{label}}' został udostępniony",
+    "LINK_SHARED_ERROR_MESSAGE" : "Wystąpił błąd podczas udostępniania linku '{{label}}'",
+
     "ADD": "Dodaj",
     "NO_RESULT" : "Brak wyników do wyświetlenia",
 

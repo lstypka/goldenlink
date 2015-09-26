@@ -20,7 +20,7 @@ angular.module('clientApp')
             resetLinkForm();
         };
 
-        var resetLinkForm = function() {
+        var resetLinkForm = function () {
             if ($scope.link && $scope.link.category) {
                 $scope.link.category._isSelected = false;
             }
@@ -96,6 +96,28 @@ angular.module('clientApp')
         $scope.isBlank = function (value) {
             return utilService.isBlank(value);
         };
+
+        $scope.checkUrl = function (link) {
+            window.console.log("BLUR ", link);
+            if (link.category.categoryGroup === 'YOUTUBE') {
+                if (link.link !== null && link.link !== '') {
+                    if (link.link.indexOf('https://') !== 0) {
+                        link.link = 'https://' + link.link;
+                    }
+                    if (link.link.indexOf('embed') !== 0) {
+                        var youtubeId = getParameterByName(link.link, 'v');
+                        link.link = "https://www.youtube.com/embed/" + youtubeId;
+                    }
+                }
+            }
+        };
+
+        function getParameterByName(url, name) {
+            name = name.replace(/[\[]/, "\\[").replace(/[\]]/, "\\]");
+            var regex = new RegExp("[\\?&]" + name + "=([^&#]*)"),
+                results = regex.exec(url);
+            return results === null ? "" : decodeURIComponent(results[1].replace(/\+/g, " "));
+        }
 
         $scope.saveLink = function () {
             linkService.addLink($scope.link.category.publicId, $scope.link, function () {

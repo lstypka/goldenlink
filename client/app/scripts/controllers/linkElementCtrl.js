@@ -117,6 +117,8 @@ angular.module('clientApp')
                 });
         };
 
+
+
         init();
 
     }]);
