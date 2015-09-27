@@ -70,8 +70,8 @@ public class LinkController {
 	@RequestMapping(value = "/categories/{categoryPublicId}/links", method = RequestMethod.POST)
 	public Link createLink(
 			@PathVariable("categoryPublicId") final String categoryPublicId,
-			@RequestBody Link linkToAdd) {
-		return linkService.addLink(linkToAdd);
+			@RequestBody Link linkToAdd, @RequestParam(value = "shareLinkPublicId", required = false) String shareLinkPublicId) {
+		return linkService.addLink(linkToAdd, shareLinkPublicId);
 	}
 
 	@RequestMapping(value = "/categories/{categoryPublicId}/links/{linkPublicId}", method = RequestMethod.PUT)

@@ -1,0 +1,30 @@
+.message-preview {
+    color: #8a6d3b;
+    margin: 1px;
+    padding: 15px;
+    cursor: pointer;
+    width: 350px !important;
+}
+
+.message-preview:hover {
+    background-color: #f5f5f5;
+}
+
+.message-preview .label {
+    color: #8a6d3b;
+    font-size: 14px;
+}
+
+.message-preview .media-body .media-heading {
+    font-weight: bold;
+}
+
+.message-preview .media-body a {
+    color: #8a6d3b;
+}
+
+.message-preview .button {
+    color: #8a6d3b;
+    border-color: #8a6d3b;
+    font-size: 12px;
+}

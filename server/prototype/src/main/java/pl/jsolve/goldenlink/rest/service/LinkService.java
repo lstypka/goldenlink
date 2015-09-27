@@ -3,9 +3,12 @@ package pl.jsolve.goldenlink.rest.service;
 import java.util.List;
 import java.util.UUID;
 
+import org.joda.time.DateTimeZone;
+import org.joda.time.LocalDateTime;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import pl.jsolve.goldenlink.rest.dto.Author;
 import pl.jsolve.goldenlink.rest.dto.Link;
 import pl.jsolve.goldenlink.rest.dto.Links;
 import pl.jsolve.goldenlink.rest.dto.Tag;
@@ -24,7 +27,19 @@ public class LinkService {
 	public static List<Link> links = Lists.newArrayList();
 
 	public Link addLink(Link link) {
+		return addLink(link, null);
+	}
+
+	public Link addLink(Link link, String shareLinkPublicId) {
+		// jesli shareLinkPublicId jest roznce od null, to oznacza ze uzytkownik
+		// stworzył nowy link na postawie linku udostępnionego od znajomego.
+		// W takim przypadku author powinine zostac przepisany od oryginalnego
+		// uzytkownika (tego co udostepnial)
 		link.setPublicId(generateId());
+		if (shareLinkPublicId == null) {
+			link.setAuthor(new Author(generateId(), "Tomasz Kuryłek"));
+		}
+		link.setDate(LocalDateTime.now(DateTimeZone.UTC));
 		links.add(link);
 
 		if (link.getTags() != null) {

@@ -43,7 +43,7 @@
 
                 </div>
                 <div class="row">
-                    <button type="text" class="btn btn-default btn-sm share-link-button" ng-click="share();" data-dismiss="modal" ng-disabled="isLoading">
+                    <button type="text" class="btn btn-default btn-sm share-link-button" ng-click="share();" data-dismiss="modal" ng-disabled="isLoading || numberOfSelectedItems === 0">
                         <span translate="SHARE"/> ({{numberOfSelectedItems}})
                     </button>
                 </div>

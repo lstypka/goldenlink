@@ -23,12 +23,12 @@ public class Link {
 
 	@JsonSerialize(using = LocalDateTimeSerializer.class)
 	@JsonDeserialize(using = LocalDateTimeDeserializer.class)
-	private final LocalDateTime date;
+	private LocalDateTime date;
 
 	@JsonSerialize(using = LocalDateTimeSerializer.class)
 	@JsonDeserialize(using = LocalDateTimeDeserializer.class)
 	private final LocalDateTime expiryDate;
-	private final Author author;
+	private Author author;
 	private final boolean isMarked;
 
 	@JsonCreator
@@ -76,12 +76,20 @@ public class Link {
 		return date;
 	}
 
+	public void setDate(LocalDateTime date) {
+		this.date = date;
+	}
+
 	public LocalDateTime getExpiryDate() {
 		return expiryDate;
 	}
 
 	public Author getAuthor() {
 		return author;
+	}
+
+	public void setAuthor(Author author) {
+		this.author = author;
 	}
 
 	public boolean isMarked() {

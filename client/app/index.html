@@ -33,6 +33,7 @@
     <link rel="stylesheet" href="styles/select2.css">
     <link rel="stylesheet" href="styles/modal.css">
     <link rel="stylesheet" href="styles/share_modal.css">
+    <link rel="stylesheet" href="styles/notification_dropdown.css">
     <!-- endbuild -->
 </head>
 <body ng-app="clientApp" data-ng-controller="rootCtrl">
@@ -143,34 +144,13 @@
                     </li>
                 </ul>
             </li>
-            <li class="dropdown">
-                <a class="dropdown-toggle" data-toggle="dropdown"><i class="fa fa-bell"></i> <b
-                        class="caret"></b></a>
-                <ul class="dropdown-menu alert-dropdown">
-                    <li>
-                        <a>Alert Name <span class="label label-default">Alert Badge</span></a>
-                    </li>
-                    <li>
-                        <a>Alert Name <span class="label label-primary">Alert Badge</span></a>
-                    </li>
-                    <li>
-                        <a>Alert Name <span class="label label-success">Alert Badge</span></a>
-                    </li>
-                    <li>
-                        <a>Alert Name <span class="label label-info">Alert Badge</span></a>
-                    </li>
-                    <li>
-                        <a>Alert Name <span class="label label-warning">Alert Badge</span></a>
-                    </li>
-                    <li>
-                        <a>Alert Name <span class="label label-danger">Alert Badge</span></a>
-                    </li>
-                    <li class="divider"></li>
-                    <li>
-                        <a>View All</a>
-                    </li>
-                </ul>
-            </li>
+
+
+
+           <li class="dropdown" ng-include="'views/notification_dropdown.html'"/>
+
+
+
             <li class="dropdown">
                 <a class="dropdown-toggle" data-toggle="dropdown"><i class="fa fa-user"></i> John Smith <b
                         class="caret"></b></a>
@@ -255,6 +235,7 @@
 <script src="scripts/services/shareService.js"></script>
 <script src="scripts/services/authService.js"></script>
 <script src="scripts/services/utilService.js"></script>
+<script src="scripts/services/notificationService.js"></script>
 <script src="scripts/services/select2CategoryType.js"></script>
 <script src="scripts/services/select2Star.js"></script>
 <script src="scripts/services/select2ExpiryDate.js"></script>
@@ -283,6 +264,7 @@
 <script src="scripts/controllers/editLinkModalCtrl.js"></script>
 <script src="scripts/controllers/shareModalCtrl.js"></script>
 <script src="scripts/controllers/addLinkCtrl.js"></script>
+<script src="scripts/controllers/notificationDropdownCtrl.js"></script>
 
 
 

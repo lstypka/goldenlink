@@ -8,16 +8,32 @@
  * Controller of the clientApp
  */
 angular.module('clientApp')
-    .controller('addLinkCtrl', ['$rootScope', '$scope', '$http', '$timeout', '$translate', 'timeService', 'authService', 'utilService', 'categoryService', 'linkService', 'alertMessageService', function ($rootScope, $scope, $http, $timeout, $translate, timeService, authService, utilService, categoryService, linkService, alertMessageService) {
+    .controller('addLinkCtrl', ['$rootScope', '$scope', '$http', '$timeout', '$translate', '$location', 'timeService', 'authService', 'utilService', 'categoryService', 'linkService', 'alertMessageService', 'notificationService', function ($rootScope, $scope, $http, $timeout, $translate, $location, timeService, authService, utilService, categoryService, linkService, alertMessageService, notificationService) {
 
         $scope.editMode = true;
 
-
         var init = function () {
-            categoryService.getCategories().then(function (categories) {
-                $scope.mainCategories = categories.data;
-            });
-            resetLinkForm();
+            if ($location.search().shared) {
+                notificationService.getNotification($location.search().shared).then(function (response) {
+                    $scope.link = response.data.link;
+                    var categoryGroup = response.data.categoryGroup;
+                    categoryService.getCategories().then(function (categories) {
+                        $scope.mainCategories = categories.data;
+                        for (var index in $scope.mainCategories) {
+                            if ($scope.mainCategories[index].categoryGroup === categoryGroup) {
+                                $scope.mainCategories = [$scope.mainCategories[index]];
+                                break;
+                            }
+                        }
+
+                    });
+                });
+            } else {
+                categoryService.getCategories().then(function (categories) {
+                    $scope.mainCategories = categories.data;
+                });
+                resetLinkForm();
+            }
         };
 
         var resetLinkForm = function () {

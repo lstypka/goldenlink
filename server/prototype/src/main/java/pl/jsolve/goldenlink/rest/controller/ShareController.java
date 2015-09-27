@@ -2,6 +2,7 @@ package pl.jsolve.goldenlink.rest.controller;
 
 import java.util.UUID;
 
+import org.joda.time.DateTimeZone;
 import org.joda.time.LocalDateTime;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -11,6 +12,7 @@ import org.springframework.web.bind.annotation.RestController;
 
 import pl.jsolve.goldenlink.rest.dto.Author;
 import pl.jsolve.goldenlink.rest.dto.Friend;
+import pl.jsolve.goldenlink.rest.dto.Link;
 import pl.jsolve.goldenlink.rest.dto.Notification;
 import pl.jsolve.goldenlink.rest.dto.ShareLink;
 import pl.jsolve.goldenlink.rest.service.NotificationService;
@@ -26,7 +28,9 @@ public class ShareController {
 
 		if (!shareLink.getFriends().isEmpty()) {
 			Friend firstFriend = shareLink.getFriends().get(0);
-			Notification notification = new Notification(generateId(), shareLink.getLink(), new Author(firstFriend.getPublicId(), firstFriend.getName()), LocalDateTime.now());
+			Notification notification = new Notification(generateId(), new Link(null, shareLink.getLink().getLink(), shareLink.getLink().getTitle(), shareLink.getLink().getComment(), null, shareLink
+					.getLink().getTags(), null, null, shareLink.getLink().getAuthor(), false), new Author(firstFriend.getPublicId(), firstFriend.getName()), shareLink.getLink().getCategory()
+					.getCategoryGroup(), LocalDateTime.now(DateTimeZone.UTC));
 			notificationService.addNotification(notification);
 		}
 		return shareLink;

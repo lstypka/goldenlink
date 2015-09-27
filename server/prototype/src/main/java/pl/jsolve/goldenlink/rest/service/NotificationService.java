@@ -35,6 +35,15 @@ public class NotificationService {
 		}
 		return new Notifications(sublist, page, resultsPerPage, totalResults);
 	}
+	
+	public Notification getNotification(String publicId) {
+		for(Notification notification : notifications) {
+			if(notification.getPublicId().equals(publicId)) {
+				return notification;
+			}
+		}
+		return null;
+	}
 
 	public void deleteNotification(String publicId) {
 		for (int i = 0; i < notifications.size(); i++) {
