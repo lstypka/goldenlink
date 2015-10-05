@@ -1,16 +1,9 @@
 package pl.jsolve.goldenlink.dto
 
-import groovy.transform.Canonical
+import groovy.transform.Immutable
 
-@Canonical
-class Links extends PaginationWrapper {
-
+@Immutable
+class Links {
     List<Link> links
-
-    Links(List<Link> links,
-          Integer page,
-          Integer resultsPerPage,
-          Integer totalResults) {
-        super(page, resultsPerPage, totalResults)
-    }
+    Pagination pagination
 }

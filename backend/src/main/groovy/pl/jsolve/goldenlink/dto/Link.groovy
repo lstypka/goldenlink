@@ -2,13 +2,12 @@ package pl.jsolve.goldenlink.dto
 
 import com.fasterxml.jackson.databind.annotation.JsonDeserialize
 import com.fasterxml.jackson.databind.annotation.JsonSerialize
-import groovy.transform.Canonical
 import groovy.transform.Immutable
 import org.joda.time.LocalDateTime
 import pl.jsolve.goldenlink.util.LocalDateTimeDeserializer
 import pl.jsolve.goldenlink.util.LocalDateTimeSerializer
 
-@Canonical
+@Immutable(knownImmutableClasses = [LocalDateTime])
 class Link {
     String publicId
     String link

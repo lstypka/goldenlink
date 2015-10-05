@@ -3,5 +3,5 @@ package pl.jsolve.goldenlink.service
 import org.springframework.stereotype.Service
 
 @Service
-class CategoryService {
+class LinkService {
 }

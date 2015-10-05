@@ -1,10 +1,8 @@
 package pl.jsolve.goldenlink.dto
 
-import groovy.transform.Canonical
 import groovy.transform.Immutable
-import groovy.transform.ToString
 
-@Canonical
+@Immutable
 class Category {
     String publicId
     String label
