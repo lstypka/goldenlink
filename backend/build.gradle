@@ -3,7 +3,7 @@ buildscript {
         mavenCentral()
     }
     dependencies {
-        classpath("org.springframework.boot:spring-boot-gradle-plugin:1.2.6.RELEASE")
+        classpath 'org.springframework.boot:spring-boot-gradle-plugin:1.2.6.RELEASE'
     }
 }
 
@@ -24,27 +24,30 @@ repositories {
 }
 
 dependencies {
-    compile group: 'org.codehaus.groovy', name: 'groovy-all', version: '2.4.4'
+    def groovyVersion = '2.4.4'
+    def jodaTimeVersion = '2.8.2'
+    def sweetenerVersion = '1.0.0'
+    def ovenVersion = '1.0.1'
+    def junitVersion = '4.11'
+    def embeddedMongoVersion = '1.3.1'
+    def spockVersion = '1.0-groovy-2.4'
+    def cglibVersion = '3.1'
+    def httpBuilderVesrion = '0.7'
 
+    compile group: 'org.codehaus.groovy', name: 'groovy-all', version: groovyVersion
     compile group: 'org.springframework.boot', name: 'spring-boot-starter-web'
     compile group: 'org.springframework.boot', name: 'spring-boot-starter-data-mongodb'
     compile group: 'org.springframework.boot', name: 'spring-boot-starter-test'
+    compile group: 'joda-time', name: 'joda-time', version: jodaTimeVersion
+    compile group: 'pl.jsolve', name: 'sweetener', version: sweetenerVersion
+    compile group: 'pl.jsolve', name: 'oven', version: ovenVersion
 
-    compile group: 'com.google.guava', name: 'guava', version: '18.0'
-    compile group: 'joda-time', name: 'joda-time', version: '2.8.2'
-    compile group: 'pl.jsolve', name: 'sweetener', version: '1.0.0'
-    compile group: 'com.google.guava', name: 'guava', version: '18.0'
-    compile group: 'pl.jsolve', name: 'oven', version: '1.0.1'
-
-    testCompile group: 'junit', name: 'junit', version: '4.11'
-    testCompile group: 'cz.jirutka.spring', name: 'embedmongo-spring', version: '1.3.1'
-
-    def spockVersion = '1.0-groovy-2.4'
-
+    testCompile group: 'junit', name: 'junit', version: junitVersion
+    testCompile group: 'cz.jirutka.spring', name: 'embedmongo-spring', version: embeddedMongoVersion
     testCompile group: 'org.spockframework', name: 'spock-core', version: spockVersion
-    testCompile group: 'cglib', name: 'cglib', version: '3.1'
+    testCompile group: 'cglib', name: 'cglib', version: cglibVersion
     testCompile group: 'org.spockframework', name: 'spock-spring', version: spockVersion
-    testCompile group: 'org.codehaus.groovy.modules.http-builder', name: 'http-builder', version: '0.7'
+    testCompile group: 'org.codehaus.groovy.modules.http-builder', name: 'http-builder', version: httpBuilderVesrion
 }
 
 task wrapper(type: Wrapper) {

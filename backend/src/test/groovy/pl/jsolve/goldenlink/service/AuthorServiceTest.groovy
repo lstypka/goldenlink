@@ -1,26 +1,20 @@
 package pl.jsolve.goldenlink.service
-
 import org.mockito.InjectMocks
 import org.mockito.Mock
-import org.mockito.MockitoAnnotations
 import pl.jsolve.goldenlink.dto.Author
 import pl.jsolve.goldenlink.entity.AuthorEntity
 import pl.jsolve.goldenlink.repository.AuthorRepository
-import spock.lang.Specification
+import pl.jsolve.goldenlink.test.MockitoSpecification
 
 import static org.mockito.BDDMockito.given
 
-class AuthorServiceTest extends Specification {
+class AuthorServiceTest extends MockitoSpecification {
 
     @Mock
     AuthorRepository mockedAuthorRepository
 
     @InjectMocks
     AuthorService authorService
-
-    void setup() {
-        MockitoAnnotations.initMocks(this)
-    }
 
     def 'Should retrieve all authors'() {
         given:

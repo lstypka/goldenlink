@@ -17,7 +17,7 @@ class AuthorService {
     def retrieveAll() {
         authorRepository.findAll()
                 .stream()
-                .map({ map(it, Author) })
+                .map { map it, Author }
                 .collect toList()
     }
 }

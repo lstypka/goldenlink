@@ -15,6 +15,6 @@ abstract class ApiIntegrationSpecification extends DatabaseIntegrationSpecificat
     RESTClient api
 
     def setup() {
-        api = new RESTClient('http://localhost:' + port)
+        api = new RESTClient('http://localhost:' + port, 'application/json')
     }
 }

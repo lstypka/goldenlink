@@ -25,8 +25,8 @@ class CategoryEntity {
     @Map
     String categoryGroup
 
-    @Map
-    String parentPublicId
+    @Map(to = 'parentPublicId')
+    String parentId
 
     @Map
     String icon

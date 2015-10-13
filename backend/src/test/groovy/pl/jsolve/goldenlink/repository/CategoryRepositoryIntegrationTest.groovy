@@ -9,6 +9,83 @@ class CategoryRepositoryIntegrationTest extends DatabaseIntegrationSpecification
     @Autowired
     CategoryRepository categoryRepository
 
+    def 'Should find children of a given parent'() {
+        given:
+        def parent = categoryRepository.save new CategoryEntity(
+                label: "Andy's cakes",
+                hasChildren: true
+        )
+        def childOfParent = categoryRepository.save new CategoryEntity(
+                label: "Andy's cheesecake",
+                hasChildren: true,
+                parentId: parent.id
+        )
+        def childOfChildOfParent = categoryRepository.save new CategoryEntity(
+                label: "Macaroni",
+                hasChildren: false,
+                parentId: childOfParent.id
+        )
+
+        when:
+        def children = categoryRepository.findByParentId parent.id
+
+        then:
+        children == [childOfParent]
+    }
+
+    def 'Should find category by label'() {
+        given:
+        def andysCakes = categoryRepository.save new CategoryEntity(
+                label: "Andy's cakes",
+                hasChildren: true,
+                categoryGroup: 'Fish named Pepper',
+                icon: 'pepper'
+        )
+        def andysCheesecake = categoryRepository.save new CategoryEntity(
+                label: "Andy's cheesecake",
+                hasChildren: false,
+                categoryGroup: 'Fish named Pepper',
+                icon: 'pepper',
+                parentId: andysCakes.id
+        )
+        def louieMacaroni = categoryRepository.save new CategoryEntity(
+                label: "Macaroni",
+                hasChildren: false,
+                categoryGroup: 'Fish named Pepper',
+                icon: 'pepper',
+                parentId: null
+        )
+
+        when:
+        def result = categoryRepository.findByLabelContainingIgnoreCase('cAkE')
+
+        then:
+        result == [andysCakes, andysCheesecake]
+    }
+
+    def 'Should find main categories'() {
+        given:
+        def andysCakes = categoryRepository.save new CategoryEntity(
+                label: "Andy's cakes",
+                hasChildren: true,
+                categoryGroup: 'Fish named Pepper',
+                icon: 'pepper'
+        )
+        def andysCheesecake = categoryRepository.save new CategoryEntity(
+                label: "Andy's cheesecake",
+                hasChildren: false,
+                categoryGroup: 'Fish named Pepper',
+                icon: 'pepper',
+                parentId: andysCakes.id
+        )
+
+        when:
+        def result = categoryRepository.findMainCategories()
+
+        then:
+        result*.label == ["Andy's cakes"]
+    }
+
     def 'Should save a category'() {
         given:
         def andysCheesecake = new CategoryEntity(
