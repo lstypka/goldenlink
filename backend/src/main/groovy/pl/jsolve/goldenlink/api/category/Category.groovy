@@ -1,14 +1,13 @@
-package pl.jsolve.goldenlink.dto
+package pl.jsolve.goldenlink.api.category
 
 import groovy.transform.Immutable
-import pl.jsolve.goldenlink.infrastructure.dashboard.DashboardTileEntity
+import pl.jsolve.goldenlink.infrastructure.category.CategoryEntity
 import pl.jsolve.oven.annotationdriven.annotation.Map
 import pl.jsolve.oven.annotationdriven.annotation.MappableTo
 
 @Immutable
-@MappableTo(DashboardTileEntity)
-class DashboardTile {
-
+@MappableTo(CategoryEntity)
+class Category {
     @Map(to = 'id')
     String publicId
 
@@ -16,13 +15,13 @@ class DashboardTile {
     String label
 
     @Map
-    String colour
-
-    @Map
-    Integer numberOfLinks
+    boolean hasChildren
 
     @Map
     String categoryGroup
+
+    @Map(to = 'parentId')
+    String parentPublicId
 
     @Map
     String icon

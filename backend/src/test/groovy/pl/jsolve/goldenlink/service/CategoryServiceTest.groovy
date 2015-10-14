@@ -1,13 +1,14 @@
 package pl.jsolve.goldenlink.service
-
 import org.mockito.InjectMocks
 import org.mockito.Mock
-import pl.jsolve.goldenlink.dto.Category
-import pl.jsolve.goldenlink.entity.CategoryEntity
-import pl.jsolve.goldenlink.repository.CategoryRepository
-import pl.jsolve.goldenlink.test.MockitoSpecification
+import pl.jsolve.goldenlink.infrastructure.category.CategoryEntity
+import pl.jsolve.goldenlink.infrastructure.category.CategoryRepository
+import pl.jsolve.goldenlink.service.category.CategoryService
+import pl.jsolve.goldenlink.test.specs.MockitoSpecification
 
 import static org.mockito.BDDMockito.given
+import static org.mockito.Matchers.any
+import static org.mockito.Mockito.mock
 
 class CategoryServiceTest extends MockitoSpecification {
 
@@ -17,122 +18,42 @@ class CategoryServiceTest extends MockitoSpecification {
     @InjectMocks
     CategoryService categoryService
 
-    /*def 'Should create sub-category'() {
+    def 'Should get breadcrumbs'() {
+        given: 'relationship root -> c -> b -> a'
+        def root = new CategoryEntity(id: 'rootId', parentId: null)
+        def c = new CategoryEntity(id: 'cId', parentId: root.id)
+        def b = new CategoryEntity(id: 'bId', parentId: c.id)
+        def a = new CategoryEntity(id: 'aId', parentId: b.id)
+        given(mockedCategoryRepository.findOne(root.id)).willReturn(root)
+        given(mockedCategoryRepository.findOne(c.id)).willReturn(c)
+        given(mockedCategoryRepository.findOne(b.id)).willReturn(b)
+        given(mockedCategoryRepository.findOne(a.id)).willReturn(a)
+
+        when:
+        def breadcrumbs = categoryService.getBreadcrumbs(a.id)
+
+        then:
+        breadcrumbs == [root, c, b, a]
+    }
+
+    def 'Should create sub-category'() {
         given:
         def parentCategoryPublicId = 'parentId'
-        def category = new Category(
+        def subcategory = new CategoryEntity(
                 label: 'label',
-                hasChildren: 'hasChildren',
+                hasChildren: true,
                 categoryGroup: 'categoryGroup',
-                parentPublicId: 'parentPublicId',
+                parentId: 'parentPublicId',
                 icon: 'icon'
         )
+        def parentCategory = mock(CategoryEntity)
+        given(mockedCategoryRepository.findOne(parentCategoryPublicId)).willReturn(parentCategory)
+        given(mockedCategoryRepository.save(any(CategoryEntity))).willReturn(subcategory)
 
         when:
-        categoryService.createSubcategory parentCategoryPublicId, category
+        def result = categoryService.createSubcategory parentCategoryPublicId, subcategory
 
         then:
-    }*/
-
-    def 'Should retrieve children of a parent'() {
-        given:
-        def parentId = 'parentId'
-        given(mockedCategoryRepository.findByParentId(parentId)).willReturn([
-                new CategoryEntity(
-                        id: '1stGenerated1dh4sh',
-                        label: 'Andy',
-                        hasChildren: false,
-                        categoryGroup: 'cartoons',
-                        parentId: parentId,
-                        icon: 'andy-anderson-pic'
-                )
-        ])
-
-        when:
-        def result = categoryService.retrieveChildrenCategories parentId
-
-        then:
-        result == [new Category(
-                publicId: '1stGenerated1dh4sh',
-                label: 'Andy',
-                hasChildren: false,
-                categoryGroup: 'cartoons',
-                parentPublicId: parentId,
-                icon: 'andy-anderson-pic'
-        )]
-    }
-
-    def 'Should retrieve main categories'() {
-        given:
-        given(mockedCategoryRepository.findMainCategories()).willReturn([
-                new CategoryEntity(
-                        id: '1stGenerated1dh4sh',
-                        label: 'Andy',
-                        hasChildren: false,
-                        categoryGroup: 'cartoons',
-                        parentId: '2ndGenerated1dh4sh',
-                        icon: 'andy-anderson-pic'
-                ),
-                new CategoryEntity(
-                        id: '2stGenerated1dh4sh',
-                        label: 'The life with Louie',
-                        hasChildren: true,
-                        categoryGroup: 'cartoons',
-                        parentId: null,
-                        icon: 'the-life-with-louie-logo'
-                )
-        ])
-
-        when:
-        def retrievedCategories = categoryService.retrieveMainCategories()
-
-        then:
-        retrievedCategories == [
-                new Category(
-                        publicId: '1stGenerated1dh4sh',
-                        label: 'Andy',
-                        hasChildren: false,
-                        categoryGroup: 'cartoons',
-                        parentPublicId: '2ndGenerated1dh4sh',
-                        icon: 'andy-anderson-pic'
-                ),
-                new Category(
-                        publicId: '2stGenerated1dh4sh',
-                        label: 'The life with Louie',
-                        hasChildren: true,
-                        categoryGroup: 'cartoons',
-                        parentPublicId: null,
-                        icon: 'the-life-with-louie-logo'
-                )
-        ]
-    }
-
-    def 'Should search categories'() {
-        given:
-        def term = "life"
-        given(mockedCategoryRepository.findByLabelContainingIgnoreCase(term)).willReturn([
-                new CategoryEntity(
-                        id: '2stGenerated1dh4sh',
-                        label: 'The life with Louie',
-                        hasChildren: true,
-                        categoryGroup: 'cartoons',
-                        parentId: null,
-                        icon: 'the-life-with-louie-logo'
-                )
-        ])
-        when:
-        def foundCategories = categoryService.searchCategories(term)
-
-        then:
-        foundCategories == [
-                new Category(
-                        publicId: '2stGenerated1dh4sh',
-                        label: 'The life with Louie',
-                        hasChildren: true,
-                        categoryGroup: 'cartoons',
-                        parentPublicId: null,
-                        icon: 'the-life-with-louie-logo'
-                )
-        ]
+        result == subcategory
     }
 }
