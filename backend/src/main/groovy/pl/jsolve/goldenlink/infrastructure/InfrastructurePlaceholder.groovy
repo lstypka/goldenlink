@@ -1,3 +1,3 @@
 package pl.jsolve.goldenlink.infrastructure
 
-interface InfrastructurePlaceMarker {}
+interface InfrastructurePlaceholder {}

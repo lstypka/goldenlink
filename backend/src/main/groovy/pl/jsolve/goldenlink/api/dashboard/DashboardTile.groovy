@@ -1,4 +1,4 @@
-package pl.jsolve.goldenlink.dto
+package pl.jsolve.goldenlink.api.dashboard
 
 import groovy.transform.Immutable
 import pl.jsolve.goldenlink.infrastructure.dashboard.DashboardTileEntity

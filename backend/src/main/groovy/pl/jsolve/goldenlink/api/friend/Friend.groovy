@@ -1,4 +1,4 @@
-package pl.jsolve.goldenlink.dto
+package pl.jsolve.goldenlink.api.friend
 
 import groovy.transform.Immutable
 
