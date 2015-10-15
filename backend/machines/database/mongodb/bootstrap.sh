@@ -30,7 +30,7 @@ sudo apt-get install -y mongodb-org
 echo '## '
 echo '# Listen on all interfaces'
 echo '## '
-sed -i -- 's/bind_ip = 127.0.0.1/#bind_ip = 127.0.0.1/g' /etc/mongod.conf
+sed -i -- 's/bindIp: 127.0.0.1/#bindIp: 127.0.0.1/g' /etc/mongod.conf
 
 echo '## '
 echo '# Restart MongoDB'
